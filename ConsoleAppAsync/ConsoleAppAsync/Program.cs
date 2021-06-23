@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace ConsoleAppAsync
 {
@@ -10,18 +9,23 @@ namespace ConsoleAppAsync
         {
             Console.WriteLine("Лаборатория асинхронного кода");
 
-            DumpWebPageAsync("https://yandex.ru/");
+            DumpWebPage("https://yandex.ru/");
 
             Console.Title = "Завершено";
             Console.WriteLine("Нажмите любую кнопку для закрытия ...");
             Console.ReadLine();
         }
 
-        static async Task DumpWebPageAsync(string uri)
+        private static void DumpWebPage(string uri)
         {
             var client = new WebClient();
-            var page = await client.DownloadStringTaskAsync(uri);
-            Console.WriteLine(page);
+            client.DownloadStringCompleted += OnDownloadStringCompleted;
+            client.DownloadStringAsync(new Uri(uri));
+        }
+
+        private static void OnDownloadStringCompleted(object sender, DownloadStringCompletedEventArgs args)
+        {
+            Console.WriteLine(args.Result);
         }
     }
 }
