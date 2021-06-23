@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Net;
+using System.Threading;
+
 
 namespace ConsoleAppAsync
 {
@@ -9,23 +10,35 @@ namespace ConsoleAppAsync
         {
             Console.WriteLine("Лаборатория асинхронного кода");
 
-            DumpWebPage("https://yandex.ru/");
+
+            var my = new MyClass();
+            my.Message("one");
+
 
             Console.Title = "Завершено";
             Console.WriteLine("Нажмите любую кнопку для закрытия ...");
             Console.ReadLine();
         }
 
-        private static void DumpWebPage(string uri)
+
+    }
+
+    class MyClass
+    {
+        public void Message(string message)
         {
-            var client = new WebClient();
-            client.DownloadStringCompleted += OnDownloadStringCompleted;
-            client.DownloadStringAsync(new Uri(uri));
+            GetHostAddress("one.ru", ResolveMesssage);
         }
 
-        private static void OnDownloadStringCompleted(object sender, DownloadStringCompletedEventArgs args)
+        private void ResolveMesssage(string message)
         {
-            Console.WriteLine(args.Result);
+            Console.WriteLine($"mess: {message}");
+        }
+
+        void GetHostAddress(string host, Action<string> callback)
+        {
+            Thread.Sleep(1000);
+            callback.Invoke(host);
         }
     }
 }
