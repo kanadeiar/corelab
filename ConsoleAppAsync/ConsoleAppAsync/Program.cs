@@ -26,8 +26,12 @@ namespace ConsoleAppAsync
     class MyClass
     {
         public void Message(string message)
-        {
-            GetHostAddress("one.ru", ResolveMesssage);
+        { 
+            var str = "two";
+            GetHostAddress("one.ru", one =>
+            {
+                Console.WriteLine($"сообщение: {one} {str}");
+            });
         }
 
         private void ResolveMesssage(string message)
