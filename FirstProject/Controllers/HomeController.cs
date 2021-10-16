@@ -28,6 +28,13 @@ namespace FirstProject.Controllers
             return View();
         }
 
+        public IActionResult Hello()
+        {
+            int hour = DateTime.Now.Hour;
+            string viewModel = hour < 12 ? "Добрый день" : "Доброй ночи";
+            return View("MyView", viewModel);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
