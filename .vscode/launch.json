@@ -9,9 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/FirstProject/bin/Debug/net5.0/FirstProject.dll",
+            "program": "${workspaceFolder}/PartyInvites/bin/Debug/net5.0/PartyInvites.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/FirstProject",
+            "cwd": "${workspaceFolder}/PartyInvites",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
