@@ -31,7 +31,13 @@ namespace FirstProject.Controllers
         public IActionResult Hello()
         {
             int hour = DateTime.Now.Hour;
-            string viewModel = hour < 12 ? "Добрый день" : "Доброй ночи";
+            string viewModel = hour switch
+            {
+                int i when (i >= 6) && (i <= 10) => "Доброе утро",
+                int i when (i > 10) && (i <= 16) => "Добрый день",
+                int i when (i > 16) && (i <= 20) => "Добрый вечер",
+                _ => "Доброй ночи",
+            };
             return View("MyView", viewModel);
         }
 
