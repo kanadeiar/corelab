@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PartyInvites.Model;
+using PartyInvites.Data;
 
 namespace PartyInvites.Controllers
 {
@@ -22,11 +24,34 @@ namespace PartyInvites.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult ResponseForm()
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult ResponseForm(GuestResponse guestResponse)
+        {
+            if (ModelState.IsValid)
+            {
+                Repository.AddResponse(guestResponse);
+                return View("Thanks", guestResponse);
+            }
+            else
+            {
+                return View();
+            }
+        }
 
+        public IActionResult ListResponses()
+        {
+            var responses = Repository.Responses.Where(r => r.WillAttend == true);
+            return View(responses);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,44 @@
+@model PartyInvites.Model.GuestResponse
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <title>Форма ответа</title>
+</head>
+
+<body>
+    <h4 class="bg-dark text-white text-center m-2 p-2">Ответ</h4>
+    <form asp-action="ResponseForm" method="post" class="m-2">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label asp-for="Name">Ваше имя:</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Email">Почтовый адрес:</label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone">Телефонный номер:</label>
+            <input asp-for="Phone" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="WillAttend">Будете присутствовать?</label>
+            <select asp-for="WillAttend" class="form-control">
+                <option value="">Выберите ответ</option>
+                <option value="true">Да, буду присутствовать</option>
+                <option value="false">Нет, буду отсутствовать</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить ответ</button>
+    </form>
+</body>
+
+</html>
