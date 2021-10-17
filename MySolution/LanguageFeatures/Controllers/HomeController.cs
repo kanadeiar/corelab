@@ -9,29 +9,22 @@ namespace LanguageFeatures.Controllers
     {
         public IActionResult Index()
         {
-            // var results = new List<string>();
-            // foreach (var p in Product.GetProducts())
-            // {
-            //     var name = p?.Name ?? "<No Name>";
-            //     var price = p?.Price ?? 0;
-            //     var relatedName = p?.Related?.Name ?? "<None>";
-            //     results.Add($"Имя: {name}, Цена: {price:C2}, Подчинен: {relatedName}");
-            // }
-            var data = new object[] { 210M, 29.5M, "apple", "orange", 100, 10 };
-            decimal total = 0;
-            for (int i = 0; i < data.Length; i++)
+            var products = new Product[]
             {
-                switch (data[i])
-                {
-                    case decimal d:
-                        total += d;
-                        break;
-                    case int iVv when iVv > 50:
-                        total += iVv;
-                        break;
-                }
-            }
-            return View(new string[] { $"Итог: {total:C2}" });
+                new Product { Name = "Каяк", Price = 200M },
+                new Product { Name = "Жакет", Price = 23.5M },
+                new Product { Name = "Фрак", Price = 19.5M },
+                new Product { Name = "Флаг", Price = 34.95M },
+            };
+
+            var arrayTotal = products
+                .FilterBy(p => (p?.Price ?? 0) >= 20)
+                .TotalPrices();
+            var nameTotal = products
+                .FilterBy(p => p?.Name?[0] == 'Ф')
+                .TotalPrices();
+
+            return View(new string[] { $"Итог фильтра цены: {arrayTotal:C2}", $"Итог фильтра имени: {nameTotal:C2}" });
         }
     }
 }
