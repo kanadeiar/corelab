@@ -1,0 +1,26 @@
+@using Simple.Models
+@model IEnumerable<Product>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простое приложение</title>
+</head>
+
+<body>
+    <ul>
+        @foreach (var p in Model)
+        {
+            <li>
+                Name: @p.Name, Price: @p.Price
+            </li>
+        }
+    </ul>
+</body>
+
+</html>
