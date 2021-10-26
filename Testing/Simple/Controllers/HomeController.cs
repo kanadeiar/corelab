@@ -9,9 +9,10 @@ namespace Simple.Controllers
 {
     public class HomeController : Controller
     {
+        public IDataSource dataSource = new ProductDataSource();
         public IActionResult Index()
         {
-            var result = Product.GetProducts();
+            var result = dataSource.Products;
             return View(result);
         }
     }
