@@ -14,10 +14,27 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet]
     public IActionResult RsvpForm()
     {
         return View();
     }
+
+    [HttpPost]
+    public IActionResult RsvpForm(GuestResponse model)
+    {
+        if (!ModelState.IsValid)
+            return View();
+        Repository.AddResponse(model);
+        return View("Thanks", model);
+    }
+
+    public IActionResult ListResponses()
+    {
+        var model = Repository.Responses.Where(r => r.WillAttend == true);
+        return View(model);
+    }
+
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

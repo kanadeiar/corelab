@@ -8,16 +8,17 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
     <title>Party</title>
 </head>
 
 <body>
-    <div>
-        <div>
-            <p>Мы приглашаем на вечеринку.</p>
+    <div class="text-center">
 
-            <a asp-action="RsvpForm">RSVP форма</a>
-        </div>
+        <h3>Мы приглашаем на вечеринку.</h3>
+        <h5>Ты приглашен!</h5>
+        <a class="btn btn-primary" asp-action="RsvpForm">RSVP форма</a>
+
     </div>
 </body>
 
