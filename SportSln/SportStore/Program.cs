@@ -1,13 +1,33 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Host.ConfigureServices(services =>
+{
+    services.AddDbContext<StoreDbContext>(options =>
+    {
+        options.UseSqlite(builder.Configuration.GetConnectionString("SportStoreConnection"));
+    });
+    services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+    services.AddScoped<IStoreRepository, EFStoreRepository>();
+
+    services.AddTransient<ISeedTestData, SeedTestData>();
+});
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider
+        .GetRequiredService<ISeedTestData>()
+        .SeedData(app.Services, builder.Configuration);
+}
+
+if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+}
+else
+{
     app.UseHsts();
 }
 
