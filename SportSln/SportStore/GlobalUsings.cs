@@ -1,7 +1,12 @@
 global using System.ComponentModel.DataAnnotations.Schema;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using Microsoft.AspNetCore.Mvc.Routing;
+global using Microsoft.AspNetCore.Mvc.ViewFeatures;
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Razor.TagHelpers;
 global using SportStore.Data;
 global using SportStore.Data.Interfaces;
 global using SportStore.Data.TestData;
 global using SportStore.Models;
+global using SportStore.Models.WebModels;

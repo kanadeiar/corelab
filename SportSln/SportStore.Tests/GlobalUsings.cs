@@ -5,4 +5,8 @@ global using SportStore.Models;
 global using System.Linq;
 global using System.Collections.Generic;
 global using SportStore.Controllers;
+global using SportStore.Infrastructure;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Routing;
+global using Microsoft.AspNetCore.Razor.TagHelpers;
+global using System.Threading.Tasks;
