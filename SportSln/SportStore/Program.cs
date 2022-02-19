@@ -11,8 +11,6 @@ builder.Host.ConfigureServices(services =>
     services.AddScoped<IStoreRepository, EFStoreRepository>();
 
     services.AddTransient<ISeedTestData, SeedTestData>();
-
-    services.AddRazorPages();
 });
 
 var app = builder.Build();
@@ -43,7 +41,6 @@ app.MapControllerRoute("page", "Page{page:int}", new { Controller = "Home", Acti
 app.MapControllerRoute("category", "{category}", new { Controller = "Home", Action = "Index", Page = 1 });
 app.MapControllerRoute("pagination", "Products/Page{page}", new { Controller = "Home", Action = "Index", Page = 1 });
 app.MapDefaultControllerRoute();
-app.MapRazorPages();
 
 app.Run();
 
