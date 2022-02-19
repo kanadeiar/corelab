@@ -10,10 +10,19 @@ public class HomeController : Controller
     }
     public IActionResult Index(int page = 1)
     {
-        var models = _repo.Products
-            .OrderBy(x => x.Id)
-            .Skip((page - 1) * PageSize)
-            .Take(PageSize).ToArray();
-        return View(models);
+        var model = new ProductListWebModel
+        {
+            Products = _repo.Products
+                .OrderBy(x => x.Id)
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize).ToArray(),
+            PagingInfo = new PagingInfoWebModel
+            {
+                CurrentPage = page,
+                ItemsPerPage = PageSize,
+                TotalItems = _repo.Products.Count(),
+            }
+        };
+        return View(model);
     }
 }

@@ -36,6 +36,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.MapControllerRoute("pagination", "Products/Page{page}", new { Controller = "Home", Action = "Index" });
 app.MapDefaultControllerRoute();
 
 app.Run();

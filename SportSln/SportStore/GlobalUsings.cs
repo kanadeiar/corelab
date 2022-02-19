@@ -9,4 +9,4 @@ global using SportStore.Data;
 global using SportStore.Data.Interfaces;
 global using SportStore.Data.TestData;
 global using SportStore.Models;
-global using SportStore.Models.WebModels;
+global using SportStore.WebModels;

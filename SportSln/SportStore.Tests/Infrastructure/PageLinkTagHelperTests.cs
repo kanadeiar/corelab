@@ -15,7 +15,7 @@ public class PageLinkTagHelperTests
             .Returns(urlHelper.Object);
         var helper = new PageLinkTagHelper(urlHelperFactory.Object)
         {
-            PageModel = new Models.WebModels.PagingInfoWebModel
+            PageModel = new WebModels.PagingInfoWebModel
             {
                 CurrentPage = 2,
                 TotalItems = 29,
