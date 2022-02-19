@@ -7,6 +7,8 @@ builder.Host.ConfigureServices(services =>
         options.UseSqlite(builder.Configuration.GetConnectionString("SportStoreConnection"));
     });
     services.AddControllersWithViews().AddRazorRuntimeCompilation();
+    services.AddDistributedMemoryCache();
+    services.AddSession();
 
     services.AddScoped<IStoreRepository, EFStoreRepository>();
 
@@ -33,6 +35,7 @@ else
 
 app.UseStatusCodePages();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 
