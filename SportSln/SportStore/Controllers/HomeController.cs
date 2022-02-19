@@ -8,19 +8,20 @@ public class HomeController : Controller
     {
         _repo = repo;
     }
-    public IActionResult Index(int page = 1)
+    public IActionResult Index(string category, int page = 1)
     {
+        var query = _repo.Products
+            .Where(x => category == null || x.Category == category)
+            .OrderBy(x => x.Id);
         var model = new ProductListWebModel
         {
-            Products = _repo.Products
-                .OrderBy(x => x.Id)
-                .Skip((page - 1) * PageSize)
-                .Take(PageSize).ToArray(),
+            Products = query.Skip((page - 1) * PageSize)
+                .Take(PageSize),
             PagingInfo = new PagingInfoWebModel
             {
                 CurrentPage = page,
                 ItemsPerPage = PageSize,
-                TotalItems = _repo.Products.Count(),
+                TotalItems = query.Count(),
             }
         };
         return View(model);

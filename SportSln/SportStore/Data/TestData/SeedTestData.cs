@@ -22,16 +22,17 @@ public class SeedTestData : ISeedTestData
         if (context.Products.Any())
         {
             logger.LogInformation("Context database contains data - database init with test data is not required");
+            return;
         }
         logger.LogInformation("Begin writing test data to database Context ...");
 
         context.Products.AddRange(
             new Product
             {
-                Name = "Test1",
+                Name = "Water",
                 Description = "A test product number 1",
                 Price = 100,
-                Category = "Testsports",
+                Category = "Watersports",
             },
             new Product
             {
