@@ -53,7 +53,7 @@ public class SeedTestData : ISeedTestData
                 Name = "Soccer Ball",
                 Description = "FIFA size and weight",
                 Price = 19.5m,
-                Category = "Soccer",
+                Category = "Watersports",
             },
             new Product
             {
@@ -95,6 +95,13 @@ public class SeedTestData : ISeedTestData
                 Name = "Bling-Bling King",
                 Description = "Gold-plated, diamond-studded King",
                 Price = 1200,
+                Category = "Chess",
+            },
+            new Product
+            {
+                Name = "Bling-Bling King 2",
+                Description = "Gold-plated, diamond-studded King 2",
+                Price = 1500,
                 Category = "Chess",
             }
         );
