@@ -1,0 +1,9 @@
+@model ProductListWebModel
+
+@foreach (var item in Model.Products)
+{
+    <partial name="Partial/ProductSummaryPartial" model="item" />
+}
+<div page-model="@Model.PagingInfo" page-action="Index" page-class="btn" page-classes-enabled="true"
+    page-class-normal="btn-outline-dark" page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
+    class="btn-group pull-right m-1"></div>
