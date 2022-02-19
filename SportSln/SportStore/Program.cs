@@ -41,7 +41,6 @@ app.UseRouting();
 
 app.MapControllerRoute("catpage", "{category}/Page{page:int}", new { Controller = "Home", Action = "Index" });
 app.MapControllerRoute("page", "Page{page:int}", new { Controller = "Home", Action = "Index", Page = 1 });
-app.MapControllerRoute("category", "{category}", new { Controller = "Home", Action = "Index", Page = 1 });
 app.MapControllerRoute("pagination", "Products/Page{page}", new { Controller = "Home", Action = "Index", Page = 1 });
 app.MapDefaultControllerRoute();
 
