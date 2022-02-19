@@ -22,7 +22,8 @@ public class HomeController : Controller
                 CurrentPage = page,
                 ItemsPerPage = PageSize,
                 TotalItems = query.Count(),
-            }
+            },
+            CurrentCategory = category,
         };
         return View(model);
     }
