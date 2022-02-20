@@ -10,7 +10,9 @@ builder.Host.ConfigureServices(services =>
     services.AddDistributedMemoryCache();
     services.AddSession();
 
+    services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
     services.AddScoped<IStoreRepository, EFStoreRepository>();
+    services.AddScoped<Cart>(x => SessionCart.GetCart(x));
 
     services.AddTransient<ISeedTestData, SeedTestData>();
 });

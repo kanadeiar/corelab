@@ -10,3 +10,5 @@ global using SportStore.Data.Interfaces;
 global using SportStore.Data.TestData;
 global using SportStore.Models;
 global using SportStore.WebModels;
+global using System.Text.Json.Serialization;
+global using SportStore.Infrastructure;
