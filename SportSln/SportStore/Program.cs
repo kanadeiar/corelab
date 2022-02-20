@@ -7,6 +7,8 @@ builder.Host.ConfigureServices(services =>
         options.UseSqlite(builder.Configuration.GetConnectionString("SportStoreConnection"));
     });
     services.AddControllersWithViews().AddRazorRuntimeCompilation();
+    services.AddRazorPages();
+    services.AddServerSideBlazor();
     services.AddDistributedMemoryCache();
     services.AddSession();
 
@@ -43,10 +45,13 @@ app.UseSession();
 
 app.UseRouting();
 
-app.MapControllerRoute("catpage", "{category}/Page{page:int}", new { Controller = "Home", Action = "Index" });
-app.MapControllerRoute("page", "Page{page:int}", new { Controller = "Home", Action = "Index", Page = 1 });
-app.MapControllerRoute("pagination", "Products/Page{page}", new { Controller = "Home", Action = "Index", Page = 1 });
+//app.MapControllerRoute("catpage", "{category}/Page{page:int}", new { Controller = "Home", Action = "Index" });
+//app.MapControllerRoute("page", "Page{page:int}", new { Controller = "Home", Action = "Index", Page = 1 });
+//app.MapControllerRoute("pagination", "Products/Page{page}", new { Controller = "Home", Action = "Index", Page = 1 });
 app.MapDefaultControllerRoute();
+app.MapRazorPages();
+app.MapBlazorHub();
+app.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
 
 app.Run();
 
