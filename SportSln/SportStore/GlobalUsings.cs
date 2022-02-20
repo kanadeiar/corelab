@@ -12,3 +12,5 @@ global using SportStore.Models;
 global using SportStore.WebModels;
 global using System.Text.Json.Serialization;
 global using SportStore.Infrastructure;
+global using Microsoft.AspNetCore.Mvc.ModelBinding;
+global using System.ComponentModel.DataAnnotations;
