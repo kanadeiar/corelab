@@ -20,4 +20,6 @@ public class Order
     [Required(ErrorMessage = "Pleate enter a country name")]
     public string Country { get; set; }
     public bool GiftWrap { get; set; }
+    [BindNever]
+    public bool Shipped { get; set; }
 }

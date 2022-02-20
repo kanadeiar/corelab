@@ -1,2 +1,22 @@
 @page "/admin/orders"
-<h4>This is the orders component</h4>
+@inherits OwningComponentBase<IOrderRepository>
+
+<OrderTable TableTitle="Unshipped Orders" />
+<OrderTable TableTitle="Shipped Orders" />
+
+@code {
+    public IOrderRepository Repository => Service;
+    public IEnumerable<Order> AllOrders { get; set; }
+    public IEnumerable<Order> UnshippedOrders { get; set; }
+    public IEnumerable<Order> ShippedOrders { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+    public async Task UpdateData()
+    {
+        AllOrders = await Repository.Orders.ToListAsync();
+        UnshippedOrders = AllOrders.Where(x => !x.Shipped);
+        ShippedOrders = AllOrders.Where(x => x.Shipped);
+    }
+}
