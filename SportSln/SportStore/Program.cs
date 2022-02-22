@@ -54,9 +54,11 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseStatusCodePages();
 }
 else
 {
+    app.UseExceptionHandler("/error");
     app.UseHsts();
 }
 
