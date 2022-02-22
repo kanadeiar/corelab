@@ -6,6 +6,12 @@ builder.Host.ConfigureServices(services =>
     {
         options.UseSqlite(builder.Configuration.GetConnectionString("SportStoreConnection"));
     });
+    services.AddDbContext<AppIdentityDbContext>(options =>
+    {
+        options.UseSqlite(builder.Configuration.GetConnectionString("IdentityConnection"));
+    });
+    services.AddIdentity<IdentityUser, IdentityRole>()
+        .AddEntityFrameworkStores<AppIdentityDbContext>();
     services.AddControllersWithViews().AddRazorRuntimeCompilation();
     services.AddRazorPages();
     services.AddServerSideBlazor();
@@ -19,13 +25,28 @@ builder.Host.ConfigureServices(services =>
     services.AddScoped<Cart>(x => SessionCart.GetCart(x));
 
     services.AddTransient<ISeedTestData, SeedTestData>();
+    services.AddTransient<IIdentitySeedTestData, IdentitySeedTestData>();
+});
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequiredLength = 3;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = false;
+    options.User.RequireUniqueEmail = true;
+    options.User.AllowedUserNameCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 });
 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var seeder = scope.ServiceProvider
+    await scope.ServiceProvider
+        .GetRequiredService<IIdentitySeedTestData>()
+        .SeedData(app.Services, builder.Configuration);
+    await scope.ServiceProvider
         .GetRequiredService<ISeedTestData>()
         .SeedData(app.Services, builder.Configuration);
 }
@@ -44,6 +65,9 @@ app.UseStaticFiles();
 app.UseSession();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 //app.MapControllerRoute("catpage", "{category}/Page{page:int}", new { Controller = "Home", Action = "Index" });
 //app.MapControllerRoute("page", "Page{page:int}", new { Controller = "Home", Action = "Index", Page = 1 });
