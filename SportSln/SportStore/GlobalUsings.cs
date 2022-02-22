@@ -5,6 +5,7 @@ global using Microsoft.AspNetCore.Mvc.Routing;
 global using Microsoft.AspNetCore.Mvc.ViewFeatures;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Razor.TagHelpers;
 global using SportStore.Data;
