@@ -4,11 +4,13 @@ builder.Host.ConfigureServices(services =>
 {
     services.AddDbContext<StoreDbContext>(options =>
     {
-        options.UseSqlite(builder.Configuration.GetConnectionString("SportStoreConnection"));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("SportStoreConnection"));
+        //options.UseSqlite(builder.Configuration.GetConnectionString("SportStoreConnection"));
     });
     services.AddDbContext<AppIdentityDbContext>(options =>
     {
-        options.UseSqlite(builder.Configuration.GetConnectionString("IdentityConnection"));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
+        //options.UseSqlite(builder.Configuration.GetConnectionString("IdentityConnection"));
     });
     services.AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<AppIdentityDbContext>();
