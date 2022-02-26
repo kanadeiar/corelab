@@ -14,32 +14,33 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 
-app.Use(async (context, next) =>
-{
-    var end = context.GetEndpoint();
-    if (end is { })
-    {
-        await context.Response.WriteAsync($"{end.DisplayName} Selected\n");
-    }
-    else
-        await context.Response.WriteAsync("No endpoint Selected\n");
-    await next(context);
-});
-
-//app.UseEndpoints(endpoints => {
-//    endpoints.MapGet("{first:alpha}/{second:bool}/{*third}", async context =>
+//app.Use(async (context, next) =>
+//{
+//    var end = context.GetEndpoint();
+//    if (end is { })
 //    {
-//        await context.Response.WriteAsync("Request Routed\n");
-//        foreach (var item in context.Request.RouteValues)
-//        {
-//            await context.Response.WriteAsync($"{item.Key}: {item.Value}\n");
-//        }
-//    });
-//    endpoints.MapGet("capital/{country:regex(^uk|russia|france|monaco$)}", Capital.Endpoint);
-//    endpoints.MapGet("size/{city?}", Population.Enpoint)
-//        .WithMetadata(new RouteNameMetadata("population"));
+//        await context.Response.WriteAsync($"{end.DisplayName} Selected\n");
+//    }
+//    else
+//        await context.Response.WriteAsync("No endpoint Selected\n");
+//    await next(context);
 //});
-app.Map("{number:int}", async context => 
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGet("{first:alpha}/{second:bool}/{*third}", async context =>
+    {
+        await context.Response.WriteAsync("Request Routed\n");
+        foreach (var item in context.Request.RouteValues)
+        {
+            await context.Response.WriteAsync($"{item.Key}: {item.Value}\n");
+        }
+    });
+    endpoints.MapGet("capital/{country:regex(^uk|russia|france|monaco$)}", Capital.Endpoint);
+    endpoints.MapGet("size/{city?}", Population.Enpoint)
+        .WithMetadata(new RouteNameMetadata("population"));
+});
+app.Map("{number:int}", async context =>
 {
     await context.Response.WriteAsync("First endpoint");
 }).WithDisplayName("Int Endpoint")
