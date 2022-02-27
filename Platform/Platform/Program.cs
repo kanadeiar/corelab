@@ -1,5 +1,17 @@
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.Services.AddScoped<IResponseFormatter>(provider =>
+//{
+//    var typeName = builder.Configuration["services:IResponseFormatter"];
+//    return (IResponseFormatter)ActivatorUtilities
+//        .CreateInstance(provider, typeName == null 
+//            ? typeof(GuidService) : Type.GetType(typeName, true)!);
+//});
+//builder.Services.AddScoped<ITimeStamper, DefaultTimeStamper>();
+builder.Services.AddScoped<IResponseFormatter, TextResponseFormatter>();
+builder.Services.AddScoped<IResponseFormatter, HtmlResponseFormatter>();
+builder.Services.AddScoped<IResponseFormatter, GuidService>();
+
 #region Old
 //builder.Services.Configure<RouteOptions>(options =>
 //{
@@ -9,25 +21,40 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.MapGet("single", async context =>
 {
-    app.UseDeveloperExceptionPage();
-}
+    IResponseFormatter formatter = context.RequestServices
+        .GetRequiredService<IResponseFormatter>();
+    await formatter.Format(context, "Single service");
+});
 
-app.UseRouting();
-
-app.UseMiddleware<WeatherMiddleware>();
-
-IResponseFormatter formatter = new TextResponseFormatter();
-app.MapGet("/middleware/function", async context =>
+app.MapGet("/", async context =>
 {
-    await TypeBroker.Formatter.Format(context, "Middleware Function: It is snowing in Chicago");
+    IResponseFormatter formatter = context.RequestServices
+        .GetServices<IResponseFormatter>().First(x => x.RichOutput);
+    await formatter.Format(context, "Multiple service");
 });
-app.MapGet("/endpoint/class", WeatherEndpoint.Endpoint);
 
-app.MapGet("/endpoint/function", async context => {
-    await TypeBroker.Formatter.Format(context, "Endpoint function: is third sample");
-});
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseDeveloperExceptionPage();
+//}
+
+//app.UseRouting();
+
+//app.UseMiddleware<WeatherMiddleware>();
+
+////IResponseFormatter formatter = new TextResponseFormatter();
+//app.MapGet("/middleware/function", async (HttpContext context, IResponseFormatter formatter) =>
+//{
+//    await formatter.Format(context, "Middleware Function: It is snowing in Chicago");
+//});
+////app.MapGet("/endpoint/class", WeatherEndpoint.Endpoint);
+//app.MapEndpoint<WeatherEndpoint>("/endpoint/class");
+
+//app.MapGet("/endpoint/function", async (HttpContext context, IResponseFormatter formatter) => {
+//    await formatter.Format(context, "Endpoint function: is third sample");
+//});
 
 #region Old
 //app.Use(async (context, next) =>
@@ -83,6 +110,6 @@ app.MapGet("/endpoint/function", async context => {
 //});
 #endregion
 
-app.MapGet("/", () => "Hello World!");
+//app.MapGet("/", () => "Hello World!");
 
 app.Run();

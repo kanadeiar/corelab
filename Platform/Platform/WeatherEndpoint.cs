@@ -2,8 +2,13 @@
 
 public class WeatherEndpoint
 {
-    public static async Task Endpoint(HttpContext context)
+    //private IResponseFormatter _formatter;
+    //public WeatherEndpoint(IResponseFormatter formatter)
+    //{
+    //    _formatter = formatter;
+    //}
+    public async Task Endpoint(HttpContext context, IResponseFormatter formatter)
     {
-        await context.Response.WriteAsync("Endpoint class: It is second sample");
+        await formatter.Format(context, "Endpoint class: It is second sample");
     }
 }
