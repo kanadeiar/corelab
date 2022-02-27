@@ -16,6 +16,10 @@ if (app.Environment.IsDevelopment())
 var pipelineConfig = app.Configuration;
 var pipelineEnv = app.Environment;
 
+app.UseHttpLogging();
+
+app.UseStaticFiles();
+
 app.UseMiddleware<LocationMiddleware>();
 
 app.MapGet("config", async (HttpContext context, IConfiguration config, IWebHostEnvironment env) =>
