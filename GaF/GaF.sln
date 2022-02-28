@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppGaF", "ConsoleAppGaF\ConsoleAppGaF.csproj", "{FF46D877-C4D5-4009-A5CC-3E800738BB24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF46D877-C4D5-4009-A5CC-3E800738BB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF46D877-C4D5-4009-A5CC-3E800738BB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF46D877-C4D5-4009-A5CC-3E800738BB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF46D877-C4D5-4009-A5CC-3E800738BB24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B48DFE68-5A8B-44B3-9BA1-E815D48A0D2F}
+	EndGlobalSection
+EndGlobal
