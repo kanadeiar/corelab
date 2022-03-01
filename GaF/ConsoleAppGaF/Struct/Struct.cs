@@ -54,7 +54,14 @@ public static class Struct
             new Car { Company = "MercedesBenz", Model = "C300", Color = "black" }
         );
         factory.listFlyweights();
+        Console.WriteLine();
+        Console.ReadKey();
 
+        Console.WriteLine("Proxy");
+        var subject = new RealSubject();
+        subject.Request();
+        var proxy = new Proxy(subject);
+        proxy.Request();
         Console.WriteLine();
         Console.ReadKey();
     }
