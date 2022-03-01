@@ -33,5 +33,29 @@ public static class Struct
         Console.WriteLine();
         Console.ReadKey();
 
+        Console.WriteLine("Decoreator");
+        var simple = new ConcreteComponent();
+        Console.WriteLine("RESULT: " + simple.Operation());
+        var decorator1 = new ConcreteDecoratorA(simple);
+        Console.WriteLine("RESULT: " + decorator1.Operation());
+        Console.WriteLine();
+        Console.ReadKey();
+
+        Console.WriteLine("Facade");
+        Subsystem1 subsystem1 = new Subsystem1();
+        Facade facade = new Facade(subsystem1);
+        Console.Write(facade.Operation());
+        Console.WriteLine();
+        Console.ReadKey();
+
+        Console.WriteLine("Flyweight");
+        var factory = new FlyweightFactory(
+            new Car { Company = "Chevrolet", Model = "Camaro2018", Color = "pink" },
+            new Car { Company = "MercedesBenz", Model = "C300", Color = "black" }
+        );
+        factory.listFlyweights();
+
+        Console.WriteLine();
+        Console.ReadKey();
     }
 }
