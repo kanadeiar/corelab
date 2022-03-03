@@ -6,9 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-	
+
   <ItemGroup>
-	<PackageReference Include="RabbitMQ.Client" Version="6.2.4" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.4" />
   </ItemGroup>
-	
+
 </Project>
