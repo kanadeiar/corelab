@@ -23,5 +23,25 @@ public class Behavior
         invoker.Invoke();
         Console.WriteLine();
         Console.ReadKey();
+
+        Console.WriteLine("Collection");
+        var collection = new WordsCollection();
+        collection.Add("First");
+        collection.Add("Second");
+        collection.Add("Third");
+        foreach (var element in collection)
+        {
+            Console.WriteLine(element);
+        }
+        Console.WriteLine("\nReverse:");
+        collection.ReverseDirection();
+        foreach (var element in collection)
+        {
+            Console.WriteLine(element);
+        }
+        Console.WriteLine();
+        Console.ReadKey();
+
+
     }
 }
