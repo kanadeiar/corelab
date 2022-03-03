@@ -6,3 +6,6 @@ using ConsoleAppGaF.Behavior;
 //Struct.Invoke();
 Behavior.Invoke();
 
+
+Console.WriteLine("Press any key ...");
+Console.ReadKey();
