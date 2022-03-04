@@ -1,20 +1,19 @@
-﻿using ConsoleApp1;
+﻿using ConsoleApp2;
 using GreenPipes;
 using MassTransit;
 
 var buscontrol = Bus.Factory.CreateUsingRabbitMq(cfg =>
 {
     cfg.Host("localhost");
-    cfg.ReceiveEndpoint("invoke-service", e =>
+    cfg.ReceiveEndpoint("payment-service", e =>
     {
-        e.UseInMemoryOutbox();
         e.UseMessageRetry(r => r.Interval(2, 100));
-        e.Consumer<EventConsumer>();
+        e.Consumer<InvoiceCreatedCustomer>();
     });
 });
 var source = new CancellationTokenSource(TimeSpan.FromSeconds(10));
 await buscontrol.StartAsync(source.Token);
-Console.WriteLine("Invoice Microservice Now Listening");
+Console.WriteLine("Payment Microservice Now Listening");
 
 try
 {
@@ -30,4 +29,3 @@ finally
 
 Console.WriteLine("Press any key");
 Console.ReadKey();
-
