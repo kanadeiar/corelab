@@ -3,21 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{F8AA8C11-994F-44C2-8258-6A5636D294E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{F8AA8C11-994F-44C2-8258-6A5636D294E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{ECAB25F1-FC87-4C34-B579-1A0DD06E403D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{ECAB25F1-FC87-4C34-B579-1A0DD06E403D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{22FCFE37-7BD8-486E-9105-5B59CB289D7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{22FCFE37-7BD8-486E-9105-5B59CB289D7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{2C1D6B1F-C7B7-4F12-8307-32617CAF03A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{2C1D6B1F-C7B7-4F12-8307-32617CAF03A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp3", "ConsoleApp3\ConsoleApp3.csproj", "{C5ED6679-E77D-449C-81F5-C02C3165F557}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp3", "ConsoleApp3\ConsoleApp3.csproj", "{C5ED6679-E77D-449C-81F5-C02C3165F557}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Models", "Shared.Models\Shared.Models.csproj", "{4985832B-5F26-4C0B-AE12-D0141BF930B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Models", "Shared.Models\Shared.Models.csproj", "{4985832B-5F26-4C0B-AE12-D0141BF930B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketing.Microservice", "Ticketing.Microservice\Ticketing.Microservice.csproj", "{112736A0-14B9-42CA-8F39-4055513EC46C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ticketing.Microservice", "Ticketing.Microservice\Ticketing.Microservice.csproj", "{112736A0-14B9-42CA-8F39-4055513EC46C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketProcessor.Microservice", "TicketProcessor.Microservice\TicketProcessor.Microservice.csproj", "{A3A8BA1C-3E10-437A-A54E-749452D9D3BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketProcessor.Microservice", "TicketProcessor.Microservice\TicketProcessor.Microservice.csproj", "{A3A8BA1C-3E10-437A-A54E-749452D9D3BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestSvc", "RequestSvc\RequestSvc.csproj", "{C89DCF3D-FB17-480B-9DA0-68237AC40361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResponceSvc", "ResponceSvc\ResponceSvc.csproj", "{48319E62-95C9-4664-81D4-9BAB07C3FA15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{FEEC9065-7A34-47F7-8724-2016B492355F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,18 @@ Global
 		{A3A8BA1C-3E10-437A-A54E-749452D9D3BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3A8BA1C-3E10-437A-A54E-749452D9D3BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3A8BA1C-3E10-437A-A54E-749452D9D3BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C89DCF3D-FB17-480B-9DA0-68237AC40361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C89DCF3D-FB17-480B-9DA0-68237AC40361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C89DCF3D-FB17-480B-9DA0-68237AC40361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C89DCF3D-FB17-480B-9DA0-68237AC40361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48319E62-95C9-4664-81D4-9BAB07C3FA15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48319E62-95C9-4664-81D4-9BAB07C3FA15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48319E62-95C9-4664-81D4-9BAB07C3FA15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48319E62-95C9-4664-81D4-9BAB07C3FA15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEEC9065-7A34-47F7-8724-2016B492355F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEEC9065-7A34-47F7-8724-2016B492355F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEEC9065-7A34-47F7-8724-2016B492355F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEEC9065-7A34-47F7-8724-2016B492355F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
