@@ -1,15 +1,19 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-    options.CheckConsentNeeded = context => true;
-});
-
+//builder.Services.Configure<CookiePolicyOptions>(options =>
+//{
+//    options.CheckConsentNeeded = context => true;
+//});
 //var servicesConfig = builder.Configuration;
 //var servicesEnv = builder.Environment;
 //builder.Services.Configure<MessageOptions>(servicesConfig.GetSection("Location"));
 
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options => 
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -19,7 +23,10 @@ if (app.Environment.IsDevelopment())
     app.Logger.LogDebug("Start program pipeline");
 }
 
-app.UseCookiePolicy();
+//app.UseCookiePolicy();
+
+app.UseSession();
+
 app.UseMiddleware<ConsentMiddleware>();
 app.UseRouting();
 
@@ -51,25 +58,31 @@ app.UseRouting();
 
 app.MapGet("/cookie", async context =>
 {
-    var counter1 = int.Parse(context.Request.Cookies["counter1"] ?? "0") + 1;
-    context.Response.Cookies.Append("counter1", counter1.ToString(), 
-        new CookieOptions 
-        { 
-            MaxAge = TimeSpan.FromMinutes(30),
-            IsEssential = true,
-        });
-    var counter2 = int.Parse(context.Request.Cookies["counter2"] ?? "0") + 1;
-    context.Response.Cookies.Append("counter2", counter2.ToString(), 
-        new CookieOptions 
-        { 
-            MaxAge = TimeSpan.FromMinutes(30) 
-        });
+    //var counter1 = int.Parse(context.Request.Cookies["counter1"] ?? "0") + 1;
+    //context.Response.Cookies.Append("counter1", counter1.ToString(), 
+    //    new CookieOptions 
+    //    { 
+    //        MaxAge = TimeSpan.FromMinutes(30),
+    //        IsEssential = true,
+    //    });
+    //var counter2 = int.Parse(context.Request.Cookies["counter2"] ?? "0") + 1;
+    //context.Response.Cookies.Append("counter2", counter2.ToString(), 
+    //    new CookieOptions 
+    //    { 
+    //        MaxAge = TimeSpan.FromMinutes(30) 
+    //    });
+    var counter1 = (context.Session.GetInt32("counter1") ?? 0) + 1;
+    var counter2 = (context.Session.GetInt32("counter2") ?? 0) + 1;
+    context.Session.SetInt32("counter1", counter1);
+    context.Session.SetInt32("counter2", counter2);
+    await context.Session.CommitAsync();
     await context.Response.WriteAsync($"Counter1: {counter1}, counter2: {counter2}");
 });
-app.MapGet("/clear", context => 
+app.MapGet("/clear", context =>
 {
-    context.Response.Cookies.Delete("counter1");
-    context.Response.Cookies.Delete("counter2");
+    //context.Response.Cookies.Delete("counter1");
+    //context.Response.Cookies.Delete("counter2");
+    context.Session.Clear();
     context.Response.Redirect("/");
     return Task.CompletedTask;
 });
