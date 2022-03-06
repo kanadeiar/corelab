@@ -14,17 +14,26 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddHsts(options =>
+{
+    options.MaxAge = TimeSpan.FromDays(1);
+    options.IncludeSubDomains = true;
+});
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.Logger.LogDebug("Start program pipeline");
+}
+else
+{
+    app.UseHsts();
 }
 
 //app.UseCookiePolicy();
 
+app.UseHttpsRedirection();
 app.UseSession();
 
 app.UseMiddleware<ConsentMiddleware>();
@@ -87,7 +96,10 @@ app.MapGet("/clear", context =>
     return Task.CompletedTask;
 });
 
-app.MapFallback(async context => 
-    await context.Response.WriteAsync("Hello World!"));
+app.MapFallback(async context =>
+{
+    await context.Response.WriteAsync($"HTTPS Request: {context.Request.IsHttps}\n");
+    await context.Response.WriteAsync("Hello World!");
+});
 
 app.Run();
