@@ -29,6 +29,9 @@ builder.Services.AddDistributedSqlServerCache(options =>
     options.SchemaName = "dbo";
     options.TableName = "DataCache";
 });
+builder.Services.AddResponseCaching();
+builder.Services.AddSingleton<IResponseFormatter, HtmlResponseFormatter>();
+
 var app = builder.Build();
 
 //if (app.Environment.IsDevelopment())
@@ -111,6 +114,7 @@ var app = builder.Build();
 //    await context.Response.WriteAsync("Hello World!");
 //});
 
+app.UseResponseCaching();
 app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
