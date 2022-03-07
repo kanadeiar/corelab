@@ -1,4 +1,12 @@
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<CalculationContext>(options => 
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CalcConnection"));
+    //options.EnableSensitiveDataLogging(); //TODO: delete this - secutity
+});
 
 //builder.Services.Configure<CookiePolicyOptions>(options =>
 //{
@@ -23,16 +31,33 @@ var builder = WebApplication.CreateBuilder(args);
 //{
 //    options.SizeLimit = 200;
 //});
-builder.Services.AddDistributedSqlServerCache(options =>
+
+builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.ConnectionString = builder.Configuration.GetConnectionString("CacheConnection");
-    options.SchemaName = "dbo";
-    options.TableName = "DataCache";
+    options.InstanceName = "PlatformInstance";
+    options.Configuration = "localhost:6379";
 });
-builder.Services.AddResponseCaching();
+
+//builder.Services.AddDistributedSqlServerCache(options =>
+//{
+//    options.ConnectionString = builder.Configuration.GetConnectionString("CacheConnection");
+//    options.SchemaName = "dbo";
+//    options.TableName = "DataCache";
+//});
+//builder.Services.AddResponseCaching();
 builder.Services.AddSingleton<IResponseFormatter, HtmlResponseFormatter>();
+builder.Services.AddTransient<SeedData>();
+
 
 var app = builder.Build();
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var seedData = scope.ServiceProvider.GetRequiredService<SeedData>();
+//    seedData.SeedDatabase();
+//}
+var seedData = app.Services.GetRequiredService<SeedData>();
+seedData.SeedDatabase();
 
 //if (app.Environment.IsDevelopment())
 //{
@@ -114,7 +139,8 @@ var app = builder.Build();
 //    await context.Response.WriteAsync("Hello World!");
 //});
 
-app.UseResponseCaching();
+
+//app.UseResponseCaching();
 app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
@@ -124,5 +150,7 @@ app.UseEndpoints(endpoints =>
         await context.Response.WriteAsync("Hello World!");
     });
 });
+
+
 
 app.Run();
