@@ -19,11 +19,16 @@ var builder = WebApplication.CreateBuilder(args);
 //    options.IncludeSubDomains = true;
 //});
 
-builder.Services.AddDistributedMemoryCache(options =>
+//builder.Services.AddDistributedMemoryCache(options =>
+//{
+//    options.SizeLimit = 200;
+//});
+builder.Services.AddDistributedSqlServerCache(options =>
 {
-    options.SizeLimit = 200;
+    options.ConnectionString = builder.Configuration.GetConnectionString("CacheConnection");
+    options.SchemaName = "dbo";
+    options.TableName = "DataCache";
 });
-
 var app = builder.Build();
 
 //if (app.Environment.IsDevelopment())
