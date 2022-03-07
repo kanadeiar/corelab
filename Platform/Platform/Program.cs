@@ -19,18 +19,21 @@ var builder = WebApplication.CreateBuilder(args);
 //    options.IncludeSubDomains = true;
 //});
 
-
+builder.Services.AddDistributedMemoryCache(options =>
+{
+    options.SizeLimit = 200;
+});
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-else
-{
-    app.UseHsts();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseDeveloperExceptionPage();
+//}
+//else
+//{
+//    app.UseHsts();
+//}
 
 ////app.UseCookiePolicy();
 
@@ -102,9 +105,15 @@ else
 //    await context.Response.WriteAsync($"HTTPS Request: {context.Request.IsHttps}\n");
 //    await context.Response.WriteAsync("Hello World!");
 //});
-app.MapGet("/", async context =>
-{ 
-    await context.Response.WriteAsync("Hello World!");
+
+app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGet("/sum/{count:int=1000000000}", SumEndpoint.Endpoint);
+    endpoints.MapGet("/", async context =>
+    {
+        await context.Response.WriteAsync("Hello World!");
+    });
 });
 
 app.Run();
