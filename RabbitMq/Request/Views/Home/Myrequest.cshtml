@@ -1,0 +1,20 @@
+﻿@using Test.Core.Models
+@model Product
+@{
+    ViewData["Title"] = "Request";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Test MassTransit</h1>
+    
+    @if (Model is { })
+    {
+        <p>Product:</p>
+        <p>@Model.Slug</p>
+        <p>@Model.Name</p>
+        <p>@Model.Description</p>
+        <p>@Model.Price</p>
+    }
+
+    <a asp-controller="Home" asp-action="Request">Request</a>
+</div>
