@@ -21,21 +21,16 @@ public class Program
                 {
                     x.AddConsumer<ProductInfoRequestConsumer>();
 
-                    x.UsingRabbitMq((context, cfg) =>
+                    x.AddBus(context => Bus.Factory.CreateUsingRabbitMq(c =>
                     {
-                        cfg.Host(host);
-                        cfg.ConfigureEndpoints(context);
-                    });
-                    //x.AddBus(context => Bus.Factory.CreateUsingRabbitMq(c =>
-                    //{
-                    //    c.Host(host);
-                    //    c.ReceiveEndpoint(queue, e =>
-                    //    {
-                    //        e.PrefetchCount = 16;
-                    //        e.UseMessageRetry(r => r.Interval(2, 3000));
-                    //        e.ConfigureConsumer<ProductInfoRequestConsumer>(context);
-                    //    });
-                    //}));
+                        c.Host(host);                        
+                        c.ReceiveEndpoint(queue, e =>
+                        {
+                            e.PrefetchCount = 16;
+                            e.UseMessageRetry(r => r.Interval(2, 3000));
+                            e.Consumer<ProductInfoRequestConsumer>(context);
+                        });
+                    }));
                 });
                 services.AddMassTransitHostedService();
             });
