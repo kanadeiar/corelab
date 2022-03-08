@@ -2,8 +2,8 @@ using MassTransit;
 using Test.Core.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
-var host = builder.Configuration["MassTransit:Host"];
 
+var host = builder.Configuration["MassTransit:Host"];
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddMassTransit(x => 
