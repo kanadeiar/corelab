@@ -9,13 +9,13 @@ public class TestMiddleware
     {
         this.next = next;
     }
-    public async Task Invoke(HttpContext context, DataContext dataContext)
+    public async Task Invoke(HttpContext context, DataContext data)
     {
         if (context.Request.Path == "/test")
         {
-            await context.Response.WriteAsync($"There are {dataContext.Products.Count()} products\n");
-            await context.Response.WriteAsync($"There are {dataContext.Categiries.Count()} categories\n");
-            await context.Response.WriteAsync($"There are {dataContext.Suppliers.Count()} suppliers\n");
+            await context.Response.WriteAsync($"There are {data.Products.Count()} products\n");
+            await context.Response.WriteAsync($"There are {data.Categiries.Count()} categories\n");
+            await context.Response.WriteAsync($"There are {data.Suppliers.Count()} suppliers\n");
         }
         else
         {
