@@ -1,3 +1,5 @@
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using WebApp;
@@ -13,6 +15,11 @@ builder.Host.ConfigureServices(services =>
     {
         options.UseSqlServer(builder.Configuration.GetConnectionString("ProductConnection"));
         options.EnableSensitiveDataLogging(true);
+    });
+
+    services.Configure<JsonOptions>(options =>
+    {
+        options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
     });
 });
 
