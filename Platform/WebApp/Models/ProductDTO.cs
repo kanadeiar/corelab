@@ -22,7 +22,7 @@ public class ProductDTO
             Price = param.Price,
             CategoryId = param.CategoryId,
             SupplierId = param.SupplierId,
-        };
+        };          
     }
     public static implicit operator ProductDTO(Product param)
     {
