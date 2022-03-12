@@ -16,7 +16,7 @@ builder.Host.ConfigureServices(services =>
         options.EnableSensitiveDataLogging(true);
     });
 
-    services.AddControllers();
+    services.AddControllersWithViews().AddRazorRuntimeCompilation();
 });
 
 var app = builder.Build();

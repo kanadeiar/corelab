@@ -10,9 +10,25 @@ public class HomeController : Controller
     {
         _context = context;
     }
-    public async Task<IActionResult> Index(int id)
+    [ResponseCache(Duration = 300, Location = ResponseCacheLocation.Any)]
+    public async Task<IActionResult> Index(int id = 1)
     {
         var product = await _context.Products.FindAsync(id);
-        return View(product);
+        if (product?.CategoryId == 1)
+        {
+            return View("Watersports", product);
+        }
+        else
+        {
+            return View(product);
+        }
+    }
+    public IActionResult Common()
+    {
+        return View();
+    }
+    public IActionResult List()
+    {
+        return View(_context.Products);
     }
 }
