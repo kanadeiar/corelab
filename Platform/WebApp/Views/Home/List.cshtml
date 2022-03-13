@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Product>
 @{
+    Layout = null;
     var average = Model.Average(x => x.Price);
 }
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    <h6 class="bg-primary text-white text-center m-2 p-2">Product Table</h6>
+    <h6 class="bg-primary text-white text-center m-2 p-2">Products</h6>
     <div>
         <table class="table table-sm table-striped table-bordered">
             <thead>
