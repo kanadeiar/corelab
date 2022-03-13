@@ -1,6 +1,7 @@
 ﻿@model Product
 @{
     ViewBag.Title = "Product Table";
+    Func<Product, object> rowName = @<tr><th>Name</th><td>@item.Name</td></tr>;
 }
 @section Header {
     Product Information
@@ -8,7 +9,7 @@
 <div class="m-2">
     <table class="table table-sm table-striped table-bordered">
         <tbody>
-            <tr><th>Name</th><td>@Model?.Name</td></tr>
+            @rowName(@Model)
             <tr><th>Price</th><td>@Model?.Price.ToString("c") ()</td></tr>
             <tr><th>Category Id</th><td>@Model?.CategoryId</td></tr>
             <tr><th>Supplier Id</th><td>@Model?.SupplierId</td></tr>

@@ -11,14 +11,14 @@
 <body>
     <h6 class="bg-primary text-white text-center m-2 p-2">Products</h6>
     <div>
-        <table class="table table-sm table-striped table-bordered">
+        <table class="table table-sm table-striped table-bordered m-2 p-2">
             <thead>
-                <tr><th>Name</th><th>Price</th><th>Average</th></tr>
+                <tr><th>Name</th><th>Price</th></tr>
             </thead>
             <tbody>
                 @foreach (var p in Model)
                 {
-                    <tr><td>@p.Name</td><td>@p.Price</td><td>@((p.Price / average * 100).ToString("F1")) % of average</td></tr>
+                    <partial name="_RowPartial" model="p" />
                 }
             </tbody>
         </table>
