@@ -22,4 +22,14 @@ public class HomeController : Controller
     {
         return View(_context.Products);
     }
+    public IActionResult CubedShow()
+    {
+        return View("Cubed");
+    }
+    public IActionResult Cube(double num)
+    {
+        TempData["value"] = num.ToString();
+        TempData["result"] = Math.Pow(num, 3).ToString();
+        return RedirectToAction("CubedShow");
+    }
 }
