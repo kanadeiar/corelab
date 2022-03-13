@@ -32,4 +32,8 @@ public class HomeController : Controller
         TempData["result"] = Math.Pow(num, 3).ToString();
         return RedirectToAction("CubedShow");
     }
+    public IActionResult Html()
+    {
+        return View((object)"This is a <h3><i>string</i></h3>");
+    }
 }
