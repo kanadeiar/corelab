@@ -17,12 +17,18 @@ builder.Host.ConfigureServices(services =>
     });
 
     services.AddControllersWithViews().AddRazorRuntimeCompilation();
+    services.AddDistributedMemoryCache();
+    services.AddSession(options =>
+    {
+        options.Cookie.IsEssential = true;
+    });
 });
 
 var app = builder.Build();
 
 app.UseDeveloperExceptionPage();
 app.UseStaticFiles();
+app.UseSession();
 app.UseRouting();
 
 app.MapControllers();
