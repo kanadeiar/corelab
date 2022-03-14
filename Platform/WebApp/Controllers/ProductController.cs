@@ -12,16 +12,19 @@ namespace WebApp.Controllers;
 [ApiController, Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
+    private readonly IMapper _mapper;
     private readonly DataContext _context;
-    public ProductController(DataContext context)
+    public ProductController(IMapper mapper, DataContext context)
     {
+        _mapper = mapper;
         _context = context;
     }
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IAsyncEnumerable<ProductDTO>))]
     public IAsyncEnumerable<ProductDTO> GetProducts()
     {
-        return _context.Products.Select(x => (ProductDTO)x).AsAsyncEnumerable();
+        return _context.Products.Select(x => _mapper.Map<ProductDTO>(x)).AsAsyncEnumerable();
+        //return _context.Products.Select(x => (ProductDTO)x).AsAsyncEnumerable();
     }
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductDTO))]
@@ -31,7 +34,8 @@ public class ProductController : ControllerBase
         var product = await _context.Products.FindAsync(id);
         if (product is { })
         {
-            return Ok((ProductDTO)product);
+            return Ok(_mapper.Map<ProductDTO>(product));
+            //return Ok((ProductDTO)product);
         }
         return NotFound();
     }
@@ -40,16 +44,18 @@ public class ProductController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductDTO))]
     public async Task<IActionResult> SaveProduct(ProductDTO product)
     {
-        await _context.Products.AddAsync(product);
+        var adding = _mapper.Map<Product>(product);
+        await _context.Products.AddAsync(adding);
         await _context.SaveChangesAsync();
-        return Ok(product);
+        return Ok(_mapper.Map<ProductDTO>(adding));
     }
     [HttpPut]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task UpdateProduct(ProductDTO product)
     {
-        _context.Products.Update(product);
+        var updating = _mapper.Map<Product>(product);
+        _context.Products.Update(updating);
         await _context.SaveChangesAsync();
     }
     [HttpPatch("{id}")]
@@ -63,7 +69,7 @@ public class ProductController : ControllerBase
         {
             patchDocument.ApplyTo(product);
             await _context.SaveChangesAsync();
-            return (ProductDTO)product;
+            return _mapper.Map<ProductDTO>(product);
         }
         return default;
     }

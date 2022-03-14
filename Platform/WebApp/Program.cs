@@ -1,9 +1,11 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using WebApp;
 using WebApp.Common;
 using WebApp.Data;
+using WebApp.Mapping;
 using WebApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +25,9 @@ builder.Host.ConfigureServices(services =>
         options.Cookie.IsEssential = true;
     });
 });
+
+var mapperConfig = new MapperConfiguration(options => options.AddProfile<DataMappingProfile>());
+builder.Services.AddSingleton<IMapper>(x => mapperConfig.CreateMapper());
 
 var app = builder.Build();
 
