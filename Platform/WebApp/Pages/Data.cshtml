@@ -1,0 +1,9 @@
+﻿@page
+@inject DataContext context;
+<h5 class="bg-primary text-white text-center m-2 p-2">Categories</h5>
+<ul class="list-group m-2">
+    @foreach (var category in context.Categiries)
+    {
+        <li class="list-group-item">@category.Name</li>
+    }
+</ul>
