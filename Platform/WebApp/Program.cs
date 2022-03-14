@@ -24,6 +24,10 @@ builder.Host.ConfigureServices(services =>
     {
         options.Cookie.IsEssential = true;
     });
+    services.AddSwaggerGen(options =>
+    {
+        options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "WebApp", Version = "v1" });
+    });
 });
 
 var mapperConfig = new MapperConfiguration(options => options.AddProfile<DataMappingProfile>());
@@ -37,6 +41,12 @@ app.UseSession();
 app.UseRouting();
 
 app.MapControllers();
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApp");
+});
 
 app.MapDefaultControllerRoute();
 
