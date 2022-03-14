@@ -1,19 +1,21 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using WebApp.Mapping;
 
 namespace WebApp.Models;
 
 public class ProductDTO
 {
+    public int Id { get; set; }
     [Required]
     public string Name { get; set; }
-    [Range(1,1000)]
+    [Range(1, 1000)]
     public decimal Price { get; set; }
     [Range(1, int.MaxValue)]
     public int CategoryId { get; set; }
     [Range(1, int.MaxValue)]
     public int SupplierId { get; set; }
-
     public static implicit operator Product(ProductDTO param)
     {
         return new Product

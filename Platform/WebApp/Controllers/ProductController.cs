@@ -45,6 +45,7 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> SaveProduct(ProductDTO product)
     {
         var adding = _mapper.Map<Product>(product);
+        adding.Id = default;
         await _context.Products.AddAsync(adding);
         await _context.SaveChangesAsync();
         return Ok(_mapper.Map<ProductDTO>(adding));
