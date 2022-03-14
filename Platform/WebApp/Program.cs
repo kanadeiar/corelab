@@ -17,6 +17,8 @@ builder.Host.ConfigureServices(services =>
     });
 
     services.AddControllersWithViews().AddRazorRuntimeCompilation();
+    services.AddRazorPages().AddRazorRuntimeCompilation();
+
     services.AddDistributedMemoryCache();
     services.AddSession(options =>
     {
@@ -32,8 +34,8 @@ app.UseSession();
 app.UseRouting();
 
 app.MapControllers();
-
 app.MapDefaultControllerRoute();
+app.MapRazorPages();
 
 using (var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>())
 {

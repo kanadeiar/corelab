@@ -1,0 +1,37 @@
+﻿@page "{id:int?}"
+@model IndexModel
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="bg-primary text-white text-center m-2 p-2">
+        @Model.Product?.Name
+    </div>
+    <div class="m-2 p-2">
+        @Model.Product?.Price.ToString("c")
+    </div>
+</body>
+</html>
+@functions {
+    public class IndexModel : PageModel
+    {
+        private readonly DataContext _context;
+        public Product? Product { get; set; }
+        public IndexModel(DataContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IActionResult> OnGetAsync(int id = 1)
+        {
+            Product = await _context.Products.FindAsync(id);
+            if (Product is { })
+            {
+                return Page();
+            }
+            return RedirectToPage("NotFound");
+        }
+    }
+}
