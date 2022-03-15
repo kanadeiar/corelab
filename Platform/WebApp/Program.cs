@@ -1,9 +1,6 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
 using WebApp;
-using WebApp.Common;
 using WebApp.Data;
 using WebApp.Mapping;
 using WebApp.Models;
@@ -30,10 +27,12 @@ builder.Host.ConfigureServices(services =>
     {
         options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "WebApp", Version = "v1" });
     });
-});
 
-var mapperConfig = new MapperConfiguration(options => options.AddProfile<DataMappingProfile>());
-builder.Services.AddSingleton<IMapper>(x => mapperConfig.CreateMapper());
+    var mapperConfig = new MapperConfiguration(options => options.AddProfile<DataMappingProfile>());
+    services.AddSingleton<IMapper>(x => mapperConfig.CreateMapper());
+
+    services.AddSingleton<CitiesData>();
+});
 
 var app = builder.Build();
 
