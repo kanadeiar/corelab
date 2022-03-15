@@ -1,9 +1,9 @@
 ﻿@page
-@inject CitiesData Data
+@model WebApp.Pages.CitiesModel
 <div class="m-2">
     <table class="table table-sm table-striped table-bordered">
         <tbody>
-            @foreach (var x in Data.Cities)
+            @foreach (var x in Model.Data.Cities)
             {
                 <tr>
                     <td>@x.Name</td>

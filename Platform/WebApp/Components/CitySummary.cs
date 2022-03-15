@@ -11,20 +11,14 @@ public class CitySummary : ViewComponent
     {
         _cities = cities;
     }
-    public string Invoke()
+    public IViewComponentResult Invoke(string themeName = "secondary")
     {
-        if (RouteData.Values["controller"] != null)
+        ViewBag.Theme = themeName;
+        var result = new CityWebModel
         {
-            var result = new CityWebModel
-            {
-                Cities = _cities.Cities.Count(),
-                Population = _cities.Cities.Sum(x => x.Population),
-            };
-            return "Controller Request";
-        }
-        else
-        {
-            return "Razor Page Request";
-        }
+            Cities = _cities.Cities.Count(),
+            Population = _cities.Cities.Sum(x => x.Population),
+        };
+        return View(result);
     }
 }
