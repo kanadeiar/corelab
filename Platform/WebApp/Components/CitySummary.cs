@@ -13,7 +13,18 @@ public class CitySummary : ViewComponent
     }
     public string Invoke()
     {
-        var result = $"{_cities.Cities.Count()} cities, {_cities.Cities.Sum(x => x.Population)} people";
-        return result;
+        if (RouteData.Values["controller"] != null)
+        {
+            var result = new CityWebModel
+            {
+                Cities = _cities.Cities.Count(),
+                Population = _cities.Cities.Sum(x => x.Population),
+            };
+            return "Controller Request";
+        }
+        else
+        {
+            return "Razor Page Request";
+        }
     }
 }
