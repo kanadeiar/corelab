@@ -3,11 +3,7 @@
     Layout = "_SimpleLayout";
 }
 <table class="table table-sm table-striped table-bordered">
-    <thead>
-        <tr bg-color="info" text-color="white">
-            <th colspan="2">Product Summary</th>
-        </tr>
-    </thead>
+    <tablehead bg-color="danger">Product Summary</tablehead>
     <tbody>
         <tr><th>Name</th><td>@Model?.Name</td></tr>
         <tr><th>Price</th><td bg-color="dark">@Model?.Price.ToString("c")</td></tr>
@@ -15,4 +11,3 @@
         <tr><th>Supplier Id</th><td>@Model?.SupplierId</td></tr>
     </tbody>
 </table>
-
