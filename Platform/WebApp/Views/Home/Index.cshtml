@@ -7,9 +7,9 @@
 <table class="table table-sm table-striped table-bordered">
     <tablehead bg-color="danger">Product Summary</tablehead>
     <tbody>
-        <tr><th>Name</th><td highlight>@Model?.Name</td></tr>
-        <tr><th>Price</th><td bg-color="dark">@Model?.Price.ToString("c")</td></tr>
-        <tr><th>Category Id</th><td>@Model?.CategoryId</td></tr>
-        <tr><th>Supplier Id</th><td>@Model?.SupplierId</td></tr>
+        <tr for="Name" />
+        <tr for="Price" format="c" />
+        <tr for="CategoryId" />
+        <tr for="SupplierId" />
     </tbody>
 </table>
