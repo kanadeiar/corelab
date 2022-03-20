@@ -2,21 +2,10 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link asp-href-include="~/lib/bootstrap/css/*.min.css" asp-href-exclude="**/*-reboot*,**/*-grid*" rel="stylesheet" />
+    <link asp-href-include="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="m-2">
-        <environment names="development">
-            <h2 class="bg-info text-white m-2 p-2">This is Development</h2>
-        </environment>
-        <environment names="production">
-            <h2 class="bg-danger text-white m-2 p-2">This is Productions</h2>
-        </environment>
-        <img src="~/images/city.png" asp-append-version="true" class="m-2" />
-        <h6>Uncached timestamp: @DateTime.Now.ToString("HH:mm:ss")</h6>
-        <cache expires-after="@TimeSpan.FromSeconds(30)" vary-by-route="action">
-            <h6>Cached timestamp: @DateTime.Now.ToString("HH:mm:ss")</h6>
-        </cache>
         @RenderBody()
     </div>
 </body>

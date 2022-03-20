@@ -1,0 +1,41 @@
+﻿@page "/pages/form/{id:int}"
+@model FormHandlerModel
+
+<div class="m-2">
+    <h5 class="bg-primary text-white text-center p-2">HTML Form</h5>
+    <form asp-page="FormHandler" method="post">
+        <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" name="Name" value="@Model.Product?.Name" />
+        </div>
+        <button type="submit" class="btn btn-primary">
+            Submit
+        </button>
+    </form>
+</div>
+
+@functions
+{
+    [IgnoreAntiforgeryToken]
+    public class FormHandlerModel : PageModel
+    {
+        private readonly DataContext _dataContext;
+        public Product? Product { get; set; }
+        public FormHandlerModel(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
+        public async Task OnGetAsync(int id = 1)
+        {
+            Product = await _dataContext.Products.FindAsync(id);
+        }
+        public IActionResult OnPost()
+        {
+            foreach (var key in Request.Form.Keys.Where(k => !k.StartsWith("_")))
+            {
+                TempData[key] = string.Join(", ", Request.Form[key]);
+            }
+            return RedirectToPage("FormResults");
+        }
+    }
+}

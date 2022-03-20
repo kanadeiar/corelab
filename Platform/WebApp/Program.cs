@@ -34,9 +34,6 @@ builder.Host.ConfigureServices(services =>
     services.AddSingleton<IMapper>(x => mapperConfig.CreateMapper());
 
     services.AddSingleton<CitiesData>();
-
-    //services.AddTransient<ITagHelperComponent, TimeTagHelperComponent>();
-    //services.AddTransient<ITagHelperComponent, TableFooterTagHelperComponent>();
 });
 
 var app = builder.Build();
@@ -46,14 +43,14 @@ app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
 
-app.MapControllers();
-
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApp");
 });
 
+app.MapControllers();
+app.MapControllerRoute("forms", "controllers/{controller=Home}/{action=Index}/{id?}");
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
 

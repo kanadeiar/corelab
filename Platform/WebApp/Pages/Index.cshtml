@@ -4,6 +4,12 @@
 <div class="bg-primary text-white text-center m-2 p-2">
     @Model.Product?.Name
 </div>
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary m-2 p-2">
+    To Index of Home Controller
+</a>
+<a asp-controller="Form" asp-action="Index" class="btn btn-primary m-2 p-2">
+    To Form
+</a>
 @functions 
 {
     public class IndexModel : PageModel
