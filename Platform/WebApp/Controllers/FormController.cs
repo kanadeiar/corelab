@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 
 namespace WebApp.Controllers;
@@ -13,7 +14,7 @@ public class FormController : Controller
 
     public async Task<IActionResult> Index(int id = 1)
     {
-        var product = await _dataContext.Products.FindAsync(id);
+        var product = await _dataContext.Products.Include(x => x.Suppliler).Include(x => x.Category).FirstAsync(x => x.Id == id);
         return View("Form", product);
     }
 

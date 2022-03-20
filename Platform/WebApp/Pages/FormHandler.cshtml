@@ -6,7 +6,19 @@
     <form page="/pages/form" method="post">
         <div class="form-group">
             <label>Name</label>
-            <input class="form-control" name="Name" value="@Model.Product?.Name" />
+            <input class="form-control" asp-for="Product.Name" />
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input class="form-control" asp-for="Product.Price" />
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <input class="form-control" asp-for="Product.Category.Name" />
+        </div>
+        <div class="form-group">
+            <label>Supplier</label>
+            <input class="form-control" asp-for="Product.Suppliler.Name" />
         </div>
         <button type="submit" class="btn btn-primary">
             Submit
@@ -27,7 +39,8 @@
         }
         public async Task OnGetAsync(int id = 1)
         {
-            Product = await _dataContext.Products.FindAsync(id);
+            Product = await _dataContext.Products
+                .Include(x => x.Suppliler).Include(x => x.Category).FirstAsync(x => x.Id == id);
         }
         public IActionResult OnPost()
         {
