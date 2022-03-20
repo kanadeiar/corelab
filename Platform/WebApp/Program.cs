@@ -1,11 +1,11 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+//using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using WebApp;
 using WebApp.Data;
 using WebApp.Mapping;
 using WebApp.Models;
-using WebApp.TagHelpers;
+//using WebApp.TagHelpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,8 +35,8 @@ builder.Host.ConfigureServices(services =>
 
     services.AddSingleton<CitiesData>();
 
-    services.AddTransient<ITagHelperComponent, TimeTagHelperComponent>();
-    services.AddTransient<ITagHelperComponent, TableFooterTagHelperComponent>();
+    //services.AddTransient<ITagHelperComponent, TimeTagHelperComponent>();
+    //services.AddTransient<ITagHelperComponent, TableFooterTagHelperComponent>();
 });
 
 var app = builder.Build();
