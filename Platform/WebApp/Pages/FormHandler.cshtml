@@ -28,7 +28,6 @@
 
 @functions
 {
-    [IgnoreAntiforgeryToken]
     public class FormHandlerModel : PageModel
     {
         private readonly DataContext _dataContext;
@@ -44,7 +43,7 @@
         }
         public IActionResult OnPost()
         {
-            foreach (var key in Request.Form.Keys.Where(k => !k.StartsWith("_")))
+            foreach (var key in Request.Form.Keys)
             {
                 TempData[key] = string.Join(", ", Request.Form[key]);
             }

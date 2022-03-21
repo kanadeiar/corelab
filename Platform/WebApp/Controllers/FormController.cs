@@ -5,6 +5,7 @@ using WebApp.Data;
 
 namespace WebApp.Controllers;
 
+[AutoValidateAntiforgeryToken]
 public class FormController : Controller
 {
     private readonly DataContext _dataContext;
@@ -23,7 +24,7 @@ public class FormController : Controller
     [HttpPost]
     public IActionResult SubmitForm()
     {
-        foreach (var item in Request.Form.Keys.Where(k => !k.StartsWith("_")))
+        foreach (var item in Request.Form.Keys)
         {
             TempData[item] = string.Join(", ", Request.Form[item]);
         }
