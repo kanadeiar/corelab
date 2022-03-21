@@ -14,20 +14,19 @@ public class FormController : Controller
         _dataContext = dataContext;
     }
 
-    public async Task<IActionResult> Index(int id = 1)
+    public async Task<IActionResult> Index(int? id)
     {
         ViewBag.Categories = new SelectList(_dataContext.Categiries, "Id", "Name");
-        var product = await _dataContext.Products.Include(x => x.Suppliler).Include(x => x.Category).FirstAsync(x => x.Id == id);
+        var product = await _dataContext.Products
+            .Include(x => x.Suppliler).Include(x => x.Category).FirstOrDefaultAsync(x => id == null || x.Id == id);
         return View("Form", product);
     }
 
     [HttpPost]
-    public IActionResult SubmitForm()
+    public IActionResult SubmitForm(string name, decimal price)
     {
-        foreach (var item in Request.Form.Keys)
-        {
-            TempData[item] = string.Join(", ", Request.Form[item]);
-        }
+        TempData["name price"] = name;
+        TempData["price param"] = price.ToString();
         return RedirectToAction(nameof(Results));
     }
 

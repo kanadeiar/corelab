@@ -12,7 +12,7 @@ public class Product
     public string Name { get; set; }
     [Display(Name = "Цена")]
     [Column(TypeName = "decimal(8, 2)")]
-    [DisplayFormat(DataFormatString = "{0:c2}", ApplyFormatInEditMode = true)]
+    //[DisplayFormat(DataFormatString = "{0:c2}", ApplyFormatInEditMode = true)]
     public decimal Price { get; set; }
     public int CategoryId { get; set; }
     //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

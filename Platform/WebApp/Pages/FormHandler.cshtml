@@ -6,11 +6,11 @@
     <form page="/pages/form" method="post">
         <div class="form-group">
             <label>Name</label>
-            <input class="form-control" asp-for="Product.Name" />
+            <input class="form-control" asp-for="Product.Name" name="name" />
         </div>
         <div class="form-group">
             <label>Price</label>
-            <input class="form-control" asp-for="Product.Price" />
+            <input class="form-control" asp-for="Product.Price" name="price" />
         </div>
         <div class="form-group">
             <label>Category</label>
@@ -41,12 +41,10 @@
             Product = await _dataContext.Products
                 .Include(x => x.Suppliler).Include(x => x.Category).FirstAsync(x => x.Id == id);
         }
-        public IActionResult OnPost()
+        public IActionResult OnPost(string name, decimal price)
         {
-            foreach (var key in Request.Form.Keys)
-            {
-                TempData[key] = string.Join(", ", Request.Form[key]);
-            }
+            TempData["name param"] = name;
+            TempData["price param"] = price.ToString();
             return RedirectToPage("FormResults");
         }
     }
