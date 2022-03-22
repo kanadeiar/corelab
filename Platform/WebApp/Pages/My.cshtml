@@ -2,16 +2,15 @@
 @inject DataContext context;
 <h5 class="bg-primary text-white text-center m-2 p-2">Categories</h5>
 <ul class="list-group m-2">
-    @foreach (var elem in Products)
+    @foreach (var elem in context
+        .Products.Select(x => new { x.Name, x.Price }).ToList())
     {
         <li class="list-group-item">@elem.Name, @elem.Price</li>
     }
 </ul>
 @functions {
-    public IEnumerable<dynamic> Products { get; set; }
-    public async Task<IActionResult> OnGetAsync(int id = 1)
+    public IActionResult OnGet(int id = 1)
     {
-        Products = context.Products.Select(x => new { x.Name, x.Price }).ToList();
         return Page();
     }
 }
