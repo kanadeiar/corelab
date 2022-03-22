@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -13,6 +14,7 @@ public class Product
     [Display(Name = "Цена")]
     [Column(TypeName = "decimal(8, 2)")]
     //[DisplayFormat(DataFormatString = "{0:c2}", ApplyFormatInEditMode = true)]
+    [BindNever]
     public decimal Price { get; set; }
     public int CategoryId { get; set; }
     //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

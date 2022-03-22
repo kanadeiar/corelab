@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using WebApp.Data;
+using WebApp.Models;
 
 namespace WebApp.Controllers;
 
@@ -22,11 +24,19 @@ public class FormController : Controller
         return View("Form", product);
     }
 
+    //[HttpPost]
+    //public IActionResult SubmitForm(Product product)
+    //{
+    //    TempData["product"] = System.Text.Json.JsonSerializer.Serialize(product);
+    //    return RedirectToAction(nameof(Results));
+    //}
+
     [HttpPost]
-    public IActionResult SubmitForm(string name, decimal price)
+    public IActionResult SubmitForm([Bind("Name", "Category")] Product product)
     {
-        TempData["name price"] = name;
-        TempData["price param"] = price.ToString();
+        TempData["name"] = product.Name;
+        TempData["price"] = product.Price.ToString();
+        TempData["category name"] = product.Category.Name;
         return RedirectToAction(nameof(Results));
     }
 
