@@ -1,0 +1,43 @@
+﻿@page "/pages/bindings"
+@using Microsoft.AspNetCore.Mvc.Razor
+@model BindingsModel
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <form asp-page="Bindings" method="post">
+                <div class="form-group">
+                    <label>Value #1</label>
+                    <input class="form-control" name="Data" value="Item 1" />
+                </div>
+                <div class="form-group">
+                    <label>Value #2</label>
+                    <input class="form-control" name="Data" value="Item 2" />
+                </div>
+                <div class="form-group">
+                    <label>Value #3</label>
+                    <input class="form-control" name="Data" value="Item 3" />
+                </div>
+                <button type="submit" class="btn btn-primary my-1">Submit</button>
+                <a class="btn btn-secondary m-1" asp-page="Bindings">Reset</a>
+            </form>
+        </div>
+        <div class="col">
+            <ul class="list-group">
+                @foreach (var s in Model.Data.Where(s => s != null))
+                {
+                    <li class="list-group-item">@s</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@functions
+{
+    public class BindingsModel : PageModel
+    {
+        [BindProperty(Name = "Data")]
+        public string[] Data { get; set; } = Array.Empty<string>();
+    }
+}
