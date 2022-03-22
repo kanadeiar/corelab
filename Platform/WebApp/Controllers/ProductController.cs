@@ -6,6 +6,7 @@ using WebApp.Data;
 using WebApp.Models;
 using Microsoft.AspNetCore.Http;
 using System.Net.Mime;
+using WebApp.Mapping;
 
 namespace WebApp.Controllers;
 
@@ -19,13 +20,14 @@ public class ProductController : ControllerBase
         _mapper = mapper;
         _context = context;
     }
+
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IAsyncEnumerable<ProductDTO>))]
     public IAsyncEnumerable<ProductDTO> GetProducts()
     {
-        return _context.Products.Select(x => _mapper.Map<ProductDTO>(x)).AsAsyncEnumerable();
-        //return _context.Products.Select(x => (ProductDTO)x).AsAsyncEnumerable();
+        return _context.Products.Select(x => x.Map<Product, ProductDTO>()).AsAsyncEnumerable();
     }
+
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductDTO))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Nullable))]
@@ -34,31 +36,33 @@ public class ProductController : ControllerBase
         var product = await _context.Products.FindAsync(id);
         if (product is { })
         {
-            return Ok(_mapper.Map<ProductDTO>(product));
-            //return Ok((ProductDTO)product);
+            return Ok(product.Map<Product, ProductDTO>());
         }
         return NotFound();
     }
+
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductDTO))]
     public async Task<IActionResult> SaveProduct(ProductDTO product)
     {
-        var adding = _mapper.Map<Product>(product);
+        var adding = product.Map<ProductDTO, Product>();
         adding.Id = default;
         await _context.Products.AddAsync(adding);
         await _context.SaveChangesAsync();
         return Ok(_mapper.Map<ProductDTO>(adding));
     }
+
     [HttpPut]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task UpdateProduct(ProductDTO product)
     {
-        var updating = _mapper.Map<Product>(product);
+        var updating = product.Map<ProductDTO, Product>();
         _context.Products.Update(updating);
         await _context.SaveChangesAsync();
     }
+
     [HttpPatch("{id}")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductDTO))]
@@ -70,10 +74,11 @@ public class ProductController : ControllerBase
         {
             patchDocument.ApplyTo(product);
             await _context.SaveChangesAsync();
-            return _mapper.Map<ProductDTO>(product);
+            return product.Map<Product, ProductDTO>();
         }
         return default;
     }
+
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task DeleteProduct(int id)

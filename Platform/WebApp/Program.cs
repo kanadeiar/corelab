@@ -29,7 +29,7 @@ builder.Host.ConfigureServices(services =>
     {
         options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "WebApp", Version = "v1" });
     });
-
+    
     var mapperConfig = new MapperConfiguration(options => options.AddProfile<DataMappingProfile>());
     services.AddSingleton<IMapper>(x => mapperConfig.CreateMapper());
 
@@ -37,6 +37,8 @@ builder.Host.ConfigureServices(services =>
 });
 
 var app = builder.Build();
+
+MappingExtensions.Configure(app.Services.GetRequiredService<IMapper>());
 
 app.UseDeveloperExceptionPage();
 app.UseStaticFiles();
