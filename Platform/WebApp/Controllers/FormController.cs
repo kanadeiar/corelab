@@ -16,7 +16,7 @@ public class FormController : Controller
         _dataContext = dataContext;
     }
 
-    public async Task<IActionResult> Index(int? id)
+    public async Task<IActionResult> Index([FromQuery] int? id)
     {
         ViewBag.Categories = new SelectList(_dataContext.Categiries, "Id", "Name");
         var product = await _dataContext.Products

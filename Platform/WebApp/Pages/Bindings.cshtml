@@ -40,6 +40,7 @@
     public class BindingsModel : PageModel
     {
         [BindProperty(Name = "Data")]
+        //[FromQuery(Name = "Data")]
         public Product[] Data { get; set; } = Array.Empty<Product>();
     }
 }
