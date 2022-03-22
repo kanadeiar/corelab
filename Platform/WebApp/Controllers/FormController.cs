@@ -40,6 +40,11 @@ public class FormController : Controller
         return RedirectToAction(nameof(Results));
     }
 
+    public string Header([FromHeader(Name = "Accept-Language")]string accept)
+    {
+        return $"Header: {accept}";
+    }
+
     public IActionResult Results()
     {
         return View();
