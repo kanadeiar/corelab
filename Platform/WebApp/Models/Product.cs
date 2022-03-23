@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WebApp.Data;
 using WebApp.Validation;
@@ -24,11 +25,13 @@ public class Product
     public decimal Price { get; set; }
 
     [PrimaryKey(ContextType = typeof(DataContext), DataType = typeof(Category))]
+    [Remote("CategoryKey", "Validation", ErrorMessage = "Введите существующий ключ")]
     public int CategoryId { get; set; }
     //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Category? Category { get; set; }
 
     [PrimaryKey(ContextType = typeof(DataContext), DataType = typeof(Category))]
+    [Remote("SupplierKey", "Validation", ErrorMessage = "Введите существующий ключ")]
     public int SupplierId { get; set; }
     //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Supplier? Suppliler { get; set; }

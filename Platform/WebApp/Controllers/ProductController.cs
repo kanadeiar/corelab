@@ -10,7 +10,8 @@ using WebApp.Mapping;
 
 namespace WebApp.Controllers;
 
-[ApiController, Route("api/[controller]")]
+[ApiController]
+[Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
     private readonly IMapper _mapper;
