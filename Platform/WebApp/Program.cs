@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 //using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using WebApp;
@@ -34,6 +35,8 @@ builder.Host.ConfigureServices(services =>
     services.AddSingleton<IMapper>(x => mapperConfig.CreateMapper());
 
     services.AddSingleton<CitiesData>();
+
+    services.Configure<MvcOptions>(options => options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(value => "¬ведите значение"));
 });
 
 var app = builder.Build();
