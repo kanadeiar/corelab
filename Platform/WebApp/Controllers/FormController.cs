@@ -32,21 +32,21 @@ public class FormController : Controller
         //{
         //    ModelState.AddModelError(nameof(Product.Price), "Введите положительную цену");
         //}
-        if (ModelState.GetValidationState(nameof(Product.Name)) == ModelValidationState.Valid 
-            && ModelState.GetValidationState(nameof(Product.Price)) == ModelValidationState.Valid
-            && product.Name.ToLower().StartsWith("small")
-            && product.Price > 100)
-        {
-            ModelState.AddModelError("", "Маленькие продукты не могуть стоить выше 100");
-        }
-        if (!_dataContext.Categiries.Any(x => x.Id == product.CategoryId))
-        {
-            ModelState.AddModelError(nameof(Product.CategoryId), "Введите идентификатор соответствующей категории");
-        }
-        if (!_dataContext.Suppliers.Any(x => x.Id == product.SupplierId))
-        {
-            ModelState.AddModelError(nameof(Product.SupplierId), "Введите идентификатор соответствующего поставщика");
-        }
+        //if (ModelState.GetValidationState(nameof(Product.Name)) == ModelValidationState.Valid 
+        //    && ModelState.GetValidationState(nameof(Product.Price)) == ModelValidationState.Valid
+        //    && product.Name.ToLower().StartsWith("small")
+        //    && product.Price > 100)
+        //{
+        //    ModelState.AddModelError("", "Маленькие продукты не могуть стоить выше 100");
+        //}
+        //if (!_dataContext.Categiries.Any(x => x.Id == product.CategoryId))
+        //{
+        //    ModelState.AddModelError(nameof(Product.CategoryId), "Введите идентификатор соответствующей категории");
+        //}
+        //if (!_dataContext.Suppliers.Any(x => x.Id == product.SupplierId))
+        //{
+        //    ModelState.AddModelError(nameof(Product.SupplierId), "Введите идентификатор соответствующего поставщика");
+        //}
         if (ModelState.IsValid)
         {
             TempData["name"] = product.Name;
