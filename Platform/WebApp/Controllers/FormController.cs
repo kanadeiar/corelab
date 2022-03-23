@@ -16,33 +16,20 @@ public class FormController : Controller
         _dataContext = dataContext;
     }
 
-    public async Task<IActionResult> Index([FromQuery] int? id)
+    public async Task<IActionResult> Index(int? id)
     {
-        ViewBag.Categories = new SelectList(_dataContext.Categiries, "Id", "Name");
-        var product = await _dataContext.Products
-            .Include(x => x.Suppliler).Include(x => x.Category).FirstOrDefaultAsync(x => id == null || x.Id == id);
+        var product = await _dataContext.Products.FirstOrDefaultAsync(x => id == null || x.Id == id);
         return View("Form", product);
     }
 
-    //[HttpPost]
-    //public IActionResult SubmitForm(Product product)
-    //{
-    //    TempData["product"] = System.Text.Json.JsonSerializer.Serialize(product);
-    //    return RedirectToAction(nameof(Results));
-    //}
-
     [HttpPost]
-    public IActionResult SubmitForm([Bind("Name", "Category")] Product product)
+    public IActionResult SubmitForm(Product product)
     {
         TempData["name"] = product.Name;
         TempData["price"] = product.Price.ToString();
-        TempData["category name"] = product.Category.Name;
+        TempData["categoryId"] = product.CategoryId.ToString();
+        TempData["supplierId"] = product.SupplierId.ToString();
         return RedirectToAction(nameof(Results));
-    }
-
-    public string Header([FromHeader(Name = "Accept-Language")]string accept)
-    {
-        return $"Header: {accept}";
     }
 
     public IActionResult Results()
