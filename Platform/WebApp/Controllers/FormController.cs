@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
 using WebApp.Data;
 using WebApp.Models;
 
@@ -26,14 +24,14 @@ public class FormController : Controller
     [HttpPost]
     public IActionResult SubmitForm(Product product)
     {
-        if (string.IsNullOrEmpty(product.Name))
-        {
-            ModelState.AddModelError(nameof(Product.Name), "Введите имя");
-        }
-        if (ModelState.GetValidationState(nameof(Product.Price)) == ModelValidationState.Valid && product.Price < 1)
-        {
-            ModelState.AddModelError(nameof(Product.Price), "Введите положительную цену");
-        }
+        //if (string.IsNullOrEmpty(product.Name))
+        //{
+        //    ModelState.AddModelError(nameof(Product.Name), "Введите имя");
+        //}
+        //if (ModelState.GetValidationState(nameof(Product.Price)) == ModelValidationState.Valid && product.Price < 1)
+        //{
+        //    ModelState.AddModelError(nameof(Product.Price), "Введите положительную цену");
+        //}
         if (ModelState.GetValidationState(nameof(Product.Name)) == ModelValidationState.Valid 
             && ModelState.GetValidationState(nameof(Product.Price)) == ModelValidationState.Valid
             && product.Name.ToLower().StartsWith("small")
