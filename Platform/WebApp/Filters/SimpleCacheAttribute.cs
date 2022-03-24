@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace WebApp.Filters;
 
-public class SimpleCacheAttribute : Attribute, IResourceFilter
+public class SimpleCacheAttribute : Attribute, IAsyncResourceFilter
 {
     private Dictionary<PathString, IActionResult> _cachedResponses = new Dictionary<PathString, IActionResult>();
-    public void OnResourceExecuting(ResourceExecutingContext context)
+    public async Task OnResourceExecutionAsync(ResourceExecutingContext context, ResourceExecutionDelegate next)
     {
         var path = context.HttpContext.Request.Path;
         if (_cachedResponses.ContainsKey(path))
@@ -14,13 +14,13 @@ public class SimpleCacheAttribute : Attribute, IResourceFilter
             context.Result = _cachedResponses[path];
             _cachedResponses.Remove(path);
         }
-    }
-
-    public void OnResourceExecuted(ResourceExecutedContext context)
-    {
-        if (context != null)
+        else
         {
-            _cachedResponses.Add(context.HttpContext.Request.Path, context.Result);
+            var execContext = await next();
+            if (execContext.Result != null)
+            {
+                _cachedResponses.Add(context.HttpContext.Request.Path, execContext.Result);
+            }
         }
     }
 }
