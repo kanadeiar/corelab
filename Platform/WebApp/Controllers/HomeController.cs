@@ -31,4 +31,14 @@ public class HomeController : Controller
             context.ActionArguments["message1"] = "NewMessage1";
         }
     }
+
+    [RangeException]
+    public ViewResult GenerateException(int? id)
+    {
+        if (id == null)
+            throw new ArgumentNullException(nameof(id));
+        if (id > 10)
+            throw new ArgumentOutOfRangeException(nameof(id));
+        return View("Message", $"The value is {id}");
+    }
 }
