@@ -1,39 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Dynamic;
-using WebApp.Data;
+using WebApp.Filters;
 
 namespace WebApp.Controllers;
 
+[HttpsOnly]
 public class HomeController : Controller
 {
-    private readonly DataContext _context;
-    public HomeController(DataContext context)
+    public IActionResult Index()
     {
-        _context = context;
+        return View("Message", "This is the Index action on the Home controller");
     }
-    public async Task<IActionResult> Index(int id = 1)
+
+    public IActionResult Secure()
     {
-        var product = await _context.Products.FindAsync(id);
-        ViewBag.AveragePrice = await _context.Products.AverageAsync(x => x.Price);
-        return View(product);
-    }
-    public IActionResult List()
-    {
-        return View(_context.Products);
-    }
-    public IActionResult CubedShow()
-    {
-        return View("Cubed");
-    }
-    public IActionResult Cube(double num)
-    {
-        TempData["value"] = num.ToString();
-        TempData["result"] = Math.Pow(num, 3).ToString();
-        return RedirectToAction("CubedShow");
-    }
-    public IActionResult Html()
-    {
-        return View((object)"This is a <h3><i>string</i></h3>");
+        return View("Message", "This is the Secure action on the Home controller");
     }
 }
