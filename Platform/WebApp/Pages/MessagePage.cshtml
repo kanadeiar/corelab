@@ -1,4 +1,5 @@
 ﻿@page "/pages/message"
+@using Microsoft.AspNetCore.Mvc.Filters
 @using WebApp.Filters
 @model MessageModel
 
@@ -22,9 +23,21 @@ else if (Model.Message is IDictionary<string, string>)
 
 @functions {
     [RequireHttps]
-    [SimpleCache]
+    //[SimpleCache]
+    //[ChangePageArgs]
     public class MessageModel : PageModel
     {
         public object Message { get; set; } = $"{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")} : This is the Message Razor Page";
+        public void OnGet(string message1, string message2)
+        {
+            Message = $"{message1}, {message2}";
+        }
+        public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+        {
+            if (context.HandlerArguments.ContainsKey("message1"))
+            {
+                context.HandlerArguments["message1"] = "NewMessage1";
+            }
+        }
     }
 }
