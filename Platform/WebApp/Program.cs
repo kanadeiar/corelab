@@ -40,6 +40,13 @@ builder.Host.ConfigureServices(services =>
     services.Configure<MvcOptions>(options => options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(value => "¬ведите значение"));
 
     services.AddScoped<GuidResponseAttribute>();
+    services.Configure<MvcOptions>(options =>
+    {
+        options.Filters.Add<HttpsOnlyAttribute>();
+        options.Filters.Add(new MessageAttribute("This is the globally-scoped filter"));
+    });
+    //services.Configure<MvcOptions>(options => options
+    //    .Filters.Add<HttpsOnlyAttribute>());
 });
 
 var app = builder.Build();
