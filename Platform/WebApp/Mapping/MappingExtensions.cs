@@ -10,13 +10,12 @@ public static class MappingExtensions
         _mapper = mapper;
     }
     /// <summary>
-    /// Маппинг из [этого типа] в [этот тип]
+    /// Маппинг в [этот тип]
     /// </summary>
-    /// <typeparam name="P">Из этого типа</typeparam>
     /// <typeparam name="T">В этот тип</typeparam>
     /// <param name="from">Исходный объект</param>
     /// <returns>Требуемые объект</returns>
-    public static T Map<P, T>(this P from)
+    public static T Map<T>(this object from)
     {
         return _mapper.Map<T>(from);
     }
