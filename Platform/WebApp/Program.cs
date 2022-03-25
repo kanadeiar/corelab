@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApp;
 using WebApp.Data;
+using WebApp.Filters;
 using WebApp.Mapping;
 using WebApp.Models;
 //using WebApp.TagHelpers;
@@ -37,6 +38,8 @@ builder.Host.ConfigureServices(services =>
     services.AddSingleton<CitiesData>();
 
     services.Configure<MvcOptions>(options => options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(value => "¬ведите значение"));
+
+    services.AddScoped<GuidResponseAttribute>();
 });
 
 var app = builder.Build();
