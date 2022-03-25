@@ -54,6 +54,7 @@ namespace WebApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(8, 2)
                         .HasColumnType("decimal(8,2)");
 
                     b.Property<int>("SupplierId")

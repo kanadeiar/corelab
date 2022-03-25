@@ -11,7 +11,7 @@ using WebApp.Data;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220323175316_init")]
+    [Migration("20220325214904_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,7 @@ namespace WebApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(8, 2)
                         .HasColumnType("decimal(8,2)");
 
                     b.Property<int>("SupplierId")
