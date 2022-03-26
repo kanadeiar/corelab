@@ -18,14 +18,15 @@
                     <td>@item.Price</td>
                     <td>@item.Category?.Name</td>
                     <td class="text-center">
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                        <a asp-page="DetailsPage" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                        <a asp-page="EditPage" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-page="DeletePage" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+    <a asp-page="CreatePage" class="btn btn-primary">Create</a>
 </div>
 
 @functions {
