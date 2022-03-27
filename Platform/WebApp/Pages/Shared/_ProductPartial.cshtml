@@ -1,9 +1,0 @@
-﻿@model Product
-<table class="table table-sm table-striped table-bordered">
-    <tbody>
-        <tr><th>Name</th><td>@Model?.Name</td></tr>
-        <tr><th>Price</th><td>@Model?.Price.ToString("c")</td></tr>
-        <tr><th>Category</th><td>@Model?.Category?.Name</td></tr>
-        <tr><th>Supplier</th><td>@Model?.Suppliler?.Name</td></tr>
-    </tbody>
-</table>
