@@ -1,0 +1,35 @@
+﻿@model PersonsListWebModel
+
+<h4 class="bg-info text-center p-2">Контроллер</h4>
+<h4 class="bg-primary text-white text-center p-2">Сотрудники</h4>
+<table class="table table-sm table-bordered table-striped">
+    <thead>
+        <tr><th>Id</th><th>Фамилия и имя</th><th>Отдел</th><th>Локация</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Persons)
+        {
+            <tr class="@Model?.GetClass(item.Location?.City)">
+                <td>@item.Id</td>
+                <td>@item.SurName @item.FirstName</td>
+                <td>@item.Department?.Name</td>
+                <td>@item.Location?.State, @item.Location?.City</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="Index" method="get">
+    <label for="selectedCity">Город</label>
+    <select name="selectedCity" class="form-select">
+        <option disabled selected>Выберите город</option>
+        @foreach (var item in Model.Cities)
+        {
+            <option selected="@(item == Model?.SelectedCity)">
+                @item
+            </option>
+        }
+    </select>
+    <button class="btn btn-primary my-1">Выбрать</button>
+</form>
+
