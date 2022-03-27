@@ -1,0 +1,51 @@
+﻿@page "/pages/supplierpage"
+@model SupplierPageModel
+
+<div class="m-2">
+    <h5 class="bg-secondary text-white text-center p-2">Новый поставщик</h5>
+    <form asp-page="SupplierBreakOut" method="post">
+        <div>
+            <label asp-for="Supplier.Name"></label>
+            <input class="form-control" asp-for="Supplier.Name" />
+        </div>
+        <div>
+            <label asp-for="Supplier.City"></label>
+            <input class="form-control" asp-for="Supplier.City" />
+        </div>
+        <button class="btn btn-secondaty" type="submit">Create</button>
+        <a class="btn btn-outline-secondary" asp-page="@Model.ReturnPage" asp-route-id="@Model.ProductId">
+            Cancel
+        </a>
+    </form>
+</div>
+
+@functions {
+    public class SupplierPageModel : PageModel
+    {
+        private readonly DataContext _dataContext;
+        [BindProperty]
+        public Supplier Supplier { get; set; }
+        public string ReturnPage { get; set; }
+        public string ProductId { get; set; }
+        public SupplierPageModel(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
+        public void OnGet([FromQuery(Name = "Product")] Product product, string returnPage)
+        {
+            TempData["product"] = JsonSerializer.Serialize(product);
+            TempData["returnAction"] = ReturnPage = returnPage;
+            TempData["productId"] = ProductId = product.Id.ToString();
+        }
+        public async Task<IActionResult> OnPostAsync()
+        {
+            _dataContext.Suppliers.Add(Supplier);
+            await _dataContext.SaveChangesAsync();
+            var product = JsonSerializer.Deserialize<Product>(TempData["product"] as string);
+            product.SupplierId = Supplier.Id;
+            TempData["product"] = JsonSerializer.Serialize(product);
+            var id = TempData["productId"] as string;
+            return RedirectToPage(TempData["returnAction"] as string, new { id = id });
+        }
+    }
+}

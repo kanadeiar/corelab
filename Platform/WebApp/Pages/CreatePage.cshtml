@@ -1,4 +1,4 @@
-﻿@page "/page/create"
+﻿@page "/page/createpage"
 @model CreateModel
 
 <div class="m-2">
@@ -11,7 +11,10 @@
         public CreateModel(DataContext context) : base(context) { }
         public void OnGet()
         {
-            WebModel = ViewModelFactory.Create(new Product(), Categories, Suppliers);
+            var product = TempData.ContainsKey("product")
+                ? JsonSerializer.Deserialize<Product>(TempData["product"] as string)
+                : new Product();
+            WebModel = ViewModelFactory.Create(product, Categories, Suppliers);
         }
         public async Task<IActionResult> OnPostAsync([FromForm] Product product)
         {

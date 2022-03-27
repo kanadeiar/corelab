@@ -1,4 +1,4 @@
-﻿@page "/pages/edit/{id}"
+﻿@page "/pages/editpage/{id}"
 @model EditModel
 
 <div class="m-2">
@@ -12,8 +12,10 @@
 
         public async Task OnGetAsync(int id)
         {
-            var p = await DataContext.Products.FindAsync(id);
-            WebModel = ViewModelFactory.Edit(p, Categories, Suppliers);
+            var product = TempData.ContainsKey("product")
+                ? JsonSerializer.Deserialize<Product>(TempData["product"] as string)
+                : await DataContext.Products.FindAsync(id);
+            WebModel = ViewModelFactory.Edit(product, Categories, Suppliers);
         }
 
         public async Task<IActionResult> OnPostAsync([FromForm] Product product)
