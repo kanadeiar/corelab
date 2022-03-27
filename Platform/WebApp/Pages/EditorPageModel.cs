@@ -14,4 +14,15 @@ public class EditorPageModel : PageModel
     {
         DataContext = dataContext;
     }
+    protected async Task CheckNewCategory(Product product)
+    {
+        if (product.CategoryId == -1 && !string.IsNullOrEmpty(product.Category?.Name))
+        {
+            DataContext.Categiries.Add(product.Category);
+            await DataContext.SaveChangesAsync();
+            product.CategoryId = product.Category.Id;
+            ModelState.Clear();
+            TryValidateModel(product);
+        }
+    }
 }
