@@ -13,11 +13,16 @@ var app = builder.Build();
 
 app.UseDeveloperExceptionPage();
 app.UseHttpsRedirection();
+
+app.UseBlazorFrameworkFiles("/blazor");
 app.UseStaticFiles();
 
+app.UseRouting();
 app.MapControllers();
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
+
+app.MapFallbackToFile("/blazor/{*path:nonfile}", "/blazor/index.html");
 
 using (var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>())
 {
