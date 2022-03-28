@@ -1,6 +1,3 @@
-using Advanced;
-using Advanced.Data;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

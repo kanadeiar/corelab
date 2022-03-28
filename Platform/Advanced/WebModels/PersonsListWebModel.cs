@@ -1,6 +1,4 @@
-﻿using Advanced.Models;
-
-namespace Advanced.WebModels;
+﻿namespace Advanced.WebModels;
 
 public class PersonsListWebModel
 {

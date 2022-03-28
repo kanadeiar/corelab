@@ -1,9 +1,4 @@
-﻿using Advanced.Data;
-using Advanced.WebModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace Advanced.Controllers;
+﻿namespace Advanced.Controllers;
 
 public class HomeController : Controller
 {

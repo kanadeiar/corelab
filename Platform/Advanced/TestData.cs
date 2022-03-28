@@ -1,5 +1,5 @@
 ﻿using Advanced.Data;
-using Advanced.Models;
+using Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Advanced;

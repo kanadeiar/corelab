@@ -1,9 +1,4 @@
-﻿using Advanced.Data;
-using Advanced.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace Advanced.Controllers;
+﻿namespace Advanced.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
