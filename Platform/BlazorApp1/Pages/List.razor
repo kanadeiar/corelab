@@ -1,0 +1,74 @@
+﻿@page "/forms"
+@page "/forms/list"
+<h5 class="bg-success text-center p-2">Сотрудники (WebAssembly)</h5>
+
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr><th>Id</th><th>Название</th><th>Отдел</th><th>Локация</th><th></th></tr>
+    </thead>
+    <tbody>
+        @if (!Persons.Any())
+        {
+            <tr><th colspan="5" class="p-4 text-center">Загрузка данных ...</th></tr>
+        }
+        else
+        {
+            @foreach (var p in Persons)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.SurName @p.FirstName</td>
+                    <td>@p.Department?.Name</td>
+                    <td>@p.Location?.City</td>
+                    <td class="text-center">
+                        <NavLink class="btn btn-sm btn-info"
+                            href="@GetDetailsUrl(p.Id)">
+                            Детали
+                        </NavLink>
+                        <NavLink class="btn btn-sm btn-warning"
+                            href="@GetEditUrl(p.Id)">
+                            Редактирование
+                        </NavLink>
+                        <button class="btn btn-sm btn-danger"
+                            @onclick="@(() => HandleDelete(p))">
+                            Удалить
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div>
+    <NavLink class="btn btn-primary" href="forms/create">
+        Создать
+    </NavLink>
+</div>
+
+@code {
+    [Inject]
+    public HttpClient Http { get; set; }
+    public Person[] Persons { get; set; } = Array.Empty<Person>();
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+    private async Task UpdateData()
+    {
+        if (Http is { })
+        {
+            Persons = await Http.GetFromJsonAsync<Person[]>("/api/data") ?? Array.Empty<Person>();
+        }
+    }
+    string GetEditUrl(int id) => $"forms/edit/{id}";
+    string GetDetailsUrl(int id) => $"forms/details/{id}";
+    public async Task HandleDelete(Person p)
+    {
+        var resp = await Http.DeleteAsync($"/api/data/{p.Id}");
+        if (resp.IsSuccessStatusCode)
+        {
+            await UpdateData();
+        }
+    }
+}

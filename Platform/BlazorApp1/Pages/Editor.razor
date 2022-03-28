@@ -1,0 +1,96 @@
+﻿@page "/forms/edit/{id:int}"
+@page "/forms/create"
+<link href="/BlazorValidation.css" rel="stylesheet" />
+
+<h4 class="bg-@Theme text-center p-2">@Mode (WebAssembly)</h4>
+
+<EditForm Model="PersonData" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator/>
+    @if (Mode != "Создание")
+    {
+        <div>
+            <label>Id</label>
+            <InputNumber class="form-control" @bind-Value="PersonData.Id" readonly />
+        </div>
+    }
+    <div>
+        <label>Фамилия</label>
+        <ValidationMessage For="@(() => PersonData.SurName)" />
+        <InputText class="form-control" @bind-Value="PersonData.SurName" />
+    </div>
+    <div>
+        <label>Имя</label>
+        <ValidationMessage For="@(() => PersonData.FirstName)" />
+        <InputText class="form-control" @bind-Value="PersonData.FirstName" />
+    </div>
+    <div>
+        <label>Отдел</label>
+        <ValidationMessage For="@(() => PersonData.DepartmentId)" />
+        <InputSelect class="form-select" @bind-Value="PersonData.DepartmentId">
+            <option selected value="0" disabled="disabled">Выберите отдел</option>
+            @foreach (var item in Departments)
+            {
+                <option value="@item.Key">@item.Value</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <label>Локация</label>
+        <ValidationMessage For="@(() => PersonData.LocationId)" />
+        <InputSelect class="form-select" @bind-Value="PersonData.LocationId">
+            <option selected value="0" disabled="disabled">Выберите локацию</option>
+            @foreach (var item in Locations)
+            {
+                <option value="@item.Key">@item.Value</option>
+            }
+        </InputSelect>
+    </div>
+    <div class="text-center p-2">
+        <button type="submit" class="btn btn-@Theme">Сохранить</button>
+        <NavLink class="btn btn-secondary" href="forms">Назад</NavLink>
+    </div>
+</EditForm>
+
+@code {
+    [Inject]
+    HttpClient? Http { get; set; }
+    [Inject]
+    NavigationManager? NavManager { get; set; }
+    [Parameter]
+    public int Id { get; set; }
+    public Person PersonData { get; set; } = new Person();
+    public IDictionary<int, string> Departments { get; set; } = new Dictionary<int, string>();
+    public IDictionary<int, string> Locations { get; set; } = new Dictionary<int, string>();
+    protected async override Task OnParametersSetAsync()
+    {
+        if (Http is { })
+        {
+            if (Mode != "Создание")
+            {
+                PersonData = await Http.GetFromJsonAsync<Person>($"/api/data/{Id}") ?? new ();
+            }
+            var depts = await Http.GetFromJsonAsync<Department[]>($"/api/data/departments");
+            Departments = (depts ?? Array.Empty<Department>()).ToDictionary(x => x.Id, x => x.Name);
+            var locs = await Http.GetFromJsonAsync<Location[]>($"/api/data/locations");
+            Locations = (locs ?? Array.Empty<Location>()).ToDictionary(x => x.Id, x => $"{x.State}, {x.City}");
+        }
+    }
+    public string Theme => Id == 0 ? "primary" : "warning";
+    public string Mode => Id == 0 ? "Создание" : "Редактирование";
+
+    public async Task HandleValidSubmit()
+    {
+        if (Http is { })
+        {
+            if (Mode == "Создание")
+            {
+                await Http.PostAsJsonAsync("/api/data", PersonData);
+            }
+            else
+            {
+                await Http.PutAsJsonAsync("/api/data", PersonData);
+            }
+            NavManager?.NavigateTo("forms");
+        }
+    }
+}
