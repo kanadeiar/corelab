@@ -1,4 +1,6 @@
-﻿@model PersonsListWebModel
+﻿@using Advanced.Handlers
+@model PersonsListWebModel
+@inject IMediator Mediator
 
 <h4 class="bg-info text-center p-2">Контроллер</h4>
 <h4 class="bg-primary text-white text-center p-2">Сотрудники</h4>
@@ -14,6 +16,20 @@
                 <td>@item.SurName @item.FirstName</td>
                 <td>@item.Department?.Name</td>
                 <td>@item.Location?.State, @item.Location?.City</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table table-bordered">
+    <tbody>
+        @foreach (var item in (await Mediator.Send(new GetAllPersons()))
+            .Select(x => new { x.SurName, x.FirstName, x.Department?.Name }))
+        {
+            <tr>
+                <td>@item.SurName</td>
+                <td>@item.FirstName</td>
+                <td>@item.Name</td>
             </tr>
         }
     </tbody>

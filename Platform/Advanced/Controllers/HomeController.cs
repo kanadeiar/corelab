@@ -1,5 +1,8 @@
 ﻿using Advanced.Data;
+using Advanced.Handlers;
+using Advanced.Models;
 using Advanced.WebModels;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,19 +10,32 @@ namespace Advanced.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly DataContext _dataContext;
-    public HomeController(DataContext dataContext)
+    private readonly IMediator _mediator;
+    public HomeController(IMediator mediator)
     {
-        _dataContext = dataContext;
+        _mediator = mediator;
     }
-    public IActionResult Index([FromQuery] string selectedCity)
+    public async Task<IActionResult> Index([FromQuery] string selectedCity)
     {
         var model = new PersonsListWebModel
         {
-            Persons = _dataContext.Persons.Include(_ => _.Department).Include(_ => _.Location).AsNoTracking(),
-            Cities = _dataContext.Locations.Select(_ => _.City).Distinct(),
+            Persons = await _mediator.Send(new GetAllPersons()),
+            Cities = (await _mediator.Send(new GetAllLocations())).Select(_ => _.City).Distinct(),
             SelectedCity = selectedCity,
         };
         return View(model);
+    }
+
+    public async Task<IActionResult> Persons()
+    {
+        var person = new Person
+        {
+            SurName = "test",
+            FirstName = "test",
+            DepartmentId = 1,
+            LocationId = 1,
+        };
+        var result = await _mediator.Send(new CreatePersonCommand(person));
+        return View(result);
     }
 }

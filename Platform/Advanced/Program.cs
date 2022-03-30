@@ -1,6 +1,8 @@
 using Advanced;
 using Advanced.Data;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,9 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
