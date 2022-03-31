@@ -1,4 +1,6 @@
 using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 //using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +9,7 @@ using WebApp.Data;
 using WebApp.Filters;
 using WebApp.Mapping;
 using WebApp.Models;
+using WebApp.Validators;
 //using WebApp.TagHelpers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +22,11 @@ builder.Host.ConfigureServices(services =>
         options.EnableSensitiveDataLogging(true);
     });
 
-    services.AddControllersWithViews().AddRazorRuntimeCompilation();
-    services.AddRazorPages().AddRazorRuntimeCompilation();
+    services.AddControllersWithViews().AddRazorRuntimeCompilation().AddFluentValidation(x => 
+    {
+        
+    });
+    services.AddRazorPages().AddRazorRuntimeCompilation().AddFluentValidation();
 
     services.AddDistributedMemoryCache();
     services.AddSession(options =>
@@ -40,6 +46,9 @@ builder.Host.ConfigureServices(services =>
     services.Configure<MvcOptions>(options => options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(value => "¬ведите значение"));
 
     services.AddScoped<GuidResponseAttribute>();
+
+    services.AddTransient<IValidator<Product>, ProductValidator>();
+
     //services.Configure<MvcOptions>(options =>
     //{
     //    options.Filters.Add<HttpsOnlyAttribute>();
