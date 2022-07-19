@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/SportSln/SportStore/SportStore.csproj",
+                "${workspaceFolder}/SimpleSlnDir/SimpleConsole/SimpleConsole.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/SportSln/SportStore/SportStore.csproj",
+                "${workspaceFolder}/SimpleSlnDir/SimpleConsole/SimpleConsole.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,9 +32,8 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/SportSln/SportStore/SportStore.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "--project",
+                "${workspaceFolder}/SimpleSlnDir/SimpleConsole/SimpleConsole.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
