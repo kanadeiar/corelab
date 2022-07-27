@@ -1,11 +1,23 @@
-﻿
+﻿using System;
+
+namespace CalculatorExamples;
+
 internal class Program
 {
-    private static async Task Main(string[] args)
+    private static void Main(string[] args)
     {
-        System.Console.WriteLine("Заголовок программы");
-        await Task.Delay(3000);
+        Calc c = new Calc();
+        int ans = c.Add(1, 2);
+        Console.WriteLine("1 + 2 = {0}", ans.ToString());
         Console.WriteLine("Нажмите любую кнопку ...");
         var _ = Console.ReadKey();
+    }
+}
+
+class Calc
+{
+    public int Add(int one, int two)
+    {
+        return one + two;
     }
 }
