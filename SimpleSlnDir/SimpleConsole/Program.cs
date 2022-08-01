@@ -6,18 +6,23 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        Calc c = new Calc();
-        int ans = c.Add(1, 2);
-        Console.WriteLine("1 + 2 = {0}", ans.ToString());
+        var z = Test(1, 2, 3);
+
+
         Console.WriteLine("Нажмите любую кнопку ...");
         var _ = Console.ReadKey();
     }
-}
-
-class Calc
-{
-    public int Add(int one, int two)
+    static int Test(params int[] values)
     {
-        return one + two;
+        int sum = 0;
+        if (values != null)
+        {
+            for (int i = 0; i < values.Length; i++)
+            {
+                sum += values[i];
+            }
+        }
+        return sum;
     }
 }
+
