@@ -1,113 +1,115 @@
 ﻿using System;
+using System.Diagnostics;
+using Kanadeiar.Core.Tools;
 
 namespace CalculatorExamples;
-
-// internal class ValueEventArgs : EventArgs
-// {
-//     private readonly int _value;
-//     public ValueEventArgs(int value)
-//     {
-//         _value = value;
-//     }
-//     public int Value => _value;
-// }
-
-// internal class MySender
-// {
-//     public event EventHandler<ValueEventArgs>? NewValue;
-//     protected virtual void OnNewValue(ValueEventArgs e)
-//     {
-//         if (Volatile.Read(ref NewValue) is { } temp)
-//         {
-//             temp(this, e);
-//         }
-//     }
-//     public void Simulate(int value)
-//     {
-//         var e = new ValueEventArgs(value);
-//         OnNewValue(e);
-//     }
-// }
-
-public sealed class EventKey : Object { }
-
-public sealed class EventSet
-{
-    private readonly Dictionary<EventKey, Delegate> _events = new Dictionary<EventKey, Delegate>();
-    public void Add(EventKey key, Delegate handler)
-    {
-        Monitor.Enter(_events);
-        _events.TryGetValue(key, out var d);
-        _events[key] = Delegate.Combine(d, handler);
-        Monitor.Exit(_events);
-    }
-    public void Remove(EventKey key, Delegate handler)
-    {
-        Monitor.Enter(_events);
-        if (_events.TryGetValue(key, out var d))
-        {
-            d = Delegate.Remove(d, handler);
-            if (d != null)
-            {
-                _events[key] = d;
-            }
-            else
-            {
-                _events.Remove(key);
-            }
-        }
-        Monitor.Exit(_events);
-    }
-    public void Raise(EventKey key, Object sender, EventArgs e)
-    {
-        Monitor.Enter(_events);
-        _events.TryGetValue(key, out var d);
-        Monitor.Exit(_events);
-        if (d != null)
-        {
-            d.DynamicInvoke(new Object[] { sender, e });
-        }
-    }
-}
-
-public class InvokeEventArgs : EventArgs { }
-
-public class InvokeEvents
-{
-    private readonly EventSet _eventSet = new EventSet();
-    protected EventSet EventSet { get => _eventSet; }
-    // Идентификатор события
-    protected static readonly EventKey _testEventKey = new EventKey();
-    // Событие
-    public event EventHandler<InvokeEventArgs> Test
-    {
-        add => _eventSet.Add(_testEventKey, value);
-        remove => _eventSet.Remove(_testEventKey, value);
-    }
-    protected virtual void OnTest(InvokeEventArgs e)
-    {
-        _eventSet.Raise(_testEventKey, this, e);
-    }
-    public void Simulate()
-    {
-        OnTest(new InvokeEventArgs());
-    }
-}
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        var test = new InvokeEvents();
-        test.Test += Method;
-        test.Simulate();
+        using (new OperationTimer("Test"))
+        {
+            var manager = new TestManager();
+            manager.Message += Method;
+            var fax = new Fax(manager);
+            manager.SimulateNewMessage(1, 2);
+            fax.Unregister(manager);
+        }
 
         Console.WriteLine("Нажмите любую кнопку ...");
         var _ = Console.ReadKey();
     }
-    private static void Method(Object? s, InvokeEventArgs e)
+    private static void Method(Object? s, TestEventArgs e)
     {
-        System.Console.WriteLine($"Test done");
+        System.Console.WriteLine($"Value = {e.One} {e.Two}");
     }
 }
 
+//объект, заинтересованный в уведомлении о событии
+internal sealed class Fax
+{
+    public Fax(TestManager tm)
+    {
+        tm.Message += FaxMessage;
+    }
+    private void FaxMessage(object? sender, TestEventArgs e)
+    {
+        System.Console.WriteLine($"Fax message: {e.One} {e.Two}");
+    }
+    public void Unregister(TestManager tm)
+    {
+        tm.Message -= FaxMessage;
+    }
+}
+
+
+
+internal class TestEventArgs : EventArgs
+{
+    private readonly int _one;
+    private readonly int _two;
+    public TestEventArgs(int one, int two)
+    {
+        _one = one;
+        _two = two;
+    }
+    public int One => _one;
+    public int Two => _two;
+}
+
+internal class TestManager
+{
+    public event EventHandler<TestEventArgs> Message;
+    public virtual void OnMessage(TestEventArgs e)
+    {
+        e.Raise(this, ref Message);
+    }
+
+    public void SimulateNewMessage(int one, int two)
+    {
+        OnMessage(new TestEventArgs(one, two));
+    }
+}
+
+// internal sealed class Fax
+// {
+//     public Fax(TestManaeger tm)
+//     {
+//         tm.Message += FaxMsg;
+//     }
+//     private void FaxMsg(object? sender, TestEventArgs e)
+//     {
+//         System.Console.WriteLine($"Fax message {e.One} {e.Two}");
+//     }
+//     public void Unregistered(TestManaeger tm)
+//     {
+//         tm.Message -= FaxMsg;
+//     }
+// }
+
+// public sealed class OperationTimer : IDisposable
+// {
+//     private readonly string _text;
+//     private readonly int _collectionCount;
+//     private readonly Stopwatch _stopwatch;
+//     public OperationTimer(String text)
+//     {
+//         PrepareForOperation();
+//         _text = text;
+//         _collectionCount = GC.CollectionCount(0);
+
+//         _stopwatch = Stopwatch.StartNew();
+//     }
+
+//     public void Dispose()
+//     {
+//         System.Console.WriteLine("{0} (GCs={1,3}) {2}", _stopwatch.Elapsed, GC.CollectionCount(0) - _collectionCount, _text);
+//     }
+//     private static void PrepareForOperation()
+//     {
+//         GC.Collect();
+//         GC.WaitForPendingFinalizers();
+//         GC.Collect();
+//     }
+// }
