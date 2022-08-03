@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Diagnostics;
 using Kanadeiar.Core.Tools;
 
 namespace CalculatorExamples;
+
+public delegate TReturn CallTest<out TReturn, in TValue>(TValue value);
 
 internal class Program
 {
@@ -14,4 +17,11 @@ internal class Program
         var _ = Console.ReadKey();
     }
 }
+
+
+
+
+
+
+
 
