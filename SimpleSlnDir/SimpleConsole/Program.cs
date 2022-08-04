@@ -5,8 +5,6 @@ using Kanadeiar.Core.Tools;
 
 namespace CalculatorExamples;
 
-public delegate TReturn CallTest<out TReturn, in TValue>(TValue value);
-
 internal class Program
 {
     private static void Main(string[] args)
@@ -17,6 +15,10 @@ internal class Program
         var _ = Console.ReadKey();
     }
 }
+
+
+
+
 
 
 
