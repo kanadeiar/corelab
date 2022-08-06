@@ -13,6 +13,7 @@ internal class Program
     {
 
 
+
         Console.WriteLine("Нажмите любую кнопку ...");
         Console.ReadKey();
     }
