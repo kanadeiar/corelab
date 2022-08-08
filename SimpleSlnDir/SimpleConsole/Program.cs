@@ -1,33 +1,21 @@
-﻿using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Globalization;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
-using System.Text;
+﻿
 
+int? val = 5;
+int val2 = val ?? 4;
 
+int? nullablelnt = null;
+nullablelnt ??= 12;
+nullablelnt ??= 14;
 
-bool b = new bool();
-b = new();
-int i = new int();
-i = new();
-char c = new char();
-c = new();
-double d = new double();
-d = new();
-DateTime dt = new DateTime();
-dt = new();
+(string FirstLetter, int TheNumber, string SecondLetter) valuesWithNames = ("a", 5, "c");
+var valuesWithNames2 = (FirstLetter: "a", TheNumber: 5, SecondLetter: "c");
+
+string[] strs = { "1", "2", "3", "4", "5" };
+var elem = strs[^2];
+
 
 Console.WriteLine("Нажмите любую кнопку ...");
 var v = Console.Read();
-return -1;
-
-
-
-
-
-
 
 
 
