@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleConsole", "SimpleConsole\SimpleConsole.csproj", "{1F09E91F-699F-4C66-AD2E-951394F05158}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWpf", "SimpleWpf\SimpleWpf.csproj", "{EFC98884-8FE9-4745-9C06-6FC4FF601457}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{1F09E91F-699F-4C66-AD2E-951394F05158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F09E91F-699F-4C66-AD2E-951394F05158}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F09E91F-699F-4C66-AD2E-951394F05158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFC98884-8FE9-4745-9C06-6FC4FF601457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFC98884-8FE9-4745-9C06-6FC4FF601457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFC98884-8FE9-4745-9C06-6FC4FF601457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFC98884-8FE9-4745-9C06-6FC4FF601457}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
