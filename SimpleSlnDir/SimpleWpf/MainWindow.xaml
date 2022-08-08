@@ -3,10 +3,56 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:SimpleWpf.ViewModels"
         xmlns:local="clr-namespace:SimpleWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="{Binding Title}" 
+        Height="500" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Background="LightGreen">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Меню">
+                <MenuItem Header="Выход" Cursor="Hand"
+                    Command="{Binding CloseAppCommand}"/>
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="О программе ..." Cursor="Hand"
+                    Command="{Binding ShowAboutCommand}"/>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Cursor="Hand" Height="40">
+                    Тестовая кнопка
+                </Button>
+                <Button Cursor="Hand" Height="40">
+                    Еще тестовая кнопка
+                </Button>
+                <Button Cursor="Hand" Height="40">
+                    Третья тестовая кнопка
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="Статус бар"/>
+            </StatusBarItem>
+        </StatusBar>
+        <TabControl FontSize="14">
+            <TabItem Header="Главная вкладка" Height="40">
+                <Grid>
+                    <StackPanel>
+                        <TextBlock>Text</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Дополнительная вкладка" Height="40">
+                <Grid>
 
-    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>
