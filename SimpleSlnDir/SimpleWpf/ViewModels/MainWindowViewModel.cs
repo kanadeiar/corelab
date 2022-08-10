@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using SimpleWpf.Commands;
@@ -30,18 +26,18 @@ public class MainWindowViewModel : ViewModel
 
     #region Команды
 
-    private ICommand _CloseAppCommand;
+    private ICommand _CloseAppCommand = null!;
     public ICommand CloseAppCommand => _CloseAppCommand ??=
-        new LambdaCommand(OnCloseAppCommandExecuted, CanCloseAppCommandExecute);
+        new RelayCommand(OnCloseAppCommandExecuted, CanCloseAppCommandExecute);
     private bool CanCloseAppCommandExecute(object p) => true;
     private void OnCloseAppCommandExecuted(object p)
     {
         Application.Current.Shutdown();
     }
 
-    private ICommand _ShowAboutCommand;
+    private ICommand _ShowAboutCommand = null!;
     public ICommand ShowAboutCommand => _ShowAboutCommand ??=
-        new LambdaCommand(OnShowAboutCommandExecuted, CanShowAboutCommandExecute);
+        new RelayCommand(OnShowAboutCommandExecuted, CanShowAboutCommandExecute);
     private bool CanShowAboutCommandExecute(object p) => true;
     private void OnShowAboutCommandExecuted(object p)
     {

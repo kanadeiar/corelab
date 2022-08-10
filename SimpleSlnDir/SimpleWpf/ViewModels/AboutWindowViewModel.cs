@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using SimpleWpf.Commands;
 using SimpleWpf.ViewModels.Base;
-
 
 namespace SimpleWpf.ViewModels;
 
@@ -36,9 +32,9 @@ public class AboutWindowViewModel : ViewModel
 
     #region Команды
 
-    private ICommand _CloseWindowCommand;
+    private ICommand _CloseWindowCommand = null!;
     public ICommand CloseWindowCommand => _CloseWindowCommand ??=
-        new LambdaCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
+        new RelayCommand(OnCloseWindowCommandExecuted, CanCloseWindowCommandExecute);
     private bool CanCloseWindowCommandExecute(object p) => true;
     private void OnCloseWindowCommandExecuted(object p)
     {

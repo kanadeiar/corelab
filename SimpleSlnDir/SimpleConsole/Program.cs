@@ -21,9 +21,9 @@ var v2 = new SampleVal() with { Val2 = 20 };
 System.Console.WriteLine($"{v2.value} {v2.Val2}");
 
 var p1 = new Point { X = 1, Y = 2 };
-var values = p1.Deconstruct();
-Console.WriteLine($"X is: {values.XPos}");
-Console.WriteLine($"Y is: {values.YPos}");
+// var values = p1.Deconstruct();
+// Console.WriteLine($"X is: {values.XPos}");
+// Console.WriteLine($"Y is: {values.YPos}");
 
 
 var rez = p1 switch
