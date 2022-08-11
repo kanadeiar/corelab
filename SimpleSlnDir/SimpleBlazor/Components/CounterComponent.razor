@@ -1,0 +1,12 @@
+<p>Текущее показание: @currentCounter</p>
+
+<button class="btn btn-success" @onclick="IncrementCounter">Увеличить счетчик</button>
+
+@code {
+    private int currentCounter = 0;
+
+    private void IncrementCounter()
+    {
+        currentCounter++;
+    }
+}
