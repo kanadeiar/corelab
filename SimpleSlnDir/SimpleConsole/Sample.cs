@@ -1,23 +1,25 @@
 namespace SimpleConsole;
 
-// public class Sample
-// {
-//     public string Name { get; set; } = default!;
-//     public void Test(string name)
-//     {
-//         ArgumentNullException.ThrowIfNull(name);
-//         // код
-//     }
-// }
-
-internal sealed class Sample
+abstract class Abstract
 {
-    public int Value { get; init; }
-    public Sample(int val)
+    protected int Value { get; set; }
+    public virtual string TestAbstract() => "Abstract";
+    public abstract string Test();
+}
+
+internal class Sample : Abstract
+{
+    public override string Test() => "Base";
+}
+
+internal sealed class AdvSample : Sample
+{
+    public sealed override string Test()
     {
-        Value = val;
+        return base.Test() + "Adv";
     }
 }
+
 
 internal struct SampleVal
 {
@@ -26,6 +28,7 @@ internal struct SampleVal
         val = 10;
     }
 }
+
 
 record SampleRec(int Value, bool It);
 record class SampleRecClass(int Value, bool It) : SampleRec(Value, It);
