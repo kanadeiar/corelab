@@ -1,19 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleConsole", "SimpleConsole\SimpleConsole.csproj", "{1F09E91F-699F-4C66-AD2E-951394F05158}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleConsole", "SimpleConsole\SimpleConsole.csproj", "{1F09E91F-699F-4C66-AD2E-951394F05158}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWpf", "SimpleWpf\SimpleWpf.csproj", "{EFC98884-8FE9-4745-9C06-6FC4FF601457}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleWpf", "SimpleWpf\SimpleWpf.csproj", "{EFC98884-8FE9-4745-9C06-6FC4FF601457}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleBlazor", "SimpleBlazor\SimpleBlazor.csproj", "{28B98D1A-FA4F-409D-8090-C91EEE0E1B9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMauiApp", "SimpleMauiApp\SimpleMauiApp.csproj", "{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1F09E91F-699F-4C66-AD2E-951394F05158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +25,21 @@ Global
 		{EFC98884-8FE9-4745-9C06-6FC4FF601457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFC98884-8FE9-4745-9C06-6FC4FF601457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFC98884-8FE9-4745-9C06-6FC4FF601457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B98D1A-FA4F-409D-8090-C91EEE0E1B9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B98D1A-FA4F-409D-8090-C91EEE0E1B9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B98D1A-FA4F-409D-8090-C91EEE0E1B9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B98D1A-FA4F-409D-8090-C91EEE0E1B9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8AE2EBE-DD57-47DD-8BAB-8D0D705C3067}
 	EndGlobalSection
 EndGlobal
