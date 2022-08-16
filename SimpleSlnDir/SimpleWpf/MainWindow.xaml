@@ -23,7 +23,7 @@
             </MenuItem>
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
-            <ToolBar>
+            <ToolBar>                
                 <Button Cursor="Hand" Height="40">
                     Тестовая кнопка
                 </Button>
@@ -44,7 +44,10 @@
             <TabItem Header="Главная вкладка" Height="40">
                 <Grid>
                     <StackPanel>
-                        <TextBlock>Text</TextBlock>
+                        <TextBlock Text="{Binding Text}"></TextBlock>
+                        <Button Command="{Binding TestCommand}">
+                            Нажми меня
+                        </Button>
                     </StackPanel>
                 </Grid>
             </TabItem>
