@@ -1,9 +1,9 @@
 {
-  "name": "ComponentsWebAssembly-CSharp",
-  "short_name": "ComponentsWebAssembly-CSharp",
-  "start_url": "./",
+  "name": "SimpleBlazor",
+  "short_name": "SimpleBlazor",
+  "start_url": ".",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#bffff0",
   "theme_color": "#03173d",
   "prefer_related_applications": false,
   "icons": [
