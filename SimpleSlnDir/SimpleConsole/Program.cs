@@ -1,4 +1,6 @@
-﻿namespace SimpleConsole;
+﻿using Kanadeiar.Core.Async;
+
+namespace SimpleConsole;
 
 internal partial class Program
 {

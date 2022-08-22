@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Kanadeiar.Core" Version="0.0.13" />
+    <PackageReference Include="Kanadeiar.Core" Version="0.0.14" />
   </ItemGroup>
 
 </Project>
