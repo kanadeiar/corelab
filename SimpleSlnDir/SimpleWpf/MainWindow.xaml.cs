@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SimpleWpf;
@@ -9,6 +10,14 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+    }
+    private void cmdCancel_Click(object sender, EventArgs e)
+    {
+
+    }
+    private void cmdProcess_Click(object sender, EventArgs e)
+    {
+        this.Title = "Выполнение завершено";
     }
 }
 
