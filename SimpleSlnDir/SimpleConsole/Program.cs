@@ -13,7 +13,6 @@ internal partial class Program
             Console.WriteLine(e);
         }
 
-
         Console.WriteLine("Нажмите любую кнопку ...");
         var _ = Console.Read();
     }
