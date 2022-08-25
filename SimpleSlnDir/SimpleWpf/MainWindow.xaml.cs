@@ -59,9 +59,8 @@ public partial class MainWindow : Window
         catch (OperationCanceledException ex)
         {
             Dispatcher?.Invoke(() => this.Title = ex.Message);
+            _cancelToken = new CancellationTokenSource();
         }
-
-
     }
 }
 
