@@ -12,4 +12,8 @@
     <PackageReference Include="Kanadeiar.Core" Version="0.0.14" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="System.Text" />
+  </ItemGroup>
+
 </Project>
