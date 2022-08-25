@@ -10,25 +10,19 @@ namespace SimpleWpf;
 public partial class MainWindow : Window
 {
     private readonly TaskScheduler _syncContextTaskScheduler;
-    private CancellationTokenSource _cancelToken = new CancellationTokenSource();
+    private CancellationTokenSource? _cancelToken = null;
     public MainWindow()
     {
         InitializeComponent();
     }
+
     private void cmdCancel_Click(object sender, EventArgs e)
     {
-        _cancelToken.Cancel();
+        _cancelToken?.Cancel();
     }
-    private void cmdProcess_Click(object sender, EventArgs e)
+    private async void cmdProcess_Click(object sender, EventArgs e)
     {
-        Task.Factory.StartNew(() => ProcessFiles());
-        this.Title = "Выполнение завершено";
-    }
-    private void ProcessFiles()
-    {
-        var parOpts = new ParallelOptions();
-        parOpts.CancellationToken = _cancelToken.Token;
-        parOpts.MaxDegreeOfParallelism = System.Environment.ProcessorCount;
+        _cancelToken = new CancellationTokenSource();
         var basePath = Directory.GetCurrentDirectory();
         var pictureDirectory = Path.Combine(basePath, "TestPictures");
         var outputDirectory = Path.Combine(basePath, "ModifiedPictures");
@@ -40,26 +34,70 @@ public partial class MainWindow : Window
         string[] files = Directory.GetFiles(pictureDirectory, "*.jpg", SearchOption.AllDirectories);
         try
         {
-            Parallel.ForEach(files, parOpts, currentFile =>
+            foreach (var file in files)
             {
-                parOpts.CancellationToken.ThrowIfCancellationRequested();
-                var filename = Path.GetFileName(currentFile);
-                Dispatcher?.Invoke(() =>
+                try
                 {
-                    this.Title = $"Обработка {filename} в потоке {Thread.CurrentThread.ManagedThreadId}";
-                });
-                using (var bitmap = new Bitmap(currentFile))
+                    await ProcessFile(file, outputDirectory, _cancelToken.Token);
+                }
+                catch (OperationCanceledException)
                 {
-                    bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                    bitmap.Save(Path.Combine(outputDirectory, filename));
+                    Dispatcher?.Invoke(() =>
+                    {
+                        this.Title = "Отменено";
+                    });
+                }
+            }
+            Dispatcher?.Invoke(() =>
+            {
+                if (!_cancelToken.IsCancellationRequested)
+                {
+                    this.Title = "Выполнение завершено";
                 }
             });
-            Dispatcher?.Invoke(() => this.Title = "Готово!");
         }
-        catch (OperationCanceledException ex)
+        catch (OperationCanceledException)
         {
-            Dispatcher?.Invoke(() => this.Title = ex.Message);
-            _cancelToken = new CancellationTokenSource();
+            Dispatcher?.Invoke(() =>
+            {
+                this.Title = "Отменено";
+            });
+        }
+        catch (Exception ex)
+        {
+            Dispatcher?.Invoke(() =>
+            {
+                this.Title = ex.Message;
+            });
+            throw;
+        }
+        _cancelToken = null;
+    }
+
+    private async Task ProcessFile(string currentFile, string outputDirectory, CancellationToken token)
+    {
+        var filename = Path.GetFileName(currentFile);
+        using (var bitmap = new Bitmap(currentFile))
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    Dispatcher?.Invoke(() =>
+                    {
+                        this.Title = $"Обработка {filename}";
+                    });
+                    bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                    bitmap.Save(Path.Combine(outputDirectory, filename));
+                }, token);
+            }
+            catch (OperationCanceledException)
+            {
+                Dispatcher?.Invoke(() =>
+                {
+                    this.Title = "Отменено";
+                });
+            }
         }
     }
 }
