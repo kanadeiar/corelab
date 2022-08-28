@@ -43,7 +43,9 @@
         <TabControl FontSize="14">
             <TabItem Header="Главная вкладка" Height="40">
                 <Grid>
-
+                    <StackPanel>
+                        <TextBox x:Name="labelInfo" Text="123"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Дополнительная вкладка" Height="40">
