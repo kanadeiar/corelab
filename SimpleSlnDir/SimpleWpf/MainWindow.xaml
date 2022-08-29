@@ -42,13 +42,44 @@
         </StatusBar>
         <TabControl FontSize="14">
             <TabItem Header="Главная вкладка" Height="40">
-                <Grid>
-                    <StackPanel>
-                        <Button x:Name="buttonBestMy" Background="Red" Click="ButtonMy_OnClick" Style="{StaticResource RoundButtonStyle}">
-                        Кнопка
-                        </Button>
-                    </StackPanel>
-                </Grid>
+
+<Grid IsSharedSizeScope="True" Margin="5">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Grid Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="CarLabels"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Content="Автомобиль"/>
+        <ComboBox Name="comboBoxCars" Grid.Column="1" DisplayMemberPath="PetName"/>
+    </Grid>
+    <Grid Grid.Row="1" Name="DetailsGrid" DataContext="{Binding ElementName=comboBoxCars, Path=SelectedItem}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="CarLabels"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Content="Марка" Margin="3"/>
+        <TextBox Grid.Column="1" Grid.Row="0" Margin="3" Text="{Binding Path=Make}"/>
+        <Label Grid.Column="0" Grid.Row="1" Content="Цвет" Margin="3"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="3" Text="{Binding Path=Color}"/>
+        <Label Grid.Column="0" Grid.Row="2" Margin="3" Content="Название"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="3" Text="{Binding Path=PetName}"/>
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="buttonAddCar" Content="Добавить автомобиль" Margin="5" Padding="4, 2" Click="buttonAddCar_Click"/>
+            <Button x:Name="buttonChangeColor" Click="ButtonChangeColor_OnClick" Content="Изменить цвет" Margin="5" Padding="4, 2"/>
+        </StackPanel>
+    </Grid>
+</Grid>
+
             </TabItem>
             <TabItem Header="Дополнительная вкладка" Height="40">
                 <Grid>
