@@ -18,6 +18,9 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-
+    private void ButtonMy_OnClick(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Щелчок по необычной кнопке");
+    }
 }
 

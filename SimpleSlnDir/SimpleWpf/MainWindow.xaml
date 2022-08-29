@@ -44,7 +44,9 @@
             <TabItem Header="Главная вкладка" Height="40">
                 <Grid>
                     <StackPanel>
-                        <TextBox x:Name="labelInfo" Text="123"/>
+                        <Button x:Name="buttonBestMy" Background="Red" Click="ButtonMy_OnClick" Style="{StaticResource RoundButtonStyle}">
+                        Кнопка
+                        </Button>
                     </StackPanel>
                 </Grid>
             </TabItem>

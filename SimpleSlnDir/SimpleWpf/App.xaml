@@ -4,19 +4,22 @@
              xmlns:local="clr-namespace:SimpleWpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="TextBox">
+        <Style x:Key="RoundButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="BlueViolet"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Width" Value="300"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="Red"/>
-            <Setter Property="FontStyle" Value="Italic"/>
-            <Setter Property="Background" Value="AliceBlue"/>
-            <Style.Triggers>
-                <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="Yellow"/>
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="controlLayout">
+                            <Ellipse Fill="{TemplateBinding Background}"/>
+                            <Label Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="24" Foreground="Yellow"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>
