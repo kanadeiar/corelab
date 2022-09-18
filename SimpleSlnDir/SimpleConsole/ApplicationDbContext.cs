@@ -20,4 +20,8 @@ public partial class ApplicationDbContext : DbContext
         OnModelCreatingPartial(modelBuilder);
     }
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.Properties<string>().HaveMaxLength(100);
+    }
 }
