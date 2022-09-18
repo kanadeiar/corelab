@@ -5,12 +5,14 @@ namespace SimpleConsole;
 
 public partial class ApplicationDbContext : DbContext
 {
-    public DbSet<Sample> Samples { get; set; }
+    public DbSet<Sample> Samples => Set<Sample>();
+    public DbSet<Make> Makes => Set<Make>();
+    public DbSet<Ratio> Ratios => Set<Ratio>();
+    public DbSet<Driver> Drivers => Set<Driver>();
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<BaseEntity>().ToTable("BaseEntities");
