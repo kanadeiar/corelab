@@ -34,10 +34,40 @@ public partial class ApplicationDbContext : DbContext
                 .IsSparse();
             x.Property(x => x.AdvancedName)
                 .HasComputedColumnSql("Advanced [Name]", stored: true);
+
+            x.HasOne(s => s.MakeNavigation)
+                .WithMany(p => p.Samples)
+                .HasForeignKey(s => s.MakeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Sample_Make_MakeId");
         });
         modelBuilder.Entity<Make>()
             .HasCheckConstraint(name: "CH_Name", sql: "[Name]<>'Test'", buildAction: c => c.HasName("CK_Check_Name"));
         modelBuilder.Entity<BaseEntity>().ToTable("BaseEntities");
+
+        modelBuilder.Entity<Ratio>(x =>
+        {
+            x.HasIndex(x => x.SampleId, "XII_Ratios_CarId")
+                .IsUnique();
+            x.HasOne(x => x.SampleNavigation)
+                .WithOne(x => x.RatioNavigation)
+                .HasForeignKey<Ratio>(x => x.SampleId);
+        });
+
+        modelBuilder.Entity<Sample>()
+            .HasMany(x => x.Drivers)
+            .WithMany(x => x.Samples)
+            .UsingEntity<Dictionary<string, object>>(
+                "SampleDriver",
+                j => j.HasOne<Driver>()
+                .WithMany()
+                .HasForeignKey("DriverId")
+                .OnDelete(DeleteBehavior.Cascade),
+                j => j.HasOne<Sample>()
+                .WithMany()
+                .HasForeignKey("SamleId")
+                .OnDelete(DeleteBehavior.ClientCascade);
+            );
         OnModelCreatingPartial(modelBuilder);
     }
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
