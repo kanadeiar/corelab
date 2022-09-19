@@ -15,8 +15,29 @@ public partial class ApplicationDbContext : DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Sample>(x =>
+        {
+            x.ToTable("MySamples", "dbo");
+            x.HasKey(x => x.Id);
+            x.HasIndex(x => x.MakeId, "IX_Index_1");
+            x.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasDefaultValue("Копейка");
+            x.Property(x => x.TimeStamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+            x.Property(x => x.IsTest)
+                .HasField("_isTest")
+                .HasDefaultValue(true);
+            x.Property(x => x.IsTest)
+                .IsSparse();
+            x.Property(x => x.AdvancedName)
+                .HasComputedColumnSql("Advanced [Name]", stored: true);
+        });
+        modelBuilder.Entity<Make>()
+            .HasCheckConstraint(name: "CH_Name", sql: "[Name]<>'Test'", buildAction: c => c.HasName("CK_Check_Name"));
         modelBuilder.Entity<BaseEntity>().ToTable("BaseEntities");
-        modelBuilder.Entity<Sample>().ToTable("Samples");
         OnModelCreatingPartial(modelBuilder);
     }
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
@@ -24,4 +45,5 @@ public partial class ApplicationDbContext : DbContext
     {
         configurationBuilder.Properties<string>().HaveMaxLength(100);
     }
+
 }
