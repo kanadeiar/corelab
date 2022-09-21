@@ -6,6 +6,7 @@ namespace SimpleConsole.Models;
 
 [Table("MySample", Schema = "dbo")]
 [Index(nameof(MakeId), Name = "IX_MySample_MakeId")]
+[EntityTypeConfiguration(typeof(SampleConfiguration))]
 public class Sample : BaseEntity
 {
     [Required, StringLength(40)]
@@ -25,4 +26,7 @@ public class Sample : BaseEntity
     }
 
     public string AdvancedName { get; set; }
+
+    [InverseProperty(nameof(SampleDriver.SampleNavigation))]
+    public IEnumerable<SampleDriver> SampleDrivers { get; set; } = new List<SampleDriver>();
 }

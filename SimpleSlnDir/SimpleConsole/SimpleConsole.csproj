@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Using Include="System.Text" />
+    <Using Include="SimpleConsole.Models.Confuguration" />
   </ItemGroup>
 
 </Project>

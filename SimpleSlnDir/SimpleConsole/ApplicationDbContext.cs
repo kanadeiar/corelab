@@ -9,42 +9,33 @@ public partial class ApplicationDbContext : DbContext
     public DbSet<Make> Makes => Set<Make>();
     public DbSet<Ratio> Ratios => Set<Ratio>();
     public DbSet<Driver> Drivers => Set<Driver>();
+    public DbSet<SampleDriver> SampleDrivers => Set<SampleDriver>();
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Sample>(x =>
+        modelBuilder.Entity<Driver>(x =>
         {
-            x.ToTable("MySamples", "dbo");
-            x.HasKey(x => x.Id);
-            x.HasIndex(x => x.MakeId, "IX_Index_1");
-            x.Property(x => x.Name)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasDefaultValue("Копейка");
-            x.Property(x => x.TimeStamp)
-                .IsRowVersion()
-                .IsConcurrencyToken();
-            x.Property(x => x.IsTest)
-                .HasField("_isTest")
-                .HasDefaultValue(true);
-            x.Property(x => x.IsTest)
-                .IsSparse();
-            x.Property(x => x.AdvancedName)
-                .HasComputedColumnSql("Advanced [Name]", stored: true);
-
-            x.HasOne(s => s.MakeNavigation)
-                .WithMany(p => p.Samples)
-                .HasForeignKey(s => s.MakeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Sample_Make_MakeId");
+            x.OwnsOne(o => o.PersonInfo, pd =>
+            {
+                pd.Property<string>(nameof(Person.FirstName))
+                    .HasColumnName(nameof(Person.FirstName))
+                    .HasColumnType("nvarchar(50)");
+                pd.Property<string>(nameof(Person.LastName))
+                    .HasColumnName(nameof(Person.LastName))
+                    .HasColumnName("nvarchar(50)");
+            });
+            x.Navigation(d => d.PersonInfo).IsRequired(true);
         });
+
+        new SampleConfiguration().Configure(modelBuilder.Entity<Sample>());
+
         modelBuilder.Entity<Make>()
             .HasCheckConstraint(name: "CH_Name", sql: "[Name]<>'Test'", buildAction: c => c.HasName("CK_Check_Name"));
-        modelBuilder.Entity<BaseEntity>().ToTable("BaseEntities");
-
+        modelBuilder.Entity<BaseEntity>()
+            .ToTable("BaseEntities", t => t.ExcludeFromMigrations());
         modelBuilder.Entity<Ratio>(x =>
         {
             x.HasIndex(x => x.SampleId, "XII_Ratios_CarId")
@@ -53,21 +44,6 @@ public partial class ApplicationDbContext : DbContext
                 .WithOne(x => x.RatioNavigation)
                 .HasForeignKey<Ratio>(x => x.SampleId);
         });
-
-        modelBuilder.Entity<Sample>()
-            .HasMany(x => x.Drivers)
-            .WithMany(x => x.Samples)
-            .UsingEntity<Dictionary<string, object>>(
-                "SampleDriver",
-                j => j.HasOne<Driver>()
-                .WithMany()
-                .HasForeignKey("DriverId")
-                .OnDelete(DeleteBehavior.Cascade),
-                j => j.HasOne<Sample>()
-                .WithMany()
-                .HasForeignKey("SamleId")
-                .OnDelete(DeleteBehavior.ClientCascade);
-            );
         OnModelCreatingPartial(modelBuilder);
     }
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
