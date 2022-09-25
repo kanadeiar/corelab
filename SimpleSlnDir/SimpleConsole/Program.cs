@@ -1,4 +1,5 @@
 ﻿using Kanadeiar.Core.Async;
+using Microsoft.EntityFrameworkCore;
 
 namespace SimpleConsole;
 
@@ -6,6 +7,18 @@ internal partial class Program
 {
     private static async Task Main(string[] args)
     {
+        using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
+        {
+            var samples = context.Samples.Where(x => x.Name == "Test"); // оценка
+            var result = samples.ToList(); // выполнение
+            result = context.Samples.Where(x => x.Name == "Sim").ToList(); // немедленное выполнение
+            var query = context.Samples.AsQueryable(); // запрос
+            query = query.Where(x => x.Name == "Two");
+            result = query.ToList(); // получение
+
+            var one = context.Samples.AsNoTrackingWithIdentityResolution().FirstOrDefault(x => x.Id == 1);
+        }
+
         Console.WriteLine("Начало программы");
 
         var f = new FileInfo("test.dat");

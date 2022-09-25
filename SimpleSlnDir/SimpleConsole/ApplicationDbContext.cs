@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SimpleConsole.Models;
+using SimpleConsole.ViewModels;
+using SimpleConsole.ViewModels.Configuration;
 
 namespace SimpleConsole;
 
@@ -10,6 +12,8 @@ public partial class ApplicationDbContext : DbContext
     public DbSet<Ratio> Ratios => Set<Ratio>();
     public DbSet<Driver> Drivers => Set<Driver>();
     public DbSet<SampleDriver> SampleDrivers => Set<SampleDriver>();
+
+    public DbSet<SampleViewModel> SampleViewModels => Set<SampleViewModel>();
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -31,6 +35,7 @@ public partial class ApplicationDbContext : DbContext
         });
 
         new SampleConfiguration().Configure(modelBuilder.Entity<Sample>());
+        new SampleViewModelConfiguration().Configure(modelBuilder.Entity<SampleViewModel>());
 
         modelBuilder.Entity<Make>()
             .HasCheckConstraint(name: "CH_Name", sql: "[Name]<>'Test'", buildAction: c => c.HasName("CK_Check_Name"));
@@ -44,6 +49,9 @@ public partial class ApplicationDbContext : DbContext
                 .WithOne(x => x.RatioNavigation)
                 .HasForeignKey<Ratio>(x => x.SampleId);
         });
+        modelBuilder.Entity<SampleViewModel>()
+            .ToTable("Samples")
+            .ToView("SampleWithMakeView");
         OnModelCreatingPartial(modelBuilder);
     }
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
