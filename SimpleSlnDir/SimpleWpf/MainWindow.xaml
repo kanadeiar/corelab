@@ -3,112 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:SimpleWpf.ViewModels"
         xmlns:local="clr-namespace:SimpleWpf"
         mc:Ignorable="d"
-        Title="{Binding Title}"
+        Title="Sample"
         Height="500" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Background="LightGreen">
-    <Window.Resources>
-        <Style TargetType="{x:Type TextBox}">
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="Background" Value="Pink" />
-                    <Setter Property="Foreground" Value="Black" />
-                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
-                </Trigger>
-            </Style.Triggers>
-            <Setter Property="Validation.ErrorTemplate">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <DockPanel LastChildFill="True">
-
-                        </DockPanel>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Меню">
-                <MenuItem Header="Выход" Cursor="Hand"
-                    Command="{Binding CloseAppCommand}"/>
-            </MenuItem>
-            <MenuItem Header="Справка">
-                <MenuItem Header="О программе ..." Cursor="Hand"
-                    Command="{Binding ShowAboutCommand}"/>
-            </MenuItem>
-        </Menu>
-        <ToolBarTray DockPanel.Dock="Top">
-            <ToolBar>                
-                <Button Cursor="Hand" Height="40">
-                    Тестовая кнопка
-                </Button>
-                <Button Cursor="Hand" Height="40">
-                    Еще тестовая кнопка
-                </Button>
-                <Button Cursor="Hand" Height="40">
-                    Третья тестовая кнопка
-                </Button>
-            </ToolBar>
-        </ToolBarTray>
-        <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem>
-                <TextBlock Text="Статус бар"/>
-            </StatusBarItem>
-        </StatusBar>
-        <TabControl FontSize="14">
-            <TabItem Header="Главная вкладка" Height="40">
 
-<Grid IsSharedSizeScope="True" Margin="5">
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-    </Grid.RowDefinitions>
-    <Grid Grid.Row="0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" SharedSizeGroup="CarLabels"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Content="Автомобиль"/>
-        <ComboBox Name="comboBoxCars" Grid.Column="1" DisplayMemberPath="PetName"/>
-    </Grid>
-    <Grid Grid.Row="1" Name="DetailsGrid" DataContext="{Binding ElementName=comboBoxCars, Path=SelectedItem}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" SharedSizeGroup="CarLabels"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Label Grid.Column="0" Grid.Row="0" Content="Id" Margin="3"/>
-        <TextBox Grid.Column="1" Grid.Row="0" Margin="3" Text="{Binding Path=CarId, ValidatesOnDataErrors=True}"/>
-        <Label Grid.Column="0" Grid.Row="1" Content="Марка" Margin="3"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="3" Text="{Binding Path=Make, ValidatesOnDataErrors=True}"/>
-        <Label Grid.Column="0" Grid.Row="2" Content="Цвет" Margin="3"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Margin="3" Text="{Binding Path=Color, ValidatesOnDataErrors=True}"/>
-        <Label Grid.Column="0" Grid.Row="3" Content="Название" Margin="3"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Margin="3" Text="{Binding Path=PetName, ValidatesOnDataErrors=True}"/>
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="buttonAddCar" Content="Добавить автомобиль" Margin="5" Padding="4, 2" Click="buttonAddCar_Click"/>
-            <Button x:Name="buttonChangeColor" Click="ButtonChangeColor_OnClick" Content="Изменить цвет" Margin="5" Padding="4, 2"/>
-        </StackPanel>
-    </Grid>
-</Grid>
-
-            </TabItem>
-            <TabItem Header="Дополнительная вкладка" Height="40">
-                <Grid>
-
-                </Grid>
-            </TabItem>
-        </TabControl>
     </DockPanel>
 </Window>
