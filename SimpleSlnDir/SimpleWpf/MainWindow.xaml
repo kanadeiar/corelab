@@ -8,6 +8,25 @@
         Title="Sample"
         Height="500" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Background="LightGreen">
     <DockPanel>
+        <StackPanel>
+            <Slider Maximum="100" Value="50" x:Name="mySlider"/>
+            <TextBlock Text="{Binding Path=Value, ElementName=mySlider}"></TextBlock>
+
+            <TextBox Name="TextBoxTest" FontSize="24" Foreground="Green" />
+            <Button>
+                <Button.Background>
+                    <LinearGradientBrush>
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.0" Color="Red" />
+                            <GradientStop Offset="1.0" Color="Yellow" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Button.Background>
+                Test
+            </Button>
+        </StackPanel>
+        
+
 
     </DockPanel>
 </Window>
