@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleWpf", "SimpleWpf\Simp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleBlazor", "SimpleBlazor\SimpleBlazor.csproj", "{28B98D1A-FA4F-409D-8090-C91EEE0E1B9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMauiApp", "SimpleMauiApp\SimpleMauiApp.csproj", "{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleData", "SimpleData\SimpleData.csproj", "{8F1E0C23-BCBC-44FF-870D-63B97B969577}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +29,10 @@ Global
 		{28B98D1A-FA4F-409D-8090-C91EEE0E1B9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28B98D1A-FA4F-409D-8090-C91EEE0E1B9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28B98D1A-FA4F-409D-8090-C91EEE0E1B9B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CA1DABE-F4C6-4168-96F0-DC25DE3E4ECE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8F1E0C23-BCBC-44FF-870D-63B97B969577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F1E0C23-BCBC-44FF-870D-63B97B969577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F1E0C23-BCBC-44FF-870D-63B97B969577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F1E0C23-BCBC-44FF-870D-63B97B969577}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
