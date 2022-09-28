@@ -9,14 +9,20 @@ internal partial class Program
     {
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
-            var samples = context.Samples.Where(x => x.Name == "Test"); // оценка
-            var result = samples.ToList(); // выполнение
-            result = context.Samples.Where(x => x.Name == "Sim").ToList(); // немедленное выполнение
-            var query = context.Samples.AsQueryable(); // запрос
-            query = query.Where(x => x.Name == "Two");
-            result = query.ToList(); // получение
-
-            var one = context.Samples.AsNoTrackingWithIdentityResolution().FirstOrDefault(x => x.Id == 1);
+            var list = new List<Sample>{
+                new Sample(),
+                new Sample(),
+                new Sample(),
+            };
+            context.Samples.AddRange(list);
+            context.SaveChanges();
+            // var samples = context.Samples.Where(x => x.Name == "Test"); // оценка
+            // var result = samples.ToList(); // выполнение
+            // result = context.Samples.Where(x => x.Name == "Sim").ToList(); // немедленное выполнение
+            // var query = context.Samples.AsQueryable(); // запрос
+            // query = query.Where(x => x.Name == "Two");
+            // result = query.ToList(); // получение
+            // var one = context.Samples.AsNoTrackingWithIdentityResolution().FirstOrDefault(x => x.Id == 1);
         }
 
         Console.WriteLine("Начало программы");
