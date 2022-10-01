@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:SimpleWpf"
         mc:Ignorable="d"
         Title="Sample"
@@ -24,7 +25,37 @@
                 </Button.Background>
                 Test
             </Button>
+            <TextBlock>
+                <TextBlock.Foreground>
+                    <x:Static Member="SystemColors.ActiveCaptionBrush"></x:Static>
+                </TextBlock.Foreground>
+                Brush Test
+            </TextBlock>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">One</TextBlock>
+                <Button Grid.Row="1">Button</Button>
+            </Grid>
+            <Button Click="myButton_Click">
+                My Button
+            </Button>
+            <ListBox>
+                <ListBoxItem>
+                    <sys:DateTime>10/10/2010 4:20 PM</sys:DateTime>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <sys:DateTime>10/11/2010 5:20 PM</sys:DateTime>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <sys:DateTime>10/12/2010 1:20 PM</sys:DateTime>
+                </ListBoxItem>
+            </ListBox>
         </StackPanel>
+
+        
         
 
 

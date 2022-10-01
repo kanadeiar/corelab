@@ -20,5 +20,13 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+    private void myButton_Click(object s, RoutedEventArgs e)
+    {
+        this.Cursor = Cursors.Wait;
+        Thread.Sleep(TimeSpan.FromSeconds(3));
+        MessageBox.Show("Test");
+        this.Cursor = null;
+    }
 }
 
