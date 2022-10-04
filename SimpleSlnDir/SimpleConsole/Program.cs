@@ -9,13 +9,46 @@ internal partial class Program
     {
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
-            var list = new List<Sample>{
-                new Sample(),
-                new Sample(),
-                new Sample(),
+            var entities = new[]
+            {
+                typeof(Driver).FullName,
+                typeof(Sample).FullName,
+                typeof(Make).FullName,
             };
-            context.Samples.AddRange(list);
-            context.SaveChanges();
+            foreach (var entityName in entities)
+            {
+                var entity = context.Model.FindEntityType(entityName);
+                var tableName = entity.GetTableName;
+                var schemaName = entity.GetSchema;
+                context.Database.ExecuteSqlRaw($"DELETE FROM {schemaName}.{tableName}");
+                context.Database.ExecuteSqlRaw($"DBCC CHECKIDENT (\"{schemaName}.{tableName}\", RESEED, 0)");
+            }
+
+            // List<Make> makes = new()
+            // {
+            //     new() { Name = "Test" },
+            //     new() { Name = "Dott" },
+            // };
+            // context.Makes.AddRange(makes);
+            // context.SaveChanges();
+            // List<Sample> samples = new()
+            // {
+            //     new() { MakeId = 1, Name = "Vova" },
+            //     new() { MakeId = 2, Name = "Maka" },
+            // };
+            // context.Samples.AddRange(samples);
+            // context.SaveChanges();
+            // var list = new List<Sample>{
+            //     new Sample(),
+            //     new Sample(),
+            //     new Sample(),
+            // };
+            // context.Samples.AddRange(list);
+            // var make = new Make { Name = "Make" };
+            // var sample = new Sample { Name = "One" };
+            // ((List<Sample>)make.Samples).Add(sample);
+            // context.Makes.Add(make);
+            // context.SaveChanges();
             // var samples = context.Samples.Where(x => x.Name == "Test"); // оценка
             // var result = samples.ToList(); // выполнение
             // result = context.Samples.Where(x => x.Name == "Sim").ToList(); // немедленное выполнение

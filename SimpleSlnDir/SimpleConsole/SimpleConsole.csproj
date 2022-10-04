@@ -21,6 +21,7 @@
   <ItemGroup>
     <Using Include="System.Text" />
     <Using Include="SimpleConsole.Models.Confuguration" />
+    <Using Include="SimpleConsole.Models" />
   </ItemGroup>
 
 </Project>
