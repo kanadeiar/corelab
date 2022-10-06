@@ -53,6 +53,12 @@
                     <sys:DateTime>10/12/2010 1:20 PM</sys:DateTime>
                 </ListBoxItem>
             </ListBox>
+            <StackPanel>
+                <Button HorizontalAlignment="Center">Center</Button>
+                <Button HorizontalAlignment="Left">Left</Button>
+                <Button HorizontalAlignment="Right">Right</Button>
+                <Button>Full</Button>
+            </StackPanel>
         </StackPanel>
 
         
