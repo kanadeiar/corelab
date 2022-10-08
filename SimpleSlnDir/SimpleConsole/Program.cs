@@ -9,26 +9,10 @@ internal partial class Program
 {
     private static async Task Main(string[] args)
     {
-
-
-
-
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
-            var parameterId = new SqlParameter
-            {
-                ParameterName = "@Id",
-                SqlDbType = SqlDbType.Int,
-                Value = 1,
-            };
-            var parameterName = new SqlParameter
-            {
-                ParameterName = "@Name",
-                SqlDbType = SqlDbType.NVarChar,
-                Size = 50,
-                Direction = ParameterDirection.Output,
-            };
-            var result = context.Database.ExecuteSqlRaw("EXEC [dbo].[GetName] @Id, @Name OUTPUT", parameterId, parameterName);
+            var sampleAndDrivers = context.Samples.Include(x => x.Drivers).Where(x => x.Drivers.Any());
+            context.ChangeTracker.Clear();
         }
         Console.WriteLine("Начало программы");
 
