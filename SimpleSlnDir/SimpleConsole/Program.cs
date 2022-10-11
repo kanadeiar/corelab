@@ -11,11 +11,7 @@ internal partial class Program
     {
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
-            var sample = context.Samples.First(x => x.Id == 1);
-            context.Entry(sample).Reference(c => c.MakeNavigation).Load();
-            context.Entry(sample).Collection(c => c.Drivers).Query().Load();
 
-            context.ChangeTracker.Clear();
         }
         Console.WriteLine("Начало программы");
 

@@ -8,5 +8,5 @@ public class Driver : BaseEntity
     public IEnumerable<Sample> Samples { get; set; } = new List<Sample>();
 
     [InverseProperty(nameof(SampleDriver.SampleNavigation))]
-    public IEnumerable<SampleDriver> SampleDrivers { get; set; } = new List<SampleDriver>();
+    public virtual IEnumerable<SampleDriver> SampleDrivers { get; set; } = new List<SampleDriver>();
 }

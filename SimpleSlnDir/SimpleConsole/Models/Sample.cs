@@ -13,10 +13,10 @@ public class Sample : BaseEntity
     public string Name { get; set; }
     public int MakeId { get; set; }
     [ForeignKey(nameof(MakeId))]
-    public Make MakeNavigation { get; set; }
-    public Ratio RatioNavigation { get; set; }
+    public virtual Make MakeNavigation { get; set; }
+    public virtual Ratio RatioNavigation { get; set; }
     [InverseProperty(nameof(Driver.Samples))]
-    public IEnumerable<Driver> Drivers { get; set; } = new List<Driver>();
+    public virtual IEnumerable<Driver> Drivers { get; set; } = new List<Driver>();
 
     private bool? _isTest;
     public bool IsTest
@@ -28,5 +28,5 @@ public class Sample : BaseEntity
     public string AdvancedName { get; set; }
 
     [InverseProperty(nameof(SampleDriver.SampleNavigation))]
-    public IEnumerable<SampleDriver> SampleDrivers { get; set; } = new List<SampleDriver>();
+    public virtual IEnumerable<SampleDriver> SampleDrivers { get; set; } = new List<SampleDriver>();
 }
