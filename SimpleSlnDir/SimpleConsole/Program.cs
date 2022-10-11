@@ -11,7 +11,13 @@ internal partial class Program
     {
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
-
+            var filtereds = context.Ratios.ToArray(); // отфильтрованные сущности
+            var alls = context.Samples.IgnoreQueryFilters().ToArray(); // игнор фильтра
+            var make = context.Makes.First(x => x.Id == 1);
+            context.Entry(make).Collection(x => x.Samples).Load(); // загрука сущностей отфильтрованных
+            var samples = make.Samples.ToArray();
+            context.Entry(make).Collection(x => x.Samples).Query().IgnoreQueryFilters().Load(); // игнор фильра
+            var samples2 = make.Samples.ToArray();
         }
         Console.WriteLine("Начало программы");
 

@@ -49,6 +49,8 @@ public partial class ApplicationDbContext : DbContext
                 .WithOne(x => x.RatioNavigation)
                 .HasForeignKey<Ratio>(x => x.SampleId);
         });
+        modelBuilder.Entity<Ratio>().HasQueryFilter(e =>
+            e.SampleNavigation.IsTest);
         modelBuilder.Entity<SampleViewModel>()
             .ToTable("Samples")
             .ToView("SampleWithMakeView");

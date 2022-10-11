@@ -7,6 +7,8 @@ public class SampleConfiguration : IEntityTypeConfiguration<Sample>
 {
     public void Configure(EntityTypeBuilder<Sample> builder)
     {
+        builder.HasQueryFilter(x => x.IsTest == true);
+
         builder.ToTable("MySamples", "dbo");
         builder.HasKey(x => x.Id);
         builder.HasIndex(x => x.MakeId, "IX_Index_1");
