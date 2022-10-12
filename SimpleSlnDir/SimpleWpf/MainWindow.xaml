@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:SimpleWpf"
         mc:Ignorable="d"
         Title="Sample"
-        Height="500" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Background="LightGreen">
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Background="LightGreen">
     <DockPanel>
         <StackPanel>
             <Slider Maximum="100" Value="50" x:Name="mySlider"/>
@@ -53,12 +54,14 @@
                     <sys:DateTime>10/12/2010 1:20 PM</sys:DateTime>
                 </ListBoxItem>
             </ListBox>
-            <StackPanel>
-                <Button HorizontalAlignment="Center">Center</Button>
-                <Button HorizontalAlignment="Left">Left</Button>
-                <Button HorizontalAlignment="Right">Right</Button>
-                <Button>Full</Button>
-            </StackPanel>
+            <Border Margin="13" Padding="16" Background="Yellow" BorderBrush="SteelBlue" BorderThickness="3,4,5,6" CornerRadius="3" VerticalAlignment="Top">
+                <StackPanel Margin="3">
+                    <Button Margin="3" MaxWidth="200" MinWidth="100">One</Button>
+                    <Button Margin="3" MaxWidth="200" MinWidth="100">Two</Button>
+                    <Button Margin="3" MaxWidth="200" MinWidth="100">Three</Button>
+                </StackPanel>
+            </Border>
+
         </StackPanel>
 
         
