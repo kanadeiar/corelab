@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Runtime.InteropServices;
 using Kanadeiar.Core.Async;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -11,13 +12,11 @@ internal partial class Program
     {
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
-            var filtereds = context.Ratios.ToArray(); // отфильтрованные сущности
-            var alls = context.Samples.IgnoreQueryFilters().ToArray(); // игнор фильтра
-            var make = context.Makes.First(x => x.Id == 1);
-            context.Entry(make).Collection(x => x.Samples).Load(); // загрука сущностей отфильтрованных
-            var samples = make.Samples.ToArray();
-            context.Entry(make).Collection(x => x.Samples).Query().IgnoreQueryFilters().Load(); // игнор фильра
-            var samples2 = make.Samples.ToArray();
+            var sampleId = 1;
+            var sample = context.Samples
+                .FromSqlInterpolated($"Select * from dbo.MySample where Id = {sampleId}")
+                .Include(x => x.MakeNavigation)
+                .First();
         }
         Console.WriteLine("Начало программы");
 
