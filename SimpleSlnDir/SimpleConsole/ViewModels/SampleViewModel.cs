@@ -8,6 +8,7 @@ namespace SimpleConsole.ViewModels;
 [EntityTypeConfiguration(typeof(SampleViewModelConfiguration))]
 public class SampleViewModel
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     [NotMapped]
     public string FullDetail => $"The {Name}";

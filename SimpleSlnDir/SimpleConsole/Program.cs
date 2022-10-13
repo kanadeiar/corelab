@@ -12,11 +12,9 @@ internal partial class Program
     {
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
-            var sampleId = 1;
-            var sample = context.Samples
-                .FromSqlInterpolated($"Select * from dbo.MySample where Id = {sampleId}")
-                .Include(x => x.MakeNavigation)
-                .First();
+            var sample = context.Samples.First(x => x.Id == 1);
+            sample.Name = "Test1";
+            context.SaveChanges();
         }
         Console.WriteLine("Начало программы");
 
