@@ -12,11 +12,11 @@ internal partial class Program
     {
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
-            var sample = context.Samples.First(x => x.Id == 1);
-            sample.Name = "Test1";
-            context.SaveChanges();
+            var makes = context.Makes
+                .Where(x => ApplicationDbContext.SamplesCountFor(x.Id) > 1).ToList();
         }
         Console.WriteLine("Начало программы");
+        var one = "ddd"u8;
 
         // var f = new FileInfo("test.dat");
         // using (var bw = new BinaryWriter(f.OpenWrite()))

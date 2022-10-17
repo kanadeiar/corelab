@@ -7,6 +7,12 @@ namespace SimpleConsole;
 
 public partial class ApplicationDbContext : DbContext
 {
+    [DbFunction("test_SamplesCountFor", Schema = "dbo")]
+    public static int SamplesCountFor(int makeId) => throw new NotSupportedException();
+
+    [DbFunction("test_GetSamplesForMake", Schema = "dbo")]
+    public IQueryable<Sample> GetSamplesFor(int makeId) => FromExpression(() => GetSamplesFor(makeId));
+
     public DbSet<Sample> Samples => Set<Sample>();
     public DbSet<Make> Makes => Set<Make>();
     public DbSet<Ratio> Ratios => Set<Ratio>();
