@@ -12,8 +12,7 @@ internal partial class Program
     {
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
-            var makes = context.Makes
-                .Where(x => ApplicationDbContext.SamplesCountFor(x.Id) > 1).ToList();
+            var samples = context.Samples.IgnoreQueryFilters().Where(x => EF.Functions.Like(x.Name, "%Test%")).ToList();
         }
         Console.WriteLine("Начало программы");
         var one = "ddd"u8;
