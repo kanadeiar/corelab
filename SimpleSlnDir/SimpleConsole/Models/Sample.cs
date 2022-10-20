@@ -29,4 +29,6 @@ public class Sample : BaseEntity
 
     [InverseProperty(nameof(SampleDriver.SampleNavigation))]
     public virtual IEnumerable<SampleDriver> SampleDrivers { get; set; } = new List<SampleDriver>();
+
+    public string Price { get; set; }
 }

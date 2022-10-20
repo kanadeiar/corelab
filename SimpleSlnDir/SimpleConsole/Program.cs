@@ -12,7 +12,14 @@ internal partial class Program
     {
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
-            var samples = context.Samples.IgnoreQueryFilters().Where(x => EF.Functions.Like(x.Name, "%Test%")).ToList();
+            var newSample = new Sample();
+            context.Samples.Add(newSample);
+            context.Entry(newSample).Property("IsDeleted").CurrentValue = true;
+            var nonDeleteds = context.Samples.Where(c => !EF.Property<bool>(c, "IsDeleted")).ToList();
+            foreach (var e in nonDeleteds)
+            {
+                Console.WriteLine($"{e.Name} Is deleted: {context.Entry(e).Property("IsDeleted").CurrentValue}");
+            }
         }
         Console.WriteLine("Начало программы");
         var one = "ddd"u8;

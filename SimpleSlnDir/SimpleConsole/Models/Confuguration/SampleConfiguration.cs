@@ -7,6 +7,8 @@ public class SampleConfiguration : IEntityTypeConfiguration<Sample>
 {
     public void Configure(EntityTypeBuilder<Sample> builder)
     {
+        builder.Property<bool?>("IsDeleted").IsRequired(false).HasDefaultValue(true);
+
         builder.HasQueryFilter(x => x.IsTest == true);
 
         builder.ToTable("MySamples", "dbo");
