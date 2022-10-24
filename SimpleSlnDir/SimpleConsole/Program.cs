@@ -10,8 +10,34 @@ internal partial class Program
 {
     private static async Task Main(string[] args)
     {
+        var strategy = context.Database.CreateExecutionStrategy();
+        strategy.Execute(() =>
+        {
+            using var trans = context.Database.BeginTransaction();
+            context.Database.ExecuteSqlRaw($"ALTER TABLE dbo.Samples SET (SYSTEM_VERSIONING = OFF)");
+            context.Database.ExecuteSqlRaw($"DELETE FROM audits.SamplesHistory");
+            context.Database.ExecuteSqlRaw($"ALTER TABLE dbo.Samples SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE={historySchema}.{historyTable}))");
+            trans.Commit();
+        });
+
+
         using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
         {
+            var samples = context.Samples
+                .TemporalAll()
+                .OrderBy(x => EF.Property<DateTime>(x, "ValidFrom"))
+                .Select(x => new
+                {
+                    Sample = x,
+                    ValidFrom = EF.Property<DateTime>(x, "ValidFrom"),
+                    ValidTo = EF.Property<DateTime>(x, "ValidTo"),
+                });
+            foreach (var x in samples)
+            {
+                Console.WriteLine($"{x.Name} - {x.ValidFrom}, {x.ValidTo}");
+            }
+
+
             var newSample = new Sample();
             context.Samples.Add(newSample);
             context.Entry(newSample).Property("IsDeleted").CurrentValue = true;

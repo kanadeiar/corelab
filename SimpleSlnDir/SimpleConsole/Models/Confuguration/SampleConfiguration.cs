@@ -7,11 +7,16 @@ public class SampleConfiguration : IEntityTypeConfiguration<Sample>
 {
     public void Configure(EntityTypeBuilder<Sample> builder)
     {
-        builder.Property<bool?>("IsDeleted").IsRequired(false).HasDefaultValue(true);
+        builder.ToTable(x => x.IsTemporal(t =>
+        {
+            t.HasPeriodEnd("ValidTo");
+            t.HasPeriodStart("ValidFrom");
+            t.UseHistoryTable("SampleHistory", "audits");
+        }));
 
         builder.HasQueryFilter(x => x.IsTest == true);
 
-        builder.ToTable("MySamples", "dbo");
+
         builder.HasKey(x => x.Id);
         builder.HasIndex(x => x.MakeId, "IX_Index_1");
         builder.Property(x => x.Name)
