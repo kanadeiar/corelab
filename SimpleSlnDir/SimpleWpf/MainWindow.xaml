@@ -7,66 +7,12 @@
         xmlns:local="clr-namespace:SimpleWpf"
         mc:Ignorable="d"
         Title="Sample"
-        SizeToContent="WidthAndHeight"
+        Width="600" Height="400"
         WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Background="LightGreen">
-    <DockPanel>
-        <StackPanel>
-            <Slider Maximum="100" Value="50" x:Name="mySlider"/>
-            <TextBlock Text="{Binding Path=Value, ElementName=mySlider}"></TextBlock>
-
-            <TextBox Name="TextBoxTest" FontSize="24" Foreground="Green" />
-            <Button>
-                <Button.Background>
-                    <LinearGradientBrush>
-                        <LinearGradientBrush.GradientStops>
-                            <GradientStop Offset="0.0" Color="Red" />
-                            <GradientStop Offset="1.0" Color="Yellow" />
-                        </LinearGradientBrush.GradientStops>
-                    </LinearGradientBrush>
-                </Button.Background>
-                Test
-            </Button>
-            <TextBlock>
-                <TextBlock.Foreground>
-                    <x:Static Member="SystemColors.ActiveCaptionBrush"></x:Static>
-                </TextBlock.Foreground>
-                Brush Test
-            </TextBlock>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0">One</TextBlock>
-                <Button Grid.Row="1">Button</Button>
-            </Grid>
-            <Button Click="myButton_Click">
-                My Button
-            </Button>
-            <ListBox>
-                <ListBoxItem>
-                    <sys:DateTime>10/10/2010 4:20 PM</sys:DateTime>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <sys:DateTime>10/11/2010 5:20 PM</sys:DateTime>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <sys:DateTime>10/12/2010 1:20 PM</sys:DateTime>
-                </ListBoxItem>
-            </ListBox>
-            <Border Margin="13" Padding="16" Background="Yellow" BorderBrush="SteelBlue" BorderThickness="3,4,5,6" CornerRadius="3" VerticalAlignment="Top">
-                <StackPanel Margin="3">
-                    <Button Margin="3" MaxWidth="200" MinWidth="100">One</Button>
-                    <Button Margin="3" MaxWidth="200" MinWidth="100">Two</Button>
-                    <Button Margin="3" MaxWidth="200" MinWidth="100">Three</Button>
-                </StackPanel>
-            </Border>
-
-        </StackPanel>
-
-        
-        
+    <Grid Margin="10">
+        <Grid Background ="LightSteelBlue">
 
 
-    </DockPanel>
+        </Grid>
+    </Grid>
 </Window>
