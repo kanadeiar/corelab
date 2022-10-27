@@ -1,8 +1,4 @@
 ﻿using System.Data;
-using System.Runtime.InteropServices;
-using Kanadeiar.Core.Async;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 
 namespace SimpleConsole;
 
@@ -12,6 +8,18 @@ internal partial class Program
     {
         Console.WriteLine("Начало программы");
 
+        var arrInts = new[] { 2, -3, 4, 9, 0, 10 };
+        Console.WriteLine($"Max = {(from i in arrInts select i).Max()}");
+        Console.WriteLine($"Min = {arrInts.Min()}");
+        Console.WriteLine($"Average = {(from i in arrInts select i).Average()}");
+        Console.WriteLine($"Sum = {arrInts.Select(x => x).Sum()}");
+        var arr1 = (from i in arrInts select i).Take(2);
+        foreach (var el in arr1)
+            Console.Write($"{el} ");
+        Console.WriteLine();
+        var arr2 = arrInts.Skip(2);
+        foreach (var el in arr2)
+            Console.Write($"{el} ");
 
         // var f = new FileInfo("test.dat");
         // using (var bw = new BinaryWriter(f.OpenWrite()))
@@ -46,7 +54,7 @@ internal partial class Program
         //     }
         // }
 
-        Console.WriteLine("Нажмите любую кнопку ...");
+        Console.WriteLine(Environment.NewLine + "Нажмите любую кнопку ...");
         var _ = Console.Read();
     }
 }
