@@ -9,7 +9,7 @@ namespace SimpleConsole.ViewModels;
 public class SampleViewModel
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     [NotMapped]
     public string FullDetail => $"The {Name}";
     public override string ToString() => FullDetail;

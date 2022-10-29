@@ -2,24 +2,24 @@
 
 namespace SimpleConsole;
 
+record class Info(string Name, int Number, int Desc);
+
 internal partial class Program
 {
-    private static async Task Main(string[] args)
+    private static void Main(string[] args)
     {
         Console.WriteLine("Начало программы");
 
-        var arrInts = new[] { 2, -3, 4, 9, 0, 10 };
-        Console.WriteLine($"Max = {(from i in arrInts select i).Max()}");
-        Console.WriteLine($"Min = {arrInts.Min()}");
-        Console.WriteLine($"Average = {(from i in arrInts select i).Average()}");
-        Console.WriteLine($"Sum = {arrInts.Select(x => x).Sum()}");
-        var arr1 = (from i in arrInts select i).Take(2);
-        foreach (var el in arr1)
-            Console.Write($"{el} ");
-        Console.WriteLine();
-        var arr2 = arrInts.Skip(2);
-        foreach (var el in arr2)
-            Console.Write($"{el} ");
+
+        var infos = Enumerable.Range(1, 10)
+            .Select(x => new { Name = $"Имя{x}", Infos = new List<Info> { new Info($"N{x}", x, x) } });
+        var converted = infos.SelectMany(x => x.Infos, (x, y) => new { Name = x.Name, InfoName = y.Name });
+        foreach (var el in converted)
+        {
+            Console.Write($"{el.Name} {el.InfoName} ");
+        }
+
+
 
         // var f = new FileInfo("test.dat");
         // using (var bw = new BinaryWriter(f.OpenWrite()))

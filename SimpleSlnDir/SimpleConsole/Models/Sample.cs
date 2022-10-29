@@ -10,11 +10,11 @@ namespace SimpleConsole.Models;
 public class Sample : BaseEntity
 {
     [Required, StringLength(40)]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     public int MakeId { get; set; }
     [ForeignKey(nameof(MakeId))]
-    public virtual Make MakeNavigation { get; set; }
-    public virtual Ratio RatioNavigation { get; set; }
+    public virtual Make MakeNavigation { get; set; } = null!;
+    public virtual Ratio RatioNavigation { get; set; } = null!;
     [InverseProperty(nameof(Driver.Samples))]
     public virtual IEnumerable<Driver> Drivers { get; set; } = new List<Driver>();
 
@@ -25,10 +25,10 @@ public class Sample : BaseEntity
         set => _isTest = value;
     }
 
-    public string AdvancedName { get; set; }
+    public string AdvancedName { get; set; } = string.Empty;
 
     [InverseProperty(nameof(SampleDriver.SampleNavigation))]
     public virtual IEnumerable<SampleDriver> SampleDrivers { get; set; } = new List<SampleDriver>();
 
-    public string Price { get; set; }
+    public string Price { get; set; } = string.Empty;
 }
