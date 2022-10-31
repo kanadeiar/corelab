@@ -10,19 +10,31 @@
         Width="600" Height="400"
         WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Background="LightGreen">
     <Grid Margin="10">
-        <Grid Background ="LightSteelBlue">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBox Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">Текстовый блок 1</TextBox>
-            <Button Margin="10,10,5,15" Padding="5" Grid.Row="1" Grid.Column="1">OK</Button>
-            <Button Margin="5,10,10,15" Padding="5" Grid.Row="1" Grid.Column="2">Отмена</Button>
+            <Grid Grid.Column="0" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0">Первая</Button>
+                <Button Grid.Row="1">Третья</Button>
+            </Grid>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+            <Grid Grid.Column="2" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0">Вторая</Button>
+                <Button Grid.Row="2">Четвертая</Button>
+                <GridSplitter Grid.Row="1" Height="3" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
