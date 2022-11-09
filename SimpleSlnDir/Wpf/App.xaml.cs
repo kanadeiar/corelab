@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿namespace Wpf;
 
-namespace Wpf
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    private static IServiceProvider? __Services;
+    private static IServiceCollection GetServices()
     {
+        var services = new ServiceCollection();
+        InitServices(services);
+        return services;
+    }
+
+    /// <summary> 
+    /// Сервисы 
+    /// </summary>
+    public static IServiceProvider Services => __Services ??= GetServices().BuildServiceProvider();
+    private static void InitServices(IServiceCollection services)
+    {
+        services.AddScoped<MainWindowViewModel>();
+
     }
 }
+
