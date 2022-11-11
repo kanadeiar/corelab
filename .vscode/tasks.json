@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/SimpleSlnDir/SimpleConsole/SimpleConsole.csproj",
+                "${workspaceFolder}/SimpleSlnDir/Console/Console.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/SimpleSlnDir/SimpleConsole/SimpleConsole.csproj",
+                "${workspaceFolder}/SimpleSlnDir/Console/Console.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/SimpleSlnDir/SimpleConsole/SimpleConsole.csproj"
+                "${workspaceFolder}/SimpleSlnDir/Console/Console.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

@@ -9,6 +9,21 @@
         Title="{Binding Title}" 
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}">
     <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Главное меню">
+                <MenuItem Header="Тест"/>
+                <Separator/>
+                <MenuItem Header="Выход" Command="{Binding CloseAppCommand}"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+            </StatusBarItem>
+        </StatusBar>
+        <TabControl FontSize="14">
+            <TabItem Header="Тест" Height="40">
 
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>

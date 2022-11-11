@@ -10,11 +10,12 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/SimpleSlnDir/SimpleData/bin/Debug/net6.0/SimpleData.dll",
+            "program": "${workspaceFolder}/SimpleSlnDir/Console/bin/Debug/net7.0/Console.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/SimpleSlnDir/SimpleData",
+            "cwd": "${workspaceFolder}/SimpleSlnDir/Console",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
             "stopAtEntry": false
         },
         {
