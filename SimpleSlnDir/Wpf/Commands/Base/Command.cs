@@ -1,4 +1,5 @@
 namespace Wpf.Commands.Base;
+
 /// <summary>
 /// Базовая команда
 /// </summary>

@@ -9,6 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Using Include="System.Numerics" />
+    <Using Include="System.ComponentModel" />
+    <Using Include="System.Runtime.CompilerServices"/>
+    <Using Include="System"/>
+    <Using Include="System.Windows"/>
+    <Using Include="Microsoft.Extensions.DependencyInjection"/>
+    <Using Include="System.Windows.Input"/>
+    <Using Include="Wpf.Models.Base"/>
+    <Using Include="Wpf.Models"/>
+    <Using Include="Wpf.Commands"/>
+    <Using Include="Wpf.ViewModels"/>
+    <Using Include="Wpf.ViewModels.Base"/>
+  </ItemGroup>
+  
+  <ItemGroup>
     <Content Include="Avatar.ico" />
   </ItemGroup>
   

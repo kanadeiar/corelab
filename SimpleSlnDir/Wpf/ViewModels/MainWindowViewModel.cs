@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace Wpf.ViewModels;
 
 public class MainWindowViewModel : ViewModel
