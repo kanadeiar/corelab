@@ -1,0 +1,20 @@
+﻿<Window x:Class="HostWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HostWpf"
+        mc:Ignorable="d"
+        Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Background="LightGreen"
+        Title="MainWindow" >
+    <DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Label Name="Label" HorizontalAlignment="Center" VerticalAlignment="Center"
+                FontSize="40" Content="Test"/>
+        </Grid>
+    </DockPanel>
+</Window>
