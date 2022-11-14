@@ -21,6 +21,8 @@
     <Using Include="Wpf.Commands"/>
     <Using Include="Wpf.ViewModels"/>
     <Using Include="Wpf.ViewModels.Base"/>
+    <Using Include="Wpf.Interfaces.Services"/>
+    <Using Include="Wpf.Services"/>
   </ItemGroup>
   
   <ItemGroup>

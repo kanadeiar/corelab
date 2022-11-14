@@ -22,7 +22,15 @@
         </StatusBar>
         <TabControl FontSize="14">
             <TabItem Header="Тест" Height="40">
-
+                <StackPanel>
+                    <TextBlock>
+                        Текст: <TextBlock Text="{Binding Sample.Name}"/>
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ввод текста: "/>
+                        <TextBox Text="{Binding Sample.Name}"/>
+                    </StackPanel>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </DockPanel>

@@ -16,8 +16,9 @@ public partial class App : Application
     public static IServiceProvider Services => __Services ??= GetServices().BuildServiceProvider();
     private static void InitServices(IServiceCollection services)
     {
-        services.AddScoped<MainWindowViewModel>();
+        services.AddScoped<ISampleService, SampleService>();
 
+        services.AddScoped<MainWindowViewModel>();
     }
 }
 
