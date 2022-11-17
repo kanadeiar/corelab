@@ -6,13 +6,25 @@
 public partial class App : Application
 {
     private IHost _host;
+    //private readonly Settings _settings;
 
     public App()
     {
         _host = new HostBuilder()
+            .ConfigureAppConfiguration((context, configurationBuilder) =>
+            {
+                configurationBuilder.SetBasePath(context.HostingEnvironment.ContentRootPath);
+                configurationBuilder.AddJsonFile("appsettings.json", optional: false);
+            })
             .ConfigureServices((context, services) =>
             {
+                services.Configure<Settings>(context.Configuration);
+                services.AddSingleton<ITextService, TextService>();
                 services.AddSingleton<MainWindow>();
+            })
+            .ConfigureLogging(logging =>
+            {
+                logging.AddConsole();
             })
             .Build();
     }

@@ -1,13 +1,15 @@
-﻿namespace HostWpf;
+﻿namespace HostWpf.Windows;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    public MainWindow(ITextService textService)
     {
         InitializeComponent();
+
+        Label.Content = textService.GetText();
     }
 }
 
