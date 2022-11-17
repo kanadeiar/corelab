@@ -3,7 +3,7 @@ namespace Wpf.Models;
 /// <summary>
 /// Тестовая сущность
 /// </summary>
-public class Sample : BaseModel
+public class Sample : Base.BaseModel
 {
     private string _Name = string.Empty;
     /// <summary>

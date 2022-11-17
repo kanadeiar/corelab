@@ -6,7 +6,6 @@
 public partial class App : Application
 {
     private IHost _host;
-    //private readonly Settings _settings;
 
     public App()
     {

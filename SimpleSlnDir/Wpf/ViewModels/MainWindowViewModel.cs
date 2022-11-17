@@ -1,17 +1,17 @@
 namespace Wpf.ViewModels;
 
-public class MainWindowViewModel : ViewModel
+public class MainWindowViewModel : Base.ViewModel
 {
     private ISampleService _sampleService;
 
-    private Sample _Sample = default!;
-    public Sample Sample
+    private string _Text = "Текст пробный";
+    public string Text
     {
-        get => _Sample;
-        set => Set(ref _Sample, value);
+        get => _Text;
+        set => Set(ref _Text, value);
     }
 
-    private string _Title = "Приложение чтения файлов в бинарном виде";
+    private string _Title = "Тестовое приложение - обобщенный хост";
     /// <summary> Заголовок </summary>
     public string Title
     {
@@ -40,6 +40,6 @@ public class MainWindowViewModel : ViewModel
 
     private void Update()
     {
-        Sample = _sampleService.GetOne();
+        Text = _sampleService.GetText();
     }
 }

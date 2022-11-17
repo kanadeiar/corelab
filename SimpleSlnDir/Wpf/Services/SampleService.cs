@@ -2,17 +2,17 @@ namespace Wpf.Services;
 
 public class SampleService : ISampleService
 {
-    private Sample _sample;
-    public SampleService()
+    private string _text;
+
+    public SampleService(IOptions<Settings> options, ILogger<SampleService> logger)
     {
-        _sample = new Sample
-        {
-            Id = 1,
-            Name = "Тест1",
-        };
+        _text = options.Value.Text;
+
+        logger.LogInformation($"Text read from settings: '{options.Value.Text}'");
     }
-    public Sample GetOne()
+
+    public string GetText()
     {
-        return _sample;
+        return _text;
     }
 }

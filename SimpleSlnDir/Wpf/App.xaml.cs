@@ -2,23 +2,43 @@
 
 public partial class App : Application
 {
-    private static IServiceProvider? __Services;
-    private static IServiceCollection GetServices()
+    private IHost _host;
+
+    public App()
     {
-        var services = new ServiceCollection();
-        InitServices(services);
-        return services;
+        _host = new HostBuilder()
+            .ConfigureAppConfiguration((context, builder) =>
+            {
+                builder.SetBasePath(context.HostingEnvironment.ContentRootPath);
+                builder.AddJsonFile("appsettings.json", optional: false);
+            })
+            .ConfigureServices(InitServices)
+            .ConfigureLogging(logging =>
+            {
+                logging.AddConsole();
+            })
+            .Build();
     }
-
-    /// <summary> 
-    /// Сервисы 
-    /// </summary>
-    public static IServiceProvider Services => __Services ??= GetServices().BuildServiceProvider();
-    private static void InitServices(IServiceCollection services)
+    private static void InitServices(HostBuilderContext context, IServiceCollection services)
     {
+        services.Configure<Settings>(context.Configuration);
         services.AddScoped<ISampleService, SampleService>();
-
         services.AddScoped<MainWindowViewModel>();
+        services.AddScoped<MainWindow>();
+    }
+    private async void Application_Startup(object sender, StartupEventArgs e)
+    {
+        await _host.StartAsync();
+
+        var mainWindow = _host.Services.GetService<MainWindow>();
+        mainWindow?.Show();
+    }
+    private async void Application_Exit(object sender, ExitEventArgs e)
+    {
+        using (_host)
+        {
+            await _host.StopAsync(TimeSpan.FromSeconds(5));
+        }
     }
 }
 
