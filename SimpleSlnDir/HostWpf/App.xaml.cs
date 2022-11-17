@@ -10,10 +10,10 @@ public partial class App : Application
     public App()
     {
         _host = new HostBuilder()
-            .ConfigureAppConfiguration((context, configurationBuilder) =>
+            .ConfigureAppConfiguration((context, builder) =>
             {
-                configurationBuilder.SetBasePath(context.HostingEnvironment.ContentRootPath);
-                configurationBuilder.AddJsonFile("appsettings.json", optional: false);
+                builder.SetBasePath(context.HostingEnvironment.ContentRootPath);
+                builder.AddJsonFile("appsettings.json", optional: false);
             })
             .ConfigureServices((context, services) =>
             {
