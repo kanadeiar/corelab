@@ -11,7 +11,7 @@
   <ItemGroup>
     <Content Include="avatar.ico" />
     <Content Include="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
@@ -32,5 +32,7 @@
     <Using Include="System.Windows.Data" />
     <Using Include="System.Windows.Documents"/>
     <Using Include="System.Windows.Input"/>
+    <Using Include="System.ComponentModel"/>
+    <Using Include="System.Runtime.CompilerServices"/>
   </ItemGroup>
 </Project>

@@ -5,9 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf.Windows"
         mc:Ignorable="d"
-        Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip"
-        Title="MainWindow">
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
+        Title="{Binding Title}"
+        Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" >
     <DockPanel>
-
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Главное меню">
+                <MenuItem Header="Файл"/>
+                <Separator/>
+                <MenuItem Header="Выход" Command="{Binding CloseAppCommand}"/>
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="О программе ..."
+                          Command="{Binding ShowAboutCommand}"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Текст из конфигурации: "/>
+                    <TextBlock Text="{Binding Text}" />
+                </StackPanel>
+        </StatusBar>
+        <TabControl FontSize="14">
+            <TabItem Header="Главная" Height="40">
+                <StackPanel>
+                    <TextBlock>
+                        Текст из конфигурации: <TextBlock Text="{Binding Text}"/>
+                    </TextBlock>
+                    <TextBox Height="30" Margin="10,0" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}">
+                    </TextBox>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>
