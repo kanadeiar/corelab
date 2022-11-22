@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:myc="clr-namespace:Wpf.Controls"
         xmlns:local="clr-namespace:Wpf.Windows"
         mc:Ignorable="d"
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
@@ -43,6 +44,12 @@
                     <TextBox Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" Height="Auto"></TextBox>
                     <Button Grid.Row="0" Grid.Column="2" Margin="3" Padding="2" Cursor="Hand">Обзор</Button>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Вторая" Height="40">
+                <StackPanel>
+                    <myc:NumberControl x:Name="NumControl" Title="Тестовый заголовок" CurrentNumber="100"/>
+                    <TextBox Text="{Binding ElementName=NumControl, Path=CurrentNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </DockPanel>

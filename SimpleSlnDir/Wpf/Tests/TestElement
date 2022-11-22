@@ -2,7 +2,9 @@ namespace Wpf.Tests;
 
 public class TestElement : UIElement
 {
-    public static readonly DependencyProperty SampleProperty;
+    public static readonly DependencyProperty SampleProperty = DependencyProperty
+        .Register("Sample", typeof(int), typeof(TestElement),
+        new FrameworkPropertyMetadata(default(int)));
     public int Sample
     {
         get => (int)GetValue(SampleProperty);
@@ -10,7 +12,6 @@ public class TestElement : UIElement
     }
     static TestElement()
     {
-        var metadata = new FrameworkPropertyMetadata(default(int));
-        SampleProperty = DependencyProperty.Register("Sample", typeof(int), typeof(TestElement), metadata);
+
     }
 }
