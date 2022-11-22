@@ -3,14 +3,14 @@ namespace Wpf.Tests;
 public class TestElement : UIElement
 {
     public static readonly DependencyProperty SampleProperty;
-    public Thickness Sample
+    public int Sample
     {
-        get => (Thickness)GetValue(SampleProperty);
+        get => (int)GetValue(SampleProperty);
         set => SetValue(SampleProperty, value);
     }
     static TestElement()
     {
-        var metadata = new FrameworkPropertyMetadata(new Thickness());
-        SampleProperty = DependencyProperty.Register("Sample", typeof(Thickness), typeof(FrameworkElement), metadata);
+        var metadata = new FrameworkPropertyMetadata(default(int));
+        SampleProperty = DependencyProperty.Register("Sample", typeof(int), typeof(TestElement), metadata);
     }
 }
