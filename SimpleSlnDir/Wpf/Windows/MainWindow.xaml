@@ -28,13 +28,21 @@
         </StatusBar>
         <TabControl FontSize="14">
             <TabItem Header="Главная" Height="40">
-                <StackPanel>
-                    <TextBlock>
-                        Текст из конфигурации: <TextBlock Text="{Binding Text}"/>
-                    </TextBlock>
-                    <TextBox Height="30" Margin="10,0" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}">
-                    </TextBox>
-                </StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Margin="3" VerticalAlignment="Center">База:</Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" Height="Auto"></TextBox>
+                    <Button Grid.Row="0" Grid.Column="2" Margin="3" Padding="2" Cursor="Hand">Обзор</Button>
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
