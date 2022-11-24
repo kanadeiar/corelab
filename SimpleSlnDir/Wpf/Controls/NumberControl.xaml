@@ -6,9 +6,7 @@
     xmlns:local="clr-namespace:Wpf.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock VerticalAlignment="Center" Margin="3,0"
-            Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:NumberControl}}"/>     
-        <Label x:Name="LabelNumber" Height="50" Width="200" Background="LightBlue"></Label>
-    </Grid>
+    <StackPanel>   
+        <Label x:Name="LabelNumber" Height="50" Width="200" Background="LightBlue" />
+    </StackPanel>
 </UserControl>

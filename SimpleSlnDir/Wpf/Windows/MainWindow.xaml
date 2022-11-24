@@ -47,7 +47,7 @@
             </TabItem>
             <TabItem Header="Вторая" Height="40">
                 <StackPanel>
-                    <myc:NumberControl x:Name="NumControl" Title="Тестовый заголовок" CurrentNumber="100"/>
+                    <myc:NumberControl x:Name="NumControl" CurrentNumber="100"/>
                     <TextBox Text="{Binding ElementName=NumControl, Path=CurrentNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
             </TabItem>
