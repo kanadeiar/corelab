@@ -19,7 +19,8 @@ public partial class App : Application
         services.Configure<Settings>(host.Configuration);
         services.AddScoped<ITextService, TextService>();
         services.AddScoped<MainWindowViewModel>();
-        services.AddScoped<MainWindow>();
+        services.AddScoped<MainPageViewModel>();
+        //services.AddScoped<MainWindow>();
     }
     protected override async void OnStartup(StartupEventArgs e)
     {

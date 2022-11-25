@@ -5,6 +5,7 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>avatar.ico</ApplicationIcon>
   </PropertyGroup>
 
@@ -20,13 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="System"/>
-    <Using Include="System.Collections.Generic"/>
     <Using Include="System.Configuration"/>
     <Using Include="System.Data"/>
-    <Using Include="System.Linq"/>
     <Using Include="System.Text"/>
-    <Using Include="System.Threading.Tasks"/>
     <Using Include="System.Windows"/>
     <Using Include="System.Windows.Controls"/>
     <Using Include="System.Windows.Data" />
@@ -34,5 +31,6 @@
     <Using Include="System.Windows.Input"/>
     <Using Include="System.ComponentModel"/>
     <Using Include="System.Runtime.CompilerServices"/>
+    <Using Include="System.Windows.Controls.Primitives"/>
   </ItemGroup>
 </Project>

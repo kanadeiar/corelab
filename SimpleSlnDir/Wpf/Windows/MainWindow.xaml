@@ -27,30 +27,6 @@
                     <TextBlock Text="{Binding Text}" />
                 </StackPanel>
         </StatusBar>
-        <TabControl FontSize="14">
-            <TabItem Header="Главная" Height="40">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Margin="3" VerticalAlignment="Center">База:</Label>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" Height="Auto"></TextBox>
-                    <Button Grid.Row="0" Grid.Column="2" Margin="3" Padding="2" Cursor="Hand">Обзор</Button>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Вторая" Height="40">
-                <StackPanel>
-                    <myc:NumberControl x:Name="NumControl" CurrentNumber="100"/>
-                    <TextBox Text="{Binding ElementName=NumControl, Path=CurrentNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                </StackPanel>
-            </TabItem>
-        </TabControl>
+        <Frame Source="../Views/MainPage.xaml"></Frame>
     </DockPanel>
 </Window>
