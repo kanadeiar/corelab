@@ -1,7 +1,8 @@
 ﻿using Avalonia;
+using Avalonia.ReactiveUI;
 using System;
 
-namespace AvaloniaApplication1
+namespace AvaloniaLab
 {
     internal class Program
     {
@@ -16,6 +17,8 @@ namespace AvaloniaApplication1
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
-                .LogToTrace();
+                .WithInterFont()
+                .LogToTrace()
+                .UseReactiveUI();
     }
 }

@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaLab.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+        Width="500" Height="400"
+        x:Class="AvaloniaLab.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Блокнот">
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    <Window.KeyBindings>
+        <KeyBinding Gesture="Ctrl+O" Command="{Binding Open}"></KeyBinding>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding Save}"></KeyBinding>
+    </Window.KeyBindings>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Grid.Column="0">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть" Command="{Binding Open}"></MenuItem>
+                <MenuItem Header="Сохранить" Command="{Binding Save}"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Data}" AcceptsReturn="True"></TextBox>
+    </Grid>
+</Window>
