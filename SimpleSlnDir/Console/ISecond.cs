@@ -1,4 +1,4 @@
 public interface ISecond
 {
-    public string Messge { get; set; }
+    public string Message { get; set; }
 }

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor", "Blazor\Blazor.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf", "Wpf\Wpf.csproj", "{D23DE74D-EA44-42A6-B62A-6A7ACCCC29EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaLab", "AvaloniaLab\AvaloniaLab.csproj", "{6D276570-ADEE-438E-8DF2-F69683A4585C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaLab", "AvaloniaLab\AvaloniaLab.csproj", "{6D276570-ADEE-438E-8DF2-F69683A4585C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
