@@ -5,12 +5,6 @@ VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console", "Console\Console.csproj", "{A904B674-8C69-479E-8D12-705B39EA8A7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor", "Blazor\Blazor.csproj", "{2A7A9A87-F697-4AC9-ADFB-9AB150889C00}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf", "Wpf\Wpf.csproj", "{D23DE74D-EA44-42A6-B62A-6A7ACCCC29EF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaLab", "AvaloniaLab\AvaloniaLab.csproj", "{6D276570-ADEE-438E-8DF2-F69683A4585C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,30 +21,6 @@ Global
 		{A904B674-8C69-479E-8D12-705B39EA8A7D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A904B674-8C69-479E-8D12-705B39EA8A7D}.Release|x86.ActiveCfg = Release|Any CPU
 		{A904B674-8C69-479E-8D12-705B39EA8A7D}.Release|x86.Build.0 = Release|Any CPU
-		{2A7A9A87-F697-4AC9-ADFB-9AB150889C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A7A9A87-F697-4AC9-ADFB-9AB150889C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A7A9A87-F697-4AC9-ADFB-9AB150889C00}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2A7A9A87-F697-4AC9-ADFB-9AB150889C00}.Debug|x86.Build.0 = Debug|Any CPU
-		{2A7A9A87-F697-4AC9-ADFB-9AB150889C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A7A9A87-F697-4AC9-ADFB-9AB150889C00}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A7A9A87-F697-4AC9-ADFB-9AB150889C00}.Release|x86.ActiveCfg = Release|Any CPU
-		{2A7A9A87-F697-4AC9-ADFB-9AB150889C00}.Release|x86.Build.0 = Release|Any CPU
-		{D23DE74D-EA44-42A6-B62A-6A7ACCCC29EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D23DE74D-EA44-42A6-B62A-6A7ACCCC29EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D23DE74D-EA44-42A6-B62A-6A7ACCCC29EF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D23DE74D-EA44-42A6-B62A-6A7ACCCC29EF}.Debug|x86.Build.0 = Debug|Any CPU
-		{D23DE74D-EA44-42A6-B62A-6A7ACCCC29EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D23DE74D-EA44-42A6-B62A-6A7ACCCC29EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D23DE74D-EA44-42A6-B62A-6A7ACCCC29EF}.Release|x86.ActiveCfg = Release|Any CPU
-		{D23DE74D-EA44-42A6-B62A-6A7ACCCC29EF}.Release|x86.Build.0 = Release|Any CPU
-		{6D276570-ADEE-438E-8DF2-F69683A4585C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D276570-ADEE-438E-8DF2-F69683A4585C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D276570-ADEE-438E-8DF2-F69683A4585C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6D276570-ADEE-438E-8DF2-F69683A4585C}.Debug|x86.Build.0 = Debug|Any CPU
-		{6D276570-ADEE-438E-8DF2-F69683A4585C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D276570-ADEE-438E-8DF2-F69683A4585C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D276570-ADEE-438E-8DF2-F69683A4585C}.Release|x86.ActiveCfg = Release|Any CPU
-		{6D276570-ADEE-438E-8DF2-F69683A4585C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

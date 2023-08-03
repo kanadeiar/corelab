@@ -1,18 +1,20 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-DependencyInjectionContainer.RegisterServices(x =>
+﻿
+internal class Program
 {
-    x.AddScoped<ISecond, Second>();
-    x.AddScoped<ISample, Sample>();
-});
+    public static async Task Main(string[] args)
+    {
+        Console.WriteLine("Приложение опытное для исследований асинхронности");
 
-DependencyInjectionContainer.Build();
+        await Task.Delay(1000);
 
-IServiceProvider Services = DependencyInjectionContainer.Services;
+        var client = new HttpClient();
+        var page = await client.GetStringAsync(@"https://nigma.net.ru/");
+        Console.WriteLine($@"Page:\n{page}");
 
-var sample = Services.GetRequiredService<ISample>();
+        Console.WriteLine("Нажать любую кнопку для продолжения ...");
+        var _ = Console.ReadKey();
+    }
+}
 
-Console.WriteLine($"Message: {sample.GetMessage()}");
 
-var _ = Console.ReadKey();
 
