@@ -1,0 +1,28 @@
+﻿<Window x:Class="WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Name="ButtonGo" Click="ButtonGo_OnClick" Content="Загрузить данные по страницам" Margin="0,0,4,0" Height="48" Width="270"/>
+            <Button Name="ButtonCancel" Click="ButtonCancel_OnClick" Content="Отмена" Margin="0,0,4,0" Height="48" Width="170"></Button>
+            <ProgressBar Name="ProgressBarOperation" Width="200"></ProgressBar>
+        </StackPanel>
+        <ListView Grid.Row="1" Name="ListViewResult">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>
