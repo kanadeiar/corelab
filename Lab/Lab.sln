@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{3320A310-9989-4DFB-81BD-6F1E4122918E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLot.Dal", "AutoLot.Dal\AutoLot.Dal.csproj", "{EB0A498A-8465-4D07-A64A-6A6CE8346B69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +17,15 @@ Global
 		{3320A310-9989-4DFB-81BD-6F1E4122918E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3320A310-9989-4DFB-81BD-6F1E4122918E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3320A310-9989-4DFB-81BD-6F1E4122918E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB0A498A-8465-4D07-A64A-6A6CE8346B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB0A498A-8465-4D07-A64A-6A6CE8346B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB0A498A-8465-4D07-A64A-6A6CE8346B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB0A498A-8465-4D07-A64A-6A6CE8346B69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61B875AE-1D63-43D5-9D49-69F4EC65F49F}
 	EndGlobalSection
 EndGlobal
