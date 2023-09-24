@@ -22,13 +22,12 @@ public class InventoryDal : DalBase
         initPositions(reader);
         while (reader.Read())
         {
-            yield return new CarView
-            {
-                Id = reader.GetInt32(first),
-                Make = reader.GetString(next),
-                Name = reader.GetString(next),
-                Color = reader.GetString(next),
-            };
+            yield return new CarView(
+                reader.GetInt32(first), 
+                reader.GetString(next), 
+                reader.GetString(next), 
+                reader.GetString(next), 
+                Array.Empty<byte>());
         }
     }
 
@@ -46,13 +45,12 @@ public class InventoryDal : DalBase
         initPositions(reader);
         if (reader.Read())
         {
-            return new CarView
-            {
-                Id = reader.GetInt32(first),
-                Make = reader.GetString(next),
-                Name = reader.GetString(next),
-                Color = reader.GetString(next),
-            };
+            return new CarView(
+                reader.GetInt32(first), 
+                reader.GetString(next), 
+                reader.GetString(next), 
+                reader.GetString(next), 
+                Array.Empty<byte>());
         }
         return null;
     }
@@ -70,13 +68,12 @@ public class InventoryDal : DalBase
         initPositions(reader);
         if (reader.Read())
         {
-            return new Car
-            {
-                Id = reader.GetInt32(first),
-                MakeId = reader.GetInt32(next),
-                Name = reader.GetString(next),
-                Color = reader.GetString(next),
-            };
+            return new Car(
+                reader.GetInt32(first), 
+                reader.GetInt32(next), 
+                reader.GetString(next), 
+                reader.GetString(next), 
+                Array.Empty<byte>());
         }
         return null;
     }

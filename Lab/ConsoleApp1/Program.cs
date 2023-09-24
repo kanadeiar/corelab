@@ -23,12 +23,7 @@ static class Program
         var carView = dal.GetView(3);
 
 
-        var newCar = new Car
-        {
-            MakeId = 2,
-            Name = "Тестовое",
-            Color = "Тестовый",
-        };
+        var newCar = new Car(default, 2, "Тестовое", "Тестовый", Array.Empty<byte>());
         var newId = dal.Add(newCar);
         var carOld = dal.Get(newId);
         carOld.Name = "Изменное имя";
