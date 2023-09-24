@@ -29,15 +29,15 @@ static class Program
             Name = "Тестовое",
             Color = "Тестовый",
         };
-        dal.Add(newCar);
-        var carOld = dal.Get(16);
+        var newId = dal.Add(newCar);
+        var carOld = dal.Get(newId);
         carOld.Name = "Изменное имя";
-        dal.Update(carOld.Id, carOld);
+        dal.Update(newId, carOld);
         foreach (var car in dal.GetAllView())
         {
             Console.WriteLine($"{car.Id} {car.Make} {car.Name} {car.Color}");
         }
-        dal.Delete(13);
+        dal.Delete(newId);
         Console.WriteLine("После удаления:");
         foreach (var car in dal.GetAllView())
         {

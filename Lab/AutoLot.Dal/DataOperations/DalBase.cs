@@ -4,18 +4,41 @@ using Npgsql;
 
 namespace AutoLot.Dal.DataOperations;
 
-public class DalBase : IDisposable
+public abstract class DalBase : IDisposable
 {
     private readonly string _connectionString;
     private IDbConnection? _connection;
     private IDbCommand? _command;
     private bool _disposed = false;
 
-    public DalBase(string connectionString)
+    protected DalBase(string connectionString)
     {
         _connectionString = connectionString;
         openConnection();
     }
+
+    private string[] _columnNames;
+    private IDictionary<string, int> _ordinals;
+
+    protected void setColumnNames(params string[] names)
+    {
+        _columnNames = names;
+    }
+
+    protected void initPositions(IDataReader reader)
+    {
+        var ordinals = new Dictionary<string, int>();
+        foreach (var name in _columnNames)
+        {
+            var ord = reader.GetOrdinal(name);
+            ordinals[name] = ord;
+        }
+        _ordinals = ordinals;
+    }
+
+    private int posInOrdinals = default;
+    protected int first => _ordinals[_columnNames[posInOrdinals = 0]];
+    protected int next => _ordinals[_columnNames[++posInOrdinals]];
 
     protected void openConnection()
     {
@@ -56,70 +79,21 @@ public class DalBase : IDisposable
         _command.Parameters.Add(param);
     }
 
-    protected IEnumerable<CarView> executeEnumerableReader()
+    protected IDataReader executeReader()
     {
-        using var reader = _command.ExecuteReader();
-        var id = reader.GetOrdinal("Id");
-        var make = reader.GetOrdinal("Make");
-        var name = reader.GetOrdinal("Name");
-        var color = reader.GetOrdinal("Color");
-        while (reader.Read())
-        {
-            yield return new CarView
-            {
-                Id = reader.GetInt32(id),
-                Make = reader.GetString(make),
-                Name = reader.GetString(name),
-                Color = reader.GetString(color),
-            };
-        }
-    }
-
-    protected Car? executeGetReader()
-    {
-        using var reader = _command.ExecuteReader();
-        var id = reader.GetOrdinal("Id");
-        var makeId = reader.GetOrdinal("MakeId");
-        var name = reader.GetOrdinal("Name");
-        var color = reader.GetOrdinal("Color");
-        if (reader.Read())
-        {
-            return new Car
-            {
-                Id = reader.GetInt32(id),
-                MakeId = reader.GetInt32(makeId),
-                Name = reader.GetString(name),
-                Color = reader.GetString(color),
-            };
-        }
-
-        return null;
-    }
-
-    protected CarView? executeGetViewReader()
-    {
-        using var reader = _command.ExecuteReader();
-        var id = reader.GetOrdinal("Id");
-        var make = reader.GetOrdinal("Make");
-        var name = reader.GetOrdinal("Name");
-        var color = reader.GetOrdinal("Color");
-        if (reader.Read())
-        {
-            return new CarView
-            {
-                Id = reader.GetInt32(id),
-                Make = reader.GetString(make),
-                Name = reader.GetString(name),
-                Color = reader.GetString(color),
-            };
-        }
-
-        return null;
+        var reader = _command.ExecuteReader();
+        return reader;
     }
 
     protected void executeNonQuery()
     {
         _command.ExecuteNonQuery();
+    }
+
+    protected object executeScalar()
+    {
+        var result = _command.ExecuteScalar();
+        return result;
     }
 
     protected virtual void Dispose(bool disposing)
