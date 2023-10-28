@@ -6,7 +6,7 @@ namespace AutoLot.Dal.DataOperations;
 
 public abstract class DalBase : IDisposable
 {
-    private readonly string _connectionString;
+    protected readonly string _connectionString;
     private IDbConnection? _connection;
     private IDbCommand? _command;
     private bool _disposed = false;

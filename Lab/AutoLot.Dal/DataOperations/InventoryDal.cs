@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Reflection;
+using AutoLot.Dal.Executor;
 using AutoLot.Dal.Models;
 
 namespace AutoLot.Dal.DataOperations;
@@ -8,6 +9,19 @@ public class InventoryDal : DalBase
 {
     public InventoryDal(string connectionString) : base(connectionString)
     {
+    }
+
+    public IEnumerable<CarView> GetAll()
+    {
+        using var executor = new ReadExecutor<CarView>(_connectionString);
+        executor.AddCommand("SELECT i.Id, m.Name as Make, i.Name, i.Color FROM inventory;");
+        var items = executor.Read(reader => new CarView(
+            (int)reader.GetValue(0), 
+            (string)reader.GetValue(1),
+            (string)reader.GetValue(2), 
+            (string)reader.GetValue(3), 
+            Array.Empty<byte>()));
+        return items;
     }
 
     public IEnumerable<CarView> GetAllView()
