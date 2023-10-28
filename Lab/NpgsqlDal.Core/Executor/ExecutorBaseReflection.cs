@@ -1,21 +1,20 @@
-﻿using System.Reflection;
+﻿using System.Collections.Frozen;
+using System.Reflection;
 using Npgsql;
 using NpgsqlDal.Core.Common;
 
 namespace NpgsqlDal.Core.Executor;
 
-public abstract class ExecutorReflection<T>
+public abstract class ExecutorBaseReflection<T> : ExecutorReflection
     where T : class
 {
-    private static IDictionary<string, PropertyInfo> __propertyInfos;
-    private const int ThreadsCount = 8;
-    protected static readonly SemaphoreSlim Semaphore = new SemaphoreSlim(ThreadsCount, ThreadsCount);
+    private static readonly IDictionary<string, PropertyInfo> __propertyInfos;
     
-    static ExecutorReflection()
+    static ExecutorBaseReflection()
     {
         __propertyInfos = typeof(T)
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .ToDictionary(x => x.Name, y => y);
+            .ToFrozenDictionary(x => x.Name, y => y);
     }
 
     public TNew AutoMap<TNew>(NpgsqlDataReader dataReader)
@@ -42,4 +41,10 @@ public abstract class ExecutorReflection<T>
         }
         return results.ToArray();
     }
+}
+
+public abstract class ExecutorReflection
+{
+    private const int ThreadsCount = 8;
+    protected static readonly SemaphoreSlim Semaphore = new SemaphoreSlim(ThreadsCount, ThreadsCount);
 }

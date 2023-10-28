@@ -5,7 +5,7 @@ using NpgsqlDal.Core.Exception;
 
 namespace NpgsqlDal.Core.Executor
 {
-    public abstract class ExecutorBase<T> : ExecutorReflection<T>, IDisposable, IAsyncDisposable
+    public abstract class ExecutorBase<T> : ExecutorBaseReflection<T>, IDisposable, IAsyncDisposable
         where T : class
     {
         private NpgsqlConnection _connection;
@@ -16,16 +16,16 @@ namespace NpgsqlDal.Core.Executor
             _connection = new NpgsqlConnection(connectionString);
         }
 
-        public void AddCommand(string sql, params DalParameter[] pars)
-        {
-            _commands.Add(new DalCommand(sql, pars));
-        }
-
         public void AddCommand(string sql, T item)
         {
             AddCommand(sql, getParameters(item));
         }
 
+        public void AddCommand(string sql, params DalParameter[] pars)
+        {
+            _commands.Add(new DalCommand(sql, pars));
+        }
+        
         public void Reset()
         {
             _commands.Clear();
