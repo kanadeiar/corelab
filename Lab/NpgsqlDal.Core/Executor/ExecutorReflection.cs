@@ -5,12 +5,12 @@ using NpgsqlDal.Core.Common;
 
 namespace NpgsqlDal.Core.Executor;
 
-public abstract class ExecutorBaseReflection<T> : ExecutorReflection
+internal class ExecutorReflection<T>
     where T : class
 {
     private static readonly IDictionary<string, PropertyInfo> __propertyInfos;
-    
-    static ExecutorBaseReflection()
+
+    static ExecutorReflection()
     {
         __propertyInfos = typeof(T)
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -31,7 +31,7 @@ public abstract class ExecutorBaseReflection<T> : ExecutorReflection
         return result;
     }
 
-    protected static DalParameter[] getParameters(T oldObject)
+    public DalParameter[] GetParameters(T oldObject)
     {
         var results = new List<DalParameter>();
         foreach (var key in __propertyInfos.Keys)
@@ -41,10 +41,4 @@ public abstract class ExecutorBaseReflection<T> : ExecutorReflection
         }
         return results.ToArray();
     }
-}
-
-public abstract class ExecutorReflection
-{
-    private const int ThreadsCount = 8;
-    protected static readonly SemaphoreSlim Semaphore = new SemaphoreSlim(ThreadsCount, ThreadsCount);
 }

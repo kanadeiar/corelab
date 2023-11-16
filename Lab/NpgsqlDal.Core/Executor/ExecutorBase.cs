@@ -5,20 +5,29 @@ using NpgsqlDal.Core.Exception;
 
 namespace NpgsqlDal.Core.Executor
 {
-    public abstract class ExecutorBase<T> : ExecutorBaseReflection<T>, IDisposable, IAsyncDisposable
+    public abstract class ExecutorBase<T> : IDisposable, IAsyncDisposable
         where T : class
     {
+        private static ExecutorReflection<T> __reflection;
+        private const int ThreadsCount = 8;
+        protected static readonly SemaphoreSlim Semaphore = new SemaphoreSlim(ThreadsCount, ThreadsCount);
+        
         private NpgsqlConnection _connection;
         private List<DalCommand> _commands = new ();
 
-        public ExecutorBase(string connectionString)
+        static ExecutorBase()
+        {
+            __reflection = new ExecutorReflection<T>();
+        }
+
+        protected ExecutorBase(string connectionString)
         {
             _connection = new NpgsqlConnection(connectionString);
         }
 
         public void AddCommand(string sql, T item)
         {
-            AddCommand(sql, getParameters(item));
+            AddCommand(sql, __reflection.GetParameters(item));
         }
 
         public void AddCommand(string sql, params DalParameter[] pars)
@@ -29,6 +38,12 @@ namespace NpgsqlDal.Core.Executor
         public void Reset()
         {
             _commands.Clear();
+        }
+
+        public TNew AutoMap<TNew>(NpgsqlDataReader dataReader)
+            where TNew : new()
+        {
+            return __reflection.AutoMap<TNew>(dataReader);
         }
 
         protected async Task openConnection(CancellationToken token = default)

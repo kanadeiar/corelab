@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoLot.Dal", "AutoLot.Dal\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{611A0CEA-1373-4D41-B9B5-21E13F9378DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NpgsqlDal.Core", "NpgsqlDal.Core\NpgsqlDal.Core.csproj", "{DE2D5119-BC6A-4E80-8A71-571A47B6BD7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NpgsqlDal.Core", "NpgsqlDal.Core\NpgsqlDal.Core.csproj", "{DE2D5119-BC6A-4E80-8A71-571A47B6BD7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
