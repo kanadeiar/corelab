@@ -1,6 +1,8 @@
-﻿namespace ConsoleApp1;
+﻿using ConsoleApp1.File;
 
-public record Worker
+namespace ConsoleApp1;
+
+public record Worker : IEntity
 {
     public int Id { get; set; }
     public string Name { get; set; }
