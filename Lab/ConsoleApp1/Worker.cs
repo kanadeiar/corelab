@@ -1,6 +1,4 @@
-﻿using ConsoleApp1.File;
-
-namespace ConsoleApp1;
+﻿namespace ConsoleApp1;
 
 public record Worker : IEntity
 {
