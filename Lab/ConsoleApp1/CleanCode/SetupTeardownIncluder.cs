@@ -6,9 +6,7 @@ public class SetupTeardownIncluder
 {
     private readonly IPageData _pageData;
     private bool _isSuite;
-    private readonly IWikiPage _testPage;
-    private readonly StringBuilder _newPageContent;
-    private IPageCrawler _pageCrawler;
+    private NewPageContent _content;
 
     public static string Render(IPageData pageData)
     {
@@ -23,9 +21,7 @@ public class SetupTeardownIncluder
     private SetupTeardownIncluder(IPageData pageData)
     {
         _pageData = pageData;
-        _testPage = _pageData.GetWikiPage();
-        _newPageContent = new StringBuilder();
-        _pageCrawler = _testPage.GetPageCrawler();
+        _content = new NewPageContent(_pageData.GetWikiPage());
     }
 
     private string renderPageWithSetupAndTeardown(bool isSuite)
@@ -62,22 +58,22 @@ public class SetupTeardownIncluder
 
     private void includeSuiteSetupPage()
     {
-        include(SuiteResponse.SUITE_SETUP_NAME, "-setup");
+        _content.Include(SuiteResponse.SUITE_SETUP_NAME, "-setup");
     }
 
     private void includeSetupPage()
     {
-        include("SetUp", "-setup");
+        _content.Include("SetUp", "-setup");
     }
     
     private void includePageContent()
     {
-        _newPageContent.Append(_pageData.GetContent());
+        _content.Append(_pageData.GetContent());
     }
 
     private void includeTeardownPages()
     {
-        _newPageContent.Append("\n");
+        _content.Append("\n");
         includeTeardownPage();
         if (_isSuite)
         {
@@ -87,43 +83,16 @@ public class SetupTeardownIncluder
 
     private void includeTeardownPage()
     {
-        include("TearDown", "-teardown");
+        _content.Include("TearDown", "-teardown");
     }
 
     private void includeSuiteTeardownPage()
     {
-        include(SuiteResponse.SUITE_TEARDOWN_NAME, "-teardown");
+        _content.Include(SuiteResponse.SUITE_TEARDOWN_NAME, "-teardown");
     }
 
     private void updatePageContent()
     {
-        _pageData.SetContent(_newPageContent.ToString());
-    }
-
-    private void include(string pageName, string arg)
-    {
-        var inheritedPage = findInheritedPage(pageName);
-        if (inheritedPage != null)
-        {
-            var pagePathName = getPathNameForPage(inheritedPage);
-            buildIncludeDirective(pagePathName, arg, _newPageContent);
-        }
-    }
-
-    private IWikiPage? findInheritedPage(string pageName)
-    {
-        return PageCrawlerImpl.GetInheritedPage(pageName, _testPage);
-    }
-
-    private string getPathNameForPage(IWikiPage inheritedPage)
-    {
-        var setupPath = _pageCrawler.GetFullPath(inheritedPage);
-        var setupPathName = PathParser.Render(setupPath);
-        return setupPathName;
-    }
-
-    private void buildIncludeDirective(string setupPathName, string arg, StringBuilder newPageContent)
-    {
-        newPageContent.Append("!include ").Append(arg).Append(" .").Append(setupPathName).Append("\n");
+        _pageData.SetContent(_content.GetContent());
     }
 }
