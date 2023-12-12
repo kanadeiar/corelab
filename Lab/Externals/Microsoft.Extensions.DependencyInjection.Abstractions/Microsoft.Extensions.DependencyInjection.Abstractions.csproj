@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\Common\SR.cs" Link="SR.cs" />
+    <Compile Include="..\..\..\Common\System.SR.cs" Link="System.SR.cs" />
+    <Compile Include="..\..\..\Common\Test.cs" Link="Test.cs" />
+  </ItemGroup>
+
+</Project>
