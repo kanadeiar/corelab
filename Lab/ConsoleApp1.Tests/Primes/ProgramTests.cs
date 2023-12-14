@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp1.Tests;
+﻿using ConsoleApp1.Primes;
+
+namespace ConsoleApp1.Tests.Primes;
 
 [TestFixture]
 public class ProgramTests
@@ -9,9 +11,9 @@ public class ProgramTests
         using (StringWriter sw = new StringWriter())
         {
             Console.SetOut(sw);
-
-            Program.PrintPrimes();
-
+            var printer = new PrimePrinter();
+            printer.PrintPrimes();
+            
             var s = sw.ToString();
             StringAssert.Contains("The first 1000 Prime Numbers --- Page 1", s);
         }
@@ -23,25 +25,13 @@ public class ProgramTests
         using (StringWriter sw = new StringWriter())
         {
             Console.SetOut(sw);
-
-            Program.PrintPrimes();
-
-            var s = sw.ToString();
-            StringAssert.Contains("2\r\n233\r\n547\r\n877", s);
-        }
-    }
-
-    [Test]
-    public void MainTestDigitals2()
-    {
-        using (StringWriter sw = new StringWriter())
-        {
-            Console.SetOut(sw);
-
-            Program.PrintPrimes();
+            var printer = new PrimePrinter();
+            printer.PrintPrimes();
 
             var s = sw.ToString();
-            StringAssert.Contains("7\r\n251\r\n569\r\n887", s);
+            StringAssert.Contains("2       233       547       877", s);
+            StringAssert.Contains("11       257       571       907", s);
+            StringAssert.Contains("229       541       863      1223", s);
         }
     }
 }
