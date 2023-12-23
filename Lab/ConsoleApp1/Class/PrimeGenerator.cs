@@ -1,28 +1,35 @@
 ﻿namespace ConsoleApp1.Class;
 
-public class PrimeGenerator
+public class PrimeGenerator(int countOfPrimes)
 {
-    private readonly int _countOfPrimes;
-
-    public PrimeGenerator(int countOfPrimes)
-    {
-        _countOfPrimes = countOfPrimes;
-    }
+    private int[] _primes;
+    private int[] _multiplesOfPrimeFactors;
 
     public IEnumerable<int> Generate()
     {
+        _primes = new int[countOfPrimes + 1];
         int ORDMAX = 30;
-        int[] P = new int[_countOfPrimes + 1];
+        _multiplesOfPrimeFactors = new int[ORDMAX + 1];
+        set2AsFirstPrime();
+        checkOddNumbersForSubsequentPrimes();
+        return _primes;
+    }
+
+    private void set2AsFirstPrime()
+    {
+        _primes[1] = 2;
+    }
+
+    private void checkOddNumbersForSubsequentPrimes()
+    {
+        int primeIndex = 1;
+
         int J = 1;
-        int K = 1;
         bool JPRIME;
         int ORD = 2;
         int SQUARE = 9;
         int N;
-        int[] MULT = new int[ORDMAX + 1];
-        P[1] = 2;
-
-        while (K < _countOfPrimes)
+        while (primeIndex < countOfPrimes)
         {
             do
             {
@@ -30,28 +37,32 @@ public class PrimeGenerator
                 if (J == SQUARE)
                 {
                     ORD++;
-                    SQUARE = P[ORD] * P[ORD];
-                    MULT[ORD - 1] = J;
+                    SQUARE = _primes[ORD] * _primes[ORD];
+                    _multiplesOfPrimeFactors[ORD - 1] = J;
                 }
+
                 N = 2;
                 JPRIME = true;
                 while (N < ORD && JPRIME)
                 {
-                    while (MULT[N] < J)
+                    while (_multiplesOfPrimeFactors[N] < J)
                     {
-                        MULT[N] += MULT[N] + P[N] * 2;
+                        _multiplesOfPrimeFactors[N] += _multiplesOfPrimeFactors[N] + _primes[N] * 2;
                     }
-                    if (MULT[N] == J)
+
+                    if (_multiplesOfPrimeFactors[N] == J)
                     {
                         JPRIME = false;
                     }
+
                     N++;
                 }
             } while (!JPRIME);
-            K++;
-            P[K] = J;
-        }
 
-        return P;
+            primeIndex++;
+            _primes[primeIndex] = J;
+        }
     }
+
+
 }

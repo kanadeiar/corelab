@@ -18,28 +18,49 @@ public class RowColumnPagePrinter
     public void Print(IEnumerable<int> data)
     {
         var localData = data.ToArray();
-        var count = localData.Length;
-        int PAGENUMBER = 1;
-        int PAGEOFFSET = 1;
-        int ROWOFFSET;
-        int C;
-        while (PAGEOFFSET <= count)
+        var count = localData.Length - 1;
+        int pageNumber = 1;
+        for (var firstIndexOnPage = 1; firstIndexOnPage <= count; firstIndexOnPage++)
         {
-            Console.WriteLine(_pageHeader + PAGENUMBER);
-            Console.WriteLine();
-            for (ROWOFFSET = PAGEOFFSET; ROWOFFSET < PAGEOFFSET + _rowsPerPage; ROWOFFSET++)
-            {
-                for (C = 0; C < _columnsPerPage; C++)
-                {
-                    if (ROWOFFSET + C * _rowsPerPage < count)
-                    {
-                        Console.Write("{0,10}", localData[ROWOFFSET + C * _rowsPerPage]);
-                    }
-                }
-                Console.WriteLine();
-            }
-            PAGENUMBER++;
-            PAGEOFFSET += _numbersPerPage;
+            printPage(firstIndexOnPage, count, pageNumber, localData);
+            pageNumber++;
         }
+    }
+
+    private void printPage(int firstIndexOnPage, int count, int pageNumber, int[] localData)
+    {
+        var lastIndexOnPage = Math.Min(firstIndexOnPage + _numbersPerPage, count + 1);
+        printPageHeader(pageNumber);
+        printPageContent(firstIndexOnPage, lastIndexOnPage, localData);
+        Console.WriteLine();
+    }
+
+    private void printPageHeader(int pageNumber)
+    {
+        Console.WriteLine(_pageHeader + pageNumber);
+        Console.WriteLine();
+    }
+    
+    private void printPageContent(int firstIndexOnPage, int lastIndexOnPage, int[] localData)
+    {
+        var firstIndexOfLastRowOnPage = firstIndexOnPage + _rowsPerPage - 1;
+        for (var firstIndexInRow = firstIndexOnPage; firstIndexInRow <= firstIndexOfLastRowOnPage; firstIndexInRow++)
+        {
+            printRow(firstIndexInRow, lastIndexOnPage, localData);
+        }
+        Console.WriteLine();
+    }
+
+    private void printRow(int firstIndexInRow, int lastIndexInRow, int[] localData)
+    {
+        for (var column = 0; column < _columnsPerPage; column++)
+        {
+            var index = firstIndexInRow + column * _rowsPerPage;
+            if (index < lastIndexInRow)
+            {
+                Console.Write("{0,10}", localData[index]);
+            }
+        }
+        Console.WriteLine();
     }
 }
