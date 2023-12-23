@@ -7,6 +7,9 @@ public class RowColumnPagePrinter
     private readonly int _numbersPerPage;
     private readonly string _pageHeader;
 
+    private int[] _data;
+    private int _count;
+
     public RowColumnPagePrinter(int rowsPerPage, int columnsPerPage, string pageHeader)
     {
         _rowsPerPage = rowsPerPage;
@@ -17,21 +20,22 @@ public class RowColumnPagePrinter
 
     public void Print(IEnumerable<int> data)
     {
-        var localData = data.ToArray();
-        var count = localData.Length - 1;
+        _data = data.ToArray();
+        _count = _data.Length;
+
         int pageNumber = 1;
-        for (var firstIndexOnPage = 1; firstIndexOnPage <= count; firstIndexOnPage++)
+        for (var firstIndexOnPage = 1; firstIndexOnPage < _count; firstIndexOnPage++)
         {
-            printPage(firstIndexOnPage, count, pageNumber, localData);
+            printPage(firstIndexOnPage, pageNumber);
             pageNumber++;
         }
     }
 
-    private void printPage(int firstIndexOnPage, int count, int pageNumber, int[] localData)
+    private void printPage(int firstIndexOnPage, int pageNumber)
     {
-        var lastIndexOnPage = Math.Min(firstIndexOnPage + _numbersPerPage, count + 1);
+        var lastIndexOnPage = Math.Min(firstIndexOnPage + _numbersPerPage, _count);
         printPageHeader(pageNumber);
-        printPageContent(firstIndexOnPage, lastIndexOnPage, localData);
+        printPageContent(firstIndexOnPage, lastIndexOnPage, _data);
         Console.WriteLine();
     }
 
