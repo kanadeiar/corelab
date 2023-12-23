@@ -7,7 +7,7 @@ public class RowColumnPagePrinter
     private readonly int _numbersPerPage;
     private readonly string _pageHeader;
 
-    private int[] _data;
+    private int[] _data = Array.Empty<int>();
     private int _count;
 
     public RowColumnPagePrinter(int rowsPerPage, int columnsPerPage, string pageHeader)
