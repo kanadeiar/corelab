@@ -28,20 +28,20 @@ public class PrimePrinterTestsDown
     protected void assertFirst()
     {
         var actuals = _writer.ToString();
-        StringAssert.Contains("2       107       211       315", actuals);
+        StringAssert.Contains("2       233       547       877", actuals);
     }
 
     protected void assertCentral()
     {
         var actuals = _writer.ToString();
-        StringAssert.Contains("3       109       213       317", actuals);
-        StringAssert.Contains("417       519       621       721", actuals);
-        StringAssert.Contains("823       925      1027      1129", actuals);
+        StringAssert.Contains("3       239       557       881", actuals);
+        StringAssert.Contains("229       541       863      1223", actuals);
+        StringAssert.Contains("2749      3187      3581      4001", actuals);
     }
 
     protected void assertLast()
     {
         var actuals = _writer.ToString();
-        StringAssert.Contains("1735      1835      1937      2039", actuals);
+        StringAssert.Contains("6571      6997      7499      7919", actuals);
     }
 }

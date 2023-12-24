@@ -3,13 +3,12 @@
 public class PrimeGenerator(int countOfPrimes)
 {
     private int[] _primes;
-    private int[] _multiplesOfPrimeFactors;
+    private Multiples _multiples;
 
     public IEnumerable<int> Generate()
     {
         _primes = new int[countOfPrimes];
-        int ORDMAX = 30;
-        _multiplesOfPrimeFactors = new int[ORDMAX + 1];
+        _multiples = new Multiples(_primes);
         setupFirstPrime();
         addPrimeNumbers();
         return _primes;
@@ -18,48 +17,33 @@ public class PrimeGenerator(int countOfPrimes)
     private void setupFirstPrime()
     {
         _primes[0] = 2;
-        _multiplesOfPrimeFactors[1] = 2;
+        _multiples.AddMultiple(2);
     }
 
     private void addPrimeNumbers()
     {
         int primeIndex = 1;
-
-        int ORD = 2;
-        int SQUARE = 9;
-        
         for (var candidate = 3; primeIndex < countOfPrimes; candidate += 2)
         {
-            if (candidate == SQUARE)
-            {
-                ORD++;
-                SQUARE = _primes[ORD - 1] * _primes[ORD - 1];
-                _multiplesOfPrimeFactors[ORD - 1] = candidate;
-            }
-
-            var N = 1;
-            var JPRIME = true;
-            while (N < ORD && JPRIME)
-            {
-                while (_multiplesOfPrimeFactors[N] < candidate)
-                {
-                    _multiplesOfPrimeFactors[N] += _multiplesOfPrimeFactors[N] + _primes[N - 1] * 2;
-                }
-
-                if (_multiplesOfPrimeFactors[N] == candidate)
-                {
-                    JPRIME = false;
-                }
-
-                N++;
-            }
-
-            if (JPRIME)
+            if (isPrime(candidate))
             {
                 _primes[primeIndex++] = candidate;
             }
         }
     }
 
+    private bool isPrime(int candidate)
+    {
+        if (_multiples.IsNextLargerAdd(candidate))
+        {
+            return false;
+        }
 
+        _multiples.GrowMultiples(candidate);
+        if (_multiples.IsAllNotEqual(candidate))
+        {
+            return true;
+        }
+        return false;
+    }
 }

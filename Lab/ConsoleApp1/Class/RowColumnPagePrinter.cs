@@ -24,7 +24,7 @@ public class RowColumnPagePrinter
         _count = _data.Length;
 
         int pageNumber = 1;
-        for (var firstIndexOnPage = 1; firstIndexOnPage < _count; firstIndexOnPage += _numbersPerPage)
+        for (var firstIndexOnPage = 0; firstIndexOnPage < _count - 1; firstIndexOnPage += _numbersPerPage)
         {
             printPage(firstIndexOnPage, pageNumber);
             pageNumber++;
