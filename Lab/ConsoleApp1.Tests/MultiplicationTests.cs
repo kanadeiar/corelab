@@ -1,4 +1,5 @@
-﻿using NuGet.Frameworks;
+﻿using Moq;
+using NuGet.Frameworks;
 
 namespace ConsoleApp1.Tests;
 
@@ -9,8 +10,8 @@ public class MultiplicationTests
     public void TestMultiplication()
     {
         var five = Money.Dollar(5);
-        Assert.AreEqual(Money.Dollar(10), five.Multiply(2));
-        Assert.AreEqual(Money.Dollar(15), five.Multiply(3));
+        Assert.That(five.Multiply(2), Is.EqualTo(Money.Dollar(10)));
+        Assert.That(five.Multiply(3), Is.EqualTo(Money.Dollar(15)));
     }
 
     [Test]
@@ -23,11 +24,18 @@ public class MultiplicationTests
         Assert.IsFalse(Money.Franc(5).Equals(Money.Dollar(5)));
     }
 
-    //[Test]
-    //public void TestFrancMultiplication()
-    //{
-    //    var five = new Franc(5);
-    //    Assert.AreEqual(Money.Franc(10), five.Multiply(2));
-    //    Assert.AreEqual(Money.Franc(15), five.Multiply(3));
-    //}
+    [Test]
+    public void TestCurrency()
+    {
+        Assert.That(Money.Dollar(1).GetCurrency(), Is.EqualTo("USD"));
+        Assert.That(Money.Franc(1).GetCurrency(), Is.EqualTo("CHF"));
+    }
+
+    [Test]
+    public void TestFrancMultiplication()
+    {
+        var five = Money.Franc(5);
+        Assert.That(five.Multiply(2), Is.EqualTo(Money.Franc(10)));
+        Assert.That(five.Multiply(3), Is.EqualTo(Money.Franc(15)));
+    }
 }
