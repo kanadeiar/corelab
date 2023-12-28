@@ -45,6 +45,21 @@ public class MultiplicationTests
     }
 
     [Test]
+    public void TestIdentityRate()
+    {
+        Assert.AreEqual(1, new Bank().Rate("USD", "USD"));
+    }
+
+    [Test]
+    public void TestReduceMoneyDifferentCurrency()
+    {
+        var bank = new Bank();
+        bank.AddRate("CHF", "USD", 2);
+        var result = bank.Reduce(Money.Franc(2), "USD");
+        Assert.AreEqual(Money.Dollar(1), result);
+    }
+
+    [Test]
     public void TestMultiplication()
     {
         var five = Money.Dollar(5);

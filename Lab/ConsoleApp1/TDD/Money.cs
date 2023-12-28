@@ -32,9 +32,10 @@ public class Money : IExpression
         return new Money(amount, _currency);
     }
 
-    public Money Reduce(string to)
+    public Money Reduce(Bank bank, string to)
     {
-        return this;
+        var rate = bank.Rate(_currency, to);
+        return new Money(Amount / rate, to);
     }
 
     public override bool Equals(object? obj)
