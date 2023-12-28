@@ -20,13 +20,13 @@ public class Money : IExpression
         return new Money(amount, "CHF");
     }
 
-    public IExpression Plus(Money addend)
+    public IExpression Plus(IExpression addend)
     {
         var sum = new Sum(this, addend);
         return sum;
     }
 
-    public Money Multiply(int multiplier)
+    public IExpression Multiply(int multiplier)
     {
         var amount = Amount * multiplier;
         return new Money(amount, _currency);

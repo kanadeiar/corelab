@@ -1,8 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using ConsoleApp1.TDD;
-
-namespace ConsoleApp1.Tests.TDD;
+﻿namespace ConsoleApp1.Tests.TDD;
 
 [TestFixture]
 public class MultiplicationTests
@@ -15,6 +11,17 @@ public class MultiplicationTests
         var bank = new Bank();
         var reduced = bank.Reduce(sum, "USD");
         Assert.AreEqual(Money.Dollar(10), reduced);
+    }
+
+    [Test]
+    public void MixedAdditionTest()
+    {
+        IExpression five = Money.Dollar(5);
+        IExpression ten = Money.Franc(10);
+        var bank = new Bank();
+        bank.AddRate("CHF", "USD", 2);
+        var result = bank.Reduce(five.Plus(ten), "USD");
+        Assert.AreEqual(Money.Dollar(10), result);
     }
 
     [Test]
