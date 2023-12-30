@@ -25,6 +25,30 @@ public class MultiplicationTests
     }
 
     [Test]
+    public void SumPlusMoneyTest()
+    {
+        IExpression five = Money.Dollar(5);
+        IExpression ten = Money.Franc(10);
+        var bank = new Bank();
+        bank.AddRate("CHF", "USD", 2);
+        var sum = new Sum(five, ten).Plus(five);
+        var result = bank.Reduce(sum, "USD");
+        Assert.AreEqual(Money.Dollar(15), result);
+    }
+
+    [Test]
+    public void SumMultiplyTest()
+    {
+        IExpression five = Money.Dollar(5);
+        IExpression ten = Money.Franc(10);
+        var bank = new Bank();
+        bank.AddRate("CHF", "USD", 2);
+        var sum = new Sum(five, ten).Multiply(2);
+        var result = bank.Reduce(sum, "USD");
+        Assert.AreEqual(Money.Dollar(20), result);
+    }
+
+    [Test]
     public void TestPlusReturnsSum()
     {
         var five = Money.Dollar(5);

@@ -2,6 +2,7 @@
 
 public interface IExpression
 {
-    public IExpression Plus(IExpression addend);
+    IExpression Plus(IExpression addend);
+    IExpression Multiply(int multiplier);
     Money Reduce(Bank bank, string to);
 }

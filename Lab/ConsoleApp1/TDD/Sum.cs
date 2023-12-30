@@ -13,7 +13,12 @@ public class Sum : IExpression
 
     public IExpression Plus(IExpression addend)
     {
-        return null;
+        return new Sum(this, addend);
+    }
+
+    public IExpression Multiply(int multiplier)
+    {
+        return new Sum(Augend.Multiply(multiplier), Addend.Multiply(multiplier));
     }
 
     public Money Reduce(Bank bank, string to)
