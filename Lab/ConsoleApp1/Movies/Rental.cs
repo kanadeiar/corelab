@@ -3,11 +3,26 @@
 public class Rental
 {
     public Movie Movie { get; set; }
-    public int DaysRented { get; set; }
+    private int _daysRented;
 
     public Rental(Movie movie, int daysRented)
     {
         Movie = movie;
-        DaysRented = daysRented;
+        _daysRented = daysRented;
+    }
+
+    public string GetTitle()
+    {
+        return Movie.Title;
+    }
+
+    public double GetCharge()
+    {
+        return Movie.GetCharge(_daysRented);
+    }
+
+    public int GetFrequentRenterPoints()
+    {
+        return Movie.GetFrequentRenterPoints(_daysRented);
     }
 }

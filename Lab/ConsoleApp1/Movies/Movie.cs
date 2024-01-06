@@ -2,19 +2,22 @@
 
 public class Movie
 {
-    public string Title { get; set; }
-    public MovieType Type { get; set; }
-
-    public Movie(string title, MovieType type)
+    private Price _price;
+    public string Title { get; init; }
+    
+    public Movie(string title, PriceType priceType)
     {
         Title = title;
-        Type = type;
+        _price = Price.Create(priceType);
     }
 
-    public enum MovieType
+    public double GetCharge(int daysRented)
     {
-        Children,
-        Regular,
-        NewRelease,
+        return _price.GetCharge(daysRented);
+    }
+
+    public int GetFrequentRenterPoints(int daysRented)
+    {
+        return _price.GetFrequentRenterPoints(daysRented);
     }
 }

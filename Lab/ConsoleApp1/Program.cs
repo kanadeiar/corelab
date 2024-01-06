@@ -8,15 +8,9 @@ static class Program
     {
         Console.WriteLine("Видеопрокат");
 
-        var testMovie1 = new Movie("Тест1", Movie.MovieType.Regular);
-        var testMovie2 = new Movie("Тест2", Movie.MovieType.NewRelease);
-        var testMovie3 = new Movie("Тест3", Movie.MovieType.Children);
-        var movies = new List<Movie>
-        {
-            testMovie1,
-            testMovie2,
-            testMovie3,
-        };
+        var testMovie1 = new Movie("Тест1", PriceType.Regular);
+        var testMovie2 = new Movie("Тест2", PriceType.NewRelease);
+        var testMovie3 = new Movie("Тест3", PriceType.Children);
         var customer = new Customer("Test")
         {
             Rentals = new List<Rental>
