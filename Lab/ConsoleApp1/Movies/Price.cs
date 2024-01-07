@@ -19,6 +19,7 @@ public abstract class Price
         }
     }
 
+
     public abstract PriceType GetPriceCode();
     public abstract double GetCharge(int daysRented);
     
