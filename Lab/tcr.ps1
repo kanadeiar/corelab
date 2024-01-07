@@ -23,7 +23,7 @@ Function Commit{
 }
 Function Revert{
     # Invoke-Command
-    Invoke-Command "git checkout HEAD -- src"
+    Invoke-Command "git reset --hard HEAD"
 }
 
 Function Invoke-Command($command){
