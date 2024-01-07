@@ -8,7 +8,7 @@ public class Movie
     public Movie(string title, PriceType priceType)
     {
         Title = title;
-        _price = Price.Create(priceType);
+        _price = create(priceType);
     }
 
     public double GetCharge(int daysRented)
@@ -19,5 +19,20 @@ public class Movie
     public int GetFrequentRenterPoints(int daysRented)
     {
         return _price.GetFrequentRenterPoints(daysRented);
+    }
+
+    private static Price create(PriceType priceType)
+    {
+        switch (priceType)
+        {
+            case PriceType.Regular:
+                return new RegularPrice();
+            case PriceType.NewRelease:
+                return new NewReleasePrice();
+            case PriceType.Children:
+                return new ChildrenPrice();
+            default:
+                throw new ArgumentOutOfRangeException("Incorrect PriceType");
+        }
     }
 }
