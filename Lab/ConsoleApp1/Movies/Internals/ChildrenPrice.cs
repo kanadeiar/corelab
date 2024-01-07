@@ -1,6 +1,6 @@
-﻿namespace ConsoleApp1.Movies;
+﻿namespace ConsoleApp1.Movies.Internals;
 
-public class ChildrenPrice : Price
+internal class ChildrenPrice : Price
 {
     public override PriceType GetPriceCode()
     {

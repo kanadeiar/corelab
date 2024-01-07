@@ -1,6 +1,6 @@
-﻿namespace ConsoleApp1.Movies;
+﻿namespace ConsoleApp1.Movies.Internals;
 
-public class NewReleasePrice : Price
+internal class NewReleasePrice : Price
 {
     public override PriceType GetPriceCode()
     {
@@ -14,8 +14,8 @@ public class NewReleasePrice : Price
 
     public override int GetFrequentRenterPoints(int daysRented)
     {
-        return (daysRented > 1) 
-            ? 2 
+        return daysRented > 1
+            ? 2
             : 1;
     }
 }

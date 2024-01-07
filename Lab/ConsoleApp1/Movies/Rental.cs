@@ -2,7 +2,7 @@
 
 public class Rental
 {
-    public Movie Movie { get; set; }
+    private Movie Movie { get; set; }
     private int _daysRented;
 
     public Rental(Movie movie, int daysRented)

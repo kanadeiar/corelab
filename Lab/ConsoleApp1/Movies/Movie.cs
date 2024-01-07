@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp1.Movies;
+﻿using ConsoleApp1.Movies.Internals;
+
+namespace ConsoleApp1.Movies;
 
 public class Movie
 {
