@@ -27,8 +27,4 @@
     <ProjectReference Include="..\..\ConsoleApp1\ConsoleApp1.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Theatre\" />
-  </ItemGroup>
-
 </Project>
