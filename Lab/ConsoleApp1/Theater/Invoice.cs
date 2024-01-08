@@ -2,6 +2,6 @@
 
 public class Invoice
 {
-    public string Cusomer { get; set; }
+    public string Customer { get; set; }
     public IEnumerable<Performance> Performances { get; set; } = Enumerable.Empty<Performance>();
 }

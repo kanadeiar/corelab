@@ -16,7 +16,7 @@ public class TheaterMainTests
         };
         var invoice = new Invoice
         {
-            Cusomer = "Test", 
+            Customer = "Test", 
             Performances = new List<Performance>
             {
                 new() { PlayId = 1, Audience = 55 },

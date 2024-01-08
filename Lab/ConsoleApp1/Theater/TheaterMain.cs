@@ -1,8 +1,16 @@
 ﻿namespace ConsoleApp1.Theater;
 
+struct StatementData
+{
+    public string Customer { get; set; }
+    public IEnumerable<Performance> Performances { get; set; }
+
+}
+
 public class TheaterMain
 {
     private readonly IEnumerable<Play> _plays;
+    private StatementData _data;
 
     public TheaterMain(IEnumerable<Play> plays)
     {
@@ -11,15 +19,24 @@ public class TheaterMain
 
     public string Statement(Invoice invoice)
     {
-        var result = $"Расчет театрального представления для {invoice.Cusomer}\n";
+        var data = new StatementData();
+        data.Customer = invoice.Customer;
+        data.Performances = invoice.Performances;
+        return renderPlainText(data);
+    }
 
-        foreach (var perf in invoice.Performances)
+    private string renderPlainText(StatementData data)
+    {
+        _data = data;
+        var result = $"Расчет театрального представления для {data.Customer}\n";
+
+        foreach (var perf in data.Performances)
         {
             result += $" {playFor(perf).Name}: {rub(amountFor(perf))} р ({perf.Audience} мест)\n";
         }
 
-        result += $"Вся стоимость: {rub(totalAmount(invoice))} р\n";
-        result += $"Накоплено {totalVolumeCreditsFor(invoice.Performances)} бонусных очков";
+        result += $"Вся стоимость: {rub(totalAmount())} р\n";
+        result += $"Накоплено {totalVolumeCreditsFor()} бонусных очков";
 
         return result;
     }
@@ -64,10 +81,10 @@ public class TheaterMain
         return result;
     }
 
-    private double totalAmount(Invoice invoice)
+    private double totalAmount()
     {
         var result = 0d;
-        foreach (var perf in invoice.Performances)
+        foreach (var perf in _data.Performances)
         {
             result += amountFor(perf);
         }
@@ -75,10 +92,10 @@ public class TheaterMain
         return result;
     }
 
-    private int totalVolumeCreditsFor(IEnumerable<Performance> performances)
+    private int totalVolumeCreditsFor()
     {
         var result = 0;
-        foreach (var perf in performances)
+        foreach (var perf in _data.Performances)
         {
             result += Math.Max(0, perf.Audience - 30);
 
