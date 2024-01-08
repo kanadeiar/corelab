@@ -2,54 +2,91 @@
 
 public class TheaterMain
 {
-    public string Statement(Invoice invoice, IEnumerable<Play> plays)
+    private readonly IEnumerable<Play> _plays;
+
+    public TheaterMain(IEnumerable<Play> plays)
     {
-        var totalAmount = 0d;
-        var volumeCredits = 0;
+        _plays = plays;
+    }
+
+    public string Statement(Invoice invoice)
+    {
         var result = $"Расчет театрального представления для {invoice.Cusomer}\n";
 
         foreach (var perf in invoice.Performances)
         {
-            var play = plays.Single(pl => pl.Id == perf.PlayId);
-            var thisAmount = 0d;
-            switch (play.Type)
-            {
-                case "tragedy":
-                    thisAmount = 40000;
-                    if (perf.Audience > 30)
-                    {
-                        thisAmount += 1000 * (perf.Audience - 30);
-                    }
-                    break;
-                case "comedy":
-                    thisAmount = 30000;
-                    if (perf.Audience > 20)
-                    {
-                        thisAmount += 10000;
-                        thisAmount += 500 * (perf.Audience - 20);
-                    }
-                    thisAmount += 300 * perf.Audience;
-                    break;
-                default:
-                    throw new IndexOutOfRangeException(nameof(play.Type));
-            }
-
-            // Бонусы
-            volumeCredits += Math.Max(0, perf.Audience - 30);
-
-            // Бонус за каждые 10 комедий
-            if (play.Type == "comedy")
-            {
-                volumeCredits += perf.Audience / 5;
-            }
-
-            // Вывод строки счета
-            result += $" {play.Name}: {thisAmount / 100} р ({perf.Audience} мест)\n";
-            totalAmount += thisAmount;
+            result += $" {playFor(perf).Name}: {rub(amountFor(perf))} р ({perf.Audience} мест)\n";
         }
 
-        result += $"Вся стоимость: {totalAmount / 100} р\n";
-        result += $"Накоплено {volumeCredits} бонусных очков";
+        result += $"Вся стоимость: {rub(totalAmount(invoice))} р\n";
+        result += $"Накоплено {totalVolumeCreditsFor(invoice.Performances)} бонусных очков";
+
+        return result;
+    }
+
+    private Play playFor(Performance perf)
+    {
+        return _plays.Single(pl => pl.Id == perf.PlayId);
+    }
+
+    private string rub(double value)
+    {
+        return (value / 100).ToString();
+    }
+
+    private double amountFor(Performance aPerformance)
+    {
+        var result = 0d;
+        switch (playFor(aPerformance).Type)
+        {
+            case "tragedy":
+                result = 40000;
+                if (aPerformance.Audience > 30)
+                {
+                    result += 1000 * (aPerformance.Audience - 30);
+                }
+
+                break;
+            case "comedy":
+                result = 30000;
+                if (aPerformance.Audience > 20)
+                {
+                    result += 10000;
+                    result += 500 * (aPerformance.Audience - 20);
+                }
+
+                result += 300 * aPerformance.Audience;
+                break;
+            default:
+                throw new IndexOutOfRangeException(playFor(aPerformance).Type);
+        }
+
+        return result;
+    }
+
+    private double totalAmount(Invoice invoice)
+    {
+        var result = 0d;
+        foreach (var perf in invoice.Performances)
+        {
+            result += amountFor(perf);
+        }
+
+        return result;
+    }
+
+    private int totalVolumeCreditsFor(IEnumerable<Performance> performances)
+    {
+        var result = 0;
+        foreach (var perf in performances)
+        {
+            result += Math.Max(0, perf.Audience - 30);
+
+            if (playFor(perf).Type == "comedy")
+            {
+                result += perf.Audience / 5;
+            }
+        }
 
         return result;
     }

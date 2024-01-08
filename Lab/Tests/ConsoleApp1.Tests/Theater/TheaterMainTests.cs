@@ -25,9 +25,9 @@ public class TheaterMainTests
             }
         };
 
-        var theater = new TheaterMain();
+        var theater = new TheaterMain(plays);
 
-        var actual = theater.Statement(invoice, plays);
+        var actual = theater.Statement(invoice);
 
         Assert.Equal(expected, actual);
     }
