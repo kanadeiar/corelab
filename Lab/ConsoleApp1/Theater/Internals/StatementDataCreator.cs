@@ -13,70 +13,30 @@ internal class StatementDataCreator
     {
         var result = new StatementData();
         result.Customer = invoice.Customer;
-        result.Performances.Clear();
-        foreach (var perf in invoice.Performances)
-        {
-            var perfData = new PerformanceData
-            {
-                PlayId = perf.PlayId,
-                Audience = perf.Audience,
-            };
-            perfData.Play = playFor(perfData);
-            perfData.Amount = amountFor(perfData);
-            perfData.VolumeCredits = volumeCreditsFor(perfData);
-            result.Performances.Add(perfData);
-        }
-
+        result.Performances = invoice.Performances
+            .Select(perf => (IPerformance)enrichPerformance(perf)).ToList();
         result.TotalAmount = totalAmount(result);
         result.TotalVolumeCredits = totalVolumeCredits(result);
         return result;
     }
 
-    private Play playFor(IPerformance perf)
+    private PerformanceData enrichPerformance(Performance aPerf)
     {
-        return _plays.Single(pl => pl.Id == perf.PlayId);
+        var calculator = new PerformanceCalculator(aPerf, playFor(aPerf.PlayId));
+        var perfData = new PerformanceData
+        {
+            PlayId = aPerf.PlayId,
+            Audience = aPerf.Audience,
+        };
+        perfData.Play = calculator.Play;
+        perfData.Amount = calculator.Amount();
+        perfData.VolumeCredits = calculator.VolumeCredits();
+        return perfData;
     }
 
-    private double amountFor(IPerformance aPerformance)
+    private Play playFor(int playId)
     {
-        double result;
-        switch (aPerformance.Play.Type)
-        {
-            case "tragedy":
-                result = 40000;
-                if (aPerformance.Audience > 30)
-                {
-                    result += 1000 * (aPerformance.Audience - 30);
-                }
-
-                break;
-            case "comedy":
-                result = 30000;
-                if (aPerformance.Audience > 20)
-                {
-                    result += 10000;
-                    result += 500 * (aPerformance.Audience - 20);
-                }
-
-                result += 300 * aPerformance.Audience;
-                break;
-            default:
-                throw new IndexOutOfRangeException(aPerformance.Play.Type);
-        }
-
-        return result;
-    }
-
-    private int volumeCreditsFor(IPerformance perf)
-    {
-        var res = Math.Max(0, perf.Audience - 30);
-
-        if (playFor(perf).Type == "comedy")
-        {
-            res += perf.Audience / 5;
-        }
-
-        return res;
+        return _plays.Single(pl => pl.Id == playId);
     }
 
     private double totalAmount(StatementData data)
