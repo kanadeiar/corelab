@@ -31,4 +31,32 @@ public class TheaterMainTests
 
         Assert.Equal(expected, actual);
     }
+
+    [Fact]
+    public void TestHtmlStatement()
+    {
+        var expected = "<h1>Расчет для Test</h1>\n<table>\n<tr><td>Тест1</td><td>650 р</td><td>55</td></tr>\n<tr><td>Тест2</td><td>580 р</td><td>35</td></tr>\n<tr><td>Тест3</td><td>500 р</td><td>40</td></tr>\n</table>\n<p>Вся стоимость: 1730 р</p>\n<p>Накоплено 47 бонусных очков</p>";
+        var plays = new List<Play>
+        {
+            new() { Id = 1, Name = "Тест1", Type = "tragedy" },
+            new() { Id = 2, Name = "Тест2", Type = "comedy" },
+            new() { Id = 3, Name = "Тест3", Type = "tragedy" },
+        };
+        var invoice = new Invoice
+        {
+            Customer = "Test",
+            Performances = new List<Performance>
+            {
+                new() { PlayId = 1, Audience = 55 },
+                new() { PlayId = 2, Audience = 35 },
+                new() { PlayId = 3, Audience = 40 },
+            }
+        };
+
+        var theater = new TheaterMain(plays);
+
+        var actual = theater.HtmlStatement(invoice);
+
+        Assert.Equal(expected, actual);
+    }
 }
