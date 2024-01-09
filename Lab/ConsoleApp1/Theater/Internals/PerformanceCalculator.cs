@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp1.Theater.Internals;
 
-internal class PerformanceCalculator
+internal abstract class PerformanceCalculator
 {
     private readonly Performance _performance;
     private Play _play;
@@ -13,41 +13,10 @@ internal class PerformanceCalculator
         _play = play;
     }
 
-    public double Amount()
-    {
-        double result;
-        switch (_play.Type)
-        {
-            case "tragedy":
-                result = 40000;
-                if (_performance.Audience > 30)
-                {
-                    result += 1000 * (_performance.Audience - 30);
-                }
-                break;
-            case "comedy":
-                result = 30000;
-                if (_performance.Audience > 20)
-                {
-                    result += 10000;
-                    result += 500 * (_performance.Audience - 20);
-                }
-                result += 300 * _performance.Audience;
-                break;
-            default:
-                throw new IndexOutOfRangeException(Play.Type);
-        }
+    public abstract double Amount();
 
-        return result;
-    }
-
-    public int VolumeCredits()
+    public virtual int VolumeCredits()
     {
-        var res = Math.Max(0, _performance.Audience - 30);
-        if (Play.Type == "comedy")
-        {
-            res += _performance.Audience / 5;
-        }
-        return res;
+        return Math.Max(0, _performance.Audience - 30);
     }
 }

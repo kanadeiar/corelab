@@ -22,16 +22,29 @@ internal class StatementDataCreator
 
     private PerformanceData enrichPerformance(Performance aPerf)
     {
-        var calculator = new PerformanceCalculator(aPerf, playFor(aPerf.PlayId));
+        var calculator = createPerformanceCalculator(aPerf, playFor(aPerf.PlayId));
         var perfData = new PerformanceData
         {
             PlayId = aPerf.PlayId,
             Audience = aPerf.Audience,
+            Play = calculator.Play,
+            Amount = calculator.Amount(),
+            VolumeCredits = calculator.VolumeCredits()
         };
-        perfData.Play = calculator.Play;
-        perfData.Amount = calculator.Amount();
-        perfData.VolumeCredits = calculator.VolumeCredits();
         return perfData;
+    }
+
+    private PerformanceCalculator createPerformanceCalculator(Performance aPerf, Play play)
+    {
+        switch (play.Type)
+        {
+            case "tragedy":
+                return new TragedyCalculator(aPerf, play);
+            case "comedy":
+                return new ComedyCalculator(aPerf, play);
+            default:
+                throw new ArgumentOutOfRangeException(nameof(play.Type));
+        }
     }
 
     private Play playFor(int playId)
