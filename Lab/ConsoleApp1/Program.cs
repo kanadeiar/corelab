@@ -6,6 +6,7 @@ public static class Program
     {
 
 
+
         Console.WriteLine("Нажмиту любую кнопку ...");
         Console.ReadKey();
     }
