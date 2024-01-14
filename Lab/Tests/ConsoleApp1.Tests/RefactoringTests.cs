@@ -1,9 +1,4 @@
-﻿using ConsoleApp1.Subclasses;
-
-namespace ConsoleApp1.Tests;
-
-
-
+﻿namespace ConsoleApp1.Tests;
 
 public class RefactoringTests
 {
