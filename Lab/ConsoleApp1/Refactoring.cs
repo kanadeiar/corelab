@@ -10,6 +10,7 @@ public class Refactoring
 
 public enum EmpType
 {
+    None,
     Engineer,
     Manager,
 }
@@ -31,15 +32,12 @@ public class Employee
 
     public int PayAmount()
     {
-        switch (_code)
-        {
-            case Engineer:
-                return 10;
-            case Manager: 
-                return 20;
-            default:
-                throw new IndexOutOfRangeException();
-        }
+        return Code.PayAmount(this);
+    }
+
+    public int GetMonthlySalary()
+    {
+        return 10;
     }
 }
 
@@ -52,28 +50,56 @@ public abstract class EmployeeCode
         switch (value)
         {
             case EmpType.Engineer:
-                return new Engineer();
+                return new engineer();
             case EmpType.Manager:
-                return new Manager();
+                return new manager();
             default:
-                throw new IndexOutOfRangeException();
+                return nullCode.Instance();
         }
     }
+
+    public abstract int PayAmount(Employee employee);
 }
 
-public class Engineer : EmployeeCode
+file class engineer : EmployeeCode
 {
     public override EmpType GetCode()
     {
         return EmpType.Engineer;
     }
+
+    public override int PayAmount(Employee employee)
+    {
+        return employee.GetMonthlySalary();
+    }
 }
 
-public class Manager : EmployeeCode
+file class manager : EmployeeCode
 {
     public override EmpType GetCode()
     {
         return EmpType.Manager;
+    }
+
+    public override int PayAmount(Employee employee)
+    {
+        return employee.GetMonthlySalary() * 2;
+    }
+}
+
+file class nullCode : EmployeeCode
+{
+    private static EmployeeCode? _instance;
+    public static EmployeeCode Instance() => _instance ??= new nullCode();
+
+    public override EmpType GetCode()
+    {
+        return EmpType.None;
+    }
+
+    public override int PayAmount(Employee employee)
+    {
+        return 0;
     }
 }
 
