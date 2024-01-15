@@ -7,6 +7,7 @@ public class Refactoring
 
 }
 
+
 public enum EmpType
 {
     Engineer,
@@ -15,9 +16,9 @@ public enum EmpType
 
 public class Employee
 {
-    private EmpType _code;
+    private EmployeeCode _code;
 
-    public EmpType Code
+    public EmployeeCode Code
     {
         get => _code;
         set => _code = value;
@@ -25,16 +26,16 @@ public class Employee
 
     public Employee(EmpType code)
     {
-        Code = code;
+        Code = EmployeeCode.NewCode(code);
     }
 
     public int PayAmount()
     {
-        switch (Code)
+        switch (_code)
         {
-            case EmpType.Engineer:
+            case Engineer:
                 return 10;
-            case EmpType.Manager: 
+            case Manager: 
                 return 20;
             default:
                 throw new IndexOutOfRangeException();
@@ -45,6 +46,19 @@ public class Employee
 public abstract class EmployeeCode
 {
     public abstract EmpType GetCode();
+
+    public static EmployeeCode NewCode(EmpType value)
+    {
+        switch (value)
+        {
+            case EmpType.Engineer:
+                return new Engineer();
+            case EmpType.Manager:
+                return new Manager();
+            default:
+                throw new IndexOutOfRangeException();
+        }
+    }
 }
 
 public class Engineer : EmployeeCode
