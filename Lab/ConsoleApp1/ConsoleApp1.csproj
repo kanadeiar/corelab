@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <Compile Include="..\Common\**\*.*">
+		  <Link>Shared\%(RecursiveDir)%(FileName)%(Extension)</Link>
+	  </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FastMember" Version="1.5.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
