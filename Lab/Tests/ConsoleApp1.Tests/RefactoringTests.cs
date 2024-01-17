@@ -3,9 +3,13 @@
 public class RefactoringTests
 {
     [Fact]
-    public void TestType()
+    public void TestCalculate()
     {
-        
+        var reff = new Refactoring();
+
+        var actual = reff.Calculate();
+
+        Assert.Equal(150.0, actual);
     }
 }
 

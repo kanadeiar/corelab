@@ -5,7 +5,7 @@ namespace ConsoleApp1.Tests;
 public class DeveloperTests
 {
     [Fact]
-    public void Test1()
+    public void TestSimple()
     {
         Assert.True(true);
     }
@@ -18,8 +18,7 @@ public class DeveloperTests
         Assert.NotNull(value);
     }
 
-    [Theory]
-    [MemberData(nameof(GetTestData))]
+    [Theory, MemberData(nameof(GetTestData))]
     public void Method(int digital)
     {
         Assert.Equal(1, digital);
@@ -31,8 +30,8 @@ public class DeveloperTests
             new object[] { 1 }
         };
     }
-    [Theory]
-    [MemberData(nameof(DataForTest))]
+
+    [Theory, MemberData(nameof(DataForTest))]
     public void GenericMethod(int one, int two)
     {
         Assert.Equal(one, two);
@@ -42,8 +41,7 @@ public class DeveloperTests
         { 1, 1 }
     };
 
-    [Theory]
-    [ClassData(typeof(TestData))]
+    [Theory, ClassData(typeof(TestData))]
     public void ClassStandard(int value)
     {
         Assert.Equal(1, value);
@@ -57,8 +55,7 @@ public class DeveloperTests
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
-    [Theory]
-    [MemberData(nameof(DataSource.TestData), 1, MemberType = typeof(DataSource))]
+    [Theory, MemberData(nameof(DataSource.TestData), 1, MemberType = typeof(DataSource))]
     public void ClassSource(int value)
     {
         Assert.Equal(1, value);
@@ -74,5 +71,19 @@ public class DeveloperTests
         {
             return _data;
         }
+    }
+
+    [Theory, MemberData(nameof(TestData2), parameters: new object[] { new object[] { "1" } } )]
+    public void TypesTestData(string s, bool expected)
+    {
+        Assert.Equal(expected, int.TryParse(s, out _));
+    }
+    public static TheoryData<string, bool> TestData2(object[] args)
+    {
+        return new TheoryData<string, bool>
+        {
+            { $"{args[0]}", true },
+            { $"{args[0]}a", false },
+        };
     }
 }
