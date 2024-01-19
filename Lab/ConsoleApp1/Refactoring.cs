@@ -2,34 +2,46 @@
 
 public class Refactoring
 {
-    public double Charge(IBillable emp, int days)
-    {
-        var bas = emp.GetRate() * days;
-        if (emp.HasSpecialSkill())
-        {
-            return bas * 1.05;
-        }
 
-        return bas;
+}
+
+public abstract class Employee
+{
+    public int GetSalary(int days)
+    {
+        var salary = Salary();
+        var basic = salary * days;
+        var prem = Prem(basic);
+        return basic + prem;
+    }
+
+    protected abstract int Prem(int basic);
+    protected abstract int Salary();
+}
+
+public class Engineer : Employee
+{
+    protected override int Prem(int basic)
+    {
+        return basic * 2;
+    }
+
+    protected override int Salary()
+    {
+        return 100;
     }
 }
 
-public interface IBillable
+public class Managet : Employee
 {
-    int GetRate();
-    bool HasSpecialSkill();
-}
-
-public class Employee : IBillable
-{
-    public int GetRate()
+    protected override int Prem(int basic)
     {
-        return 10;
+        return basic * 3;
     }
 
-    public bool HasSpecialSkill()
+    protected override int Salary()
     {
-        return true;
+        return 200;
     }
 }
 

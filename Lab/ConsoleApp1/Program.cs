@@ -1,6 +1,4 @@
-﻿using ConsoleApp1.Shared;
-
-namespace ConsoleApp1;
+﻿namespace ConsoleApp1;
 
 public static class Program
 {
