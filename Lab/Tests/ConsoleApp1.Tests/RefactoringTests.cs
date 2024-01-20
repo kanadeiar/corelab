@@ -2,14 +2,5 @@
 
 public class RefactoringTests
 {
-    
+
 }
-
-
-
-
-
-
-
-
-
