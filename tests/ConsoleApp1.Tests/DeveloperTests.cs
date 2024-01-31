@@ -46,14 +46,6 @@ public class DeveloperTests
     {
         Assert.Equal(1, value);
     }
-    private class TestData : IEnumerable<object[]>
-    {
-        public IEnumerator<object[]> GetEnumerator()
-        {
-            yield return new object[] { 1 };
-        }
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-    }
 
     [Theory, MemberData(nameof(DataSource.TestData), 1, MemberType = typeof(DataSource))]
     public void ClassSource(int value)
@@ -86,4 +78,13 @@ public class DeveloperTests
             { $"{args[0]}a", false },
         };
     }
+}
+
+file class TestData : IEnumerable<object[]>
+{
+    public IEnumerator<object[]> GetEnumerator()
+    {
+        yield return new object[] { 1 };
+    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
