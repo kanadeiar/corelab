@@ -8,15 +8,16 @@ public static class Program
     {
         ConsoleHelper.PrintHeader("Лаборатория", "Опытное приложение");
 
+        var address = ConsoleHelper.ReadLineFromConsole("Введите адрес");
         var name = ConsoleHelper.ReadLineFromConsole("Введите свои имя");
+        
         Console.WriteLine();
 
-        var message = new Message();
-        var buider = new MessageBuilder(message, name);
-
-        var text = buider.GetMessage("Програмное обеспечение приветствует программиста");
-
-        Console.WriteLine(text);
+        var service = new MailService();
+        Message message = new Message();
+        MessageBuilder buider = new MessageBuilder(message, name);
+        var sender = new Sender(buider, service);
+        sender.Send(address, "Програмное обеспечение приветствует программиста");
 
         ConsoleHelper.PrintFooter();
     }

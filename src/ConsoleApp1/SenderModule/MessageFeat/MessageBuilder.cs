@@ -1,9 +1,11 @@
-﻿namespace ConsoleApp1.MessageFeat;
+﻿namespace ConsoleApp1.SenderModule.MessageFeat;
 
-public class MessageBuilder
+public class MessageBuilder : IMessageBuilder
 {
-    private string _clientName;
+    private readonly string _clientName;
     private readonly Message _message;
+
+    public string ClientName => _clientName;
 
     public MessageBuilder(Message message, string clientName)
     {
@@ -13,7 +15,7 @@ public class MessageBuilder
 
     public string GetMessage(string text)
     {
-        var hello = _message.HelloMessage(_clientName);
+        var hello = _message.HelloMessage(ClientName);
         var bye = _message.ByeMessage();
 
         var message = $"{hello}\n{text}\n{bye}";

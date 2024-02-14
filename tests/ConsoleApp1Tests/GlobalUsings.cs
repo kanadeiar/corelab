@@ -1,3 +1,9 @@
-global using ConsoleApp1.MessageFeat;
-global using FluentAssertions;
+global using AutoFixture;
+global using AutoFixture.AutoMoq;
+global using AutoFixture.Xunit2;
+global using ConsoleApp1.MailModule;
+global using ConsoleApp1.SenderModule;
+global using ConsoleApp1.SenderModule.MessageFeat;
+global using ConsoleApp1Tests.Infra;
+global using Moq;
 global using Xunit;
