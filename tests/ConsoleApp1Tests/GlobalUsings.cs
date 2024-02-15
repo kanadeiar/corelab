@@ -5,5 +5,6 @@ global using ConsoleApp1.MailModule;
 global using ConsoleApp1.SenderModule;
 global using ConsoleApp1.SenderModule.MessageFeat;
 global using ConsoleApp1Tests.Infra;
+global using FluentAssertions;
 global using Moq;
 global using Xunit;

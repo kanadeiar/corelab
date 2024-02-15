@@ -3,5 +3,4 @@
 public interface IMessageBuilder
 {
     string GetMessage(string text);
-    string ClientName { get; }
 }

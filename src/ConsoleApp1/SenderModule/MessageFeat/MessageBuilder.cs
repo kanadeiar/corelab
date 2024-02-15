@@ -2,21 +2,22 @@
 
 public class MessageBuilder : IMessageBuilder
 {
-    private readonly string _clientName;
-    private readonly Message _message;
+    private MessagesCollection _collection;
 
-    public string ClientName => _clientName;
-
-    public MessageBuilder(Message message, string clientName)
+    private MessageBuilder(NameSource source)
     {
-        _message = message;
-        _clientName = clientName;
+        _collection = MessagesCollection.Create(source);
+    }
+
+    public static MessageBuilder Create(NameSource source)
+    {
+        return new MessageBuilder(source);
     }
 
     public string GetMessage(string text)
     {
-        var hello = _message.HelloMessage(ClientName);
-        var bye = _message.ByeMessage();
+        var hello = _collection.Get(MessageCode.Hello);
+        var bye = _collection.Get(MessageCode.Bye);
 
         var message = $"{hello}\n{text}\n{bye}";
         return message;

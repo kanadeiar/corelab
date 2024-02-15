@@ -10,12 +10,12 @@ public static class Program
 
         var address = ConsoleHelper.ReadLineFromConsole("Введите адрес");
         var name = ConsoleHelper.ReadLineFromConsole("Введите свои имя");
-        
+        var source = new NameSource(new Name(name));
+
         Console.WriteLine();
 
         var service = new MailService();
-        Message message = new Message();
-        MessageBuilder buider = new MessageBuilder(message, name);
+        MessageBuilder buider = MessageBuilder.Create(source);
         var sender = new Sender(buider, service);
         sender.Send(address, "Програмное обеспечение приветствует программиста");
 
