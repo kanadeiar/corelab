@@ -4,11 +4,12 @@ public static class Program
 {
     public static void Main(string[] args)
     {
+        ConsoleHelper.PrintHeader("Лаборатория", "Опытное приложение");
 
 
 
-        Console.WriteLine("Нажмиту любую кнопку ...");
-        Console.ReadKey();
+        ConsoleHelper.PrintFooter();
     }
 }
+
 

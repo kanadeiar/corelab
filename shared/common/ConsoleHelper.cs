@@ -6,23 +6,20 @@ namespace Kanadeiar.Common;
 
 public class ConsoleHelper
 {
-    public static void PrintHeader(string title = "Задача", string text = "")
+    public static void PrintHeader(string title = "Приложение", string text = "Название приложения")
     {
         setupConsole(title);
-
-        OutputHeaderToConsole(text);
+        outputHeaderToConsole(text);
     }
 
-    public static void OutputHeaderToConsole(string text)
+    private static void outputHeaderToConsole(string text)
     {
         BackgroundColor = ConsoleColor.DarkGreen;
         ForegroundColor = ConsoleColor.White;
 
-        WriteLine(
-            $"┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+        WriteLine($"┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
         WriteLine($"│{text,-117}│");
-        WriteLine(
-            $"└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+        WriteLine($"└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
 
         ForegroundColor = ConsoleColor.White;
         BackgroundColor = ConsoleColor.Black;
