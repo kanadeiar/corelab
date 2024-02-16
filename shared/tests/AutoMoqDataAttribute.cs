@@ -1,4 +1,7 @@
-﻿namespace ConsoleApp1Tests.Infra;
+using AutoFixture;
+using AutoFixture.AutoMoq;
+
+namespace Kanadeiar.Tests;
 
 public class AutoMoqDataAttribute : AutoDataAttribute
 {

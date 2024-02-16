@@ -30,6 +30,12 @@
     </PackageReference>
   </ItemGroup>
 
+	<ItemGroup>
+		<Compile Include="..\..\shared\tests\**\*.*">
+			<Link>tests\%(RecursiveDir)%(FileName)%(Extension)</Link>
+		</Compile>
+	</ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\src\ConsoleApp1\ConsoleApp1.csproj" />
   </ItemGroup>
