@@ -9,7 +9,6 @@
     <Content Include="hello.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Collections.fs" />
     <Compile Include="Shapes.fs" />
     <Compile Include="Persons.fs" />
     <Compile Include="Program.fs" />

@@ -35,7 +35,7 @@ type Person(name : string, _age : int) =
         return $"asunc result {name}"
     }
 
-type Employee(name, age, pet) = 
+type Employee(name, age, pet : string) = 
     inherit Person(name, age)
 
     member this.Pet = pet
@@ -50,6 +50,9 @@ type Employee(name, age, pet) =
     override this.Test() =
         printfn "Test"
 
+type Student(name, age, university : string) =
+    inherit Person(name, age)
 
+    member this.University = university
     
 

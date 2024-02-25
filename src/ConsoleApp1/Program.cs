@@ -6,6 +6,10 @@ public static class Program
     {
         ConsoleHelper.PrintHeader("Лаборатория", "Опытное приложение");
 
+        var add = (int x, int y) => x + y;
+
+        var res = add(2, 3);
+
 
 
         ConsoleHelper.PrintFooter();
