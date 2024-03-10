@@ -1,93 +1,59 @@
 namespace WinFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IObserver
     {
+        private Interval _interval;
+
+        public string Start
+        {
+            get => _interval.Start;
+            set => _interval.Start = value;
+        }
+
+        public string End
+        {
+            get => _interval.End;
+            set => _interval.End = value;
+        }
+
+        public string Length
+        {
+            get => _interval.Length;
+            set => _interval.Length = value;
+        }
+
         public Form1()
         {
             InitializeComponent();
+
+            _interval = new Interval();
+            _interval.AddObserver(this);
+            Update(_interval, null);
         }
 
-        private void textBox_Leave(object sender, EventArgs e)
+        public void Update(IObservable observed, object arg)
+        {
+            textBoxStart.Text = _interval.Start;
+            textBoxEnd.Text = _interval.End;
+            textBoxLength.Text = _interval.Length;
+        }
+
+        private void textBoxStart_Leave(object sender, EventArgs e)
         {
             var text = ((TextBox)sender).Text;
-            if (sender == textBoxStart)
-            {
-                startField_FocusLost(text);
-            }
-            else if (sender == textBoxEnd)
-            {
-                endField_FocusLost(text);
-            }
-            else if (sender == textBoxLength)
-            {
-                lengthField_FocusLost(text);
-            }
+            Start = int.TryParse(text, out _) ? textBoxStart.Text : "0";
         }
 
-        private void startField_FocusLost(string text)
+        private void textBoxEnd_Leave(object sender, EventArgs e)
         {
-            if (int.TryParse(text, out _))
-            {
-                calculateLength();
-            }
-            else
-            {
-                textBoxStart.Text = "0";
-            }
-        }    
-        
-        private void endField_FocusLost(string text)
-        {
-            if (int.TryParse(text, out _))
-            {
-                calculateLength();
-            }
-            else
-            {
-                textBoxEnd.Text = "0";
-            }
-        }    
-        
-        private void lengthField_FocusLost(string text)
-        {
-            if (int.TryParse(text, out _))
-            {
-                calculateEnd();
-            }
-            else
-            {
-                textBoxLength.Text = "0";
-            }
+            var text = ((TextBox)sender).Text;
+            End = int.TryParse(text, out _) ? textBoxEnd.Text : "0";
         }
 
-        private void calculateLength()
+        private void textBoxLength_Leave(object sender, EventArgs e)
         {
-            try
-            {
-                var start = int.Parse(textBoxStart.Text);
-                var end = int.Parse(textBoxEnd.Text);
-                var length = end - start;
-                textBoxLength.Text = length.ToString();
-            }
-            catch
-            {
-                throw new ApplicationException("Некорректный формат числа");
-            }
-        }
-
-        private void calculateEnd()
-        {
-            try
-            {
-                var start = int.Parse(textBoxStart.Text);
-                var length = int.Parse(textBoxLength.Text);
-                var end = start + length;
-                textBoxEnd.Text = end.ToString();
-            }
-            catch 
-            {
-                throw new ApplicationException("Некорректный формат числа");
-            }
+            var text = ((TextBox)sender).Text;
+            Length = int.TryParse(text, out _) ? textBoxLength.Text : "0";
         }
     }
 }

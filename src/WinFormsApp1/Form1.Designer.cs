@@ -69,7 +69,7 @@
             textBoxStart.Name = "textBoxStart";
             textBoxStart.Size = new Size(213, 23);
             textBoxStart.TabIndex = 1;
-            textBoxStart.Leave += textBox_Leave;
+            textBoxStart.Leave += textBoxStart_Leave;
             // 
             // textBoxEnd
             // 
@@ -77,7 +77,7 @@
             textBoxEnd.Name = "textBoxEnd";
             textBoxEnd.Size = new Size(213, 23);
             textBoxEnd.TabIndex = 1;
-            textBoxEnd.Leave += textBox_Leave;
+            textBoxEnd.Leave += textBoxEnd_Leave;
             // 
             // textBoxLength
             // 
@@ -85,7 +85,7 @@
             textBoxLength.Name = "textBoxLength";
             textBoxLength.Size = new Size(213, 23);
             textBoxLength.TabIndex = 1;
-            textBoxLength.Leave += textBox_Leave;
+            textBoxLength.Leave += textBoxLength_Leave;
             // 
             // Form1
             // 
