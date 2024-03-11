@@ -32,7 +32,7 @@
 
 	<ItemGroup>
 		<Compile Include="..\..\shared\tests\**\*.*">
-			<Link>tests\%(RecursiveDir)%(FileName)%(Extension)</Link>
+			<Link>common\%(RecursiveDir)%(FileName)%(Extension)</Link>
 		</Compile>
 	</ItemGroup>
 
