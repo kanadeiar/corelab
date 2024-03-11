@@ -1,27 +1,9 @@
 namespace WinFormsApp1
 {
-    public partial class Form1 : Form, IObserver
+    public partial class Form1 : Form, IFormObserver
     {
         private Interval _interval;
-
-        public string Start
-        {
-            get => _interval.Start;
-            set => _interval.Start = value;
-        }
-
-        public string End
-        {
-            get => _interval.End;
-            set => _interval.End = value;
-        }
-
-        public string Length
-        {
-            get => _interval.Length;
-            set => _interval.Length = value;
-        }
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -31,29 +13,32 @@ namespace WinFormsApp1
             Update(_interval, null);
         }
 
-        public void Update(IObservable observed, object arg)
+        public void Update(IFormObservable observed, object? arg)
         {
-            textBoxStart.Text = _interval.Start;
-            textBoxEnd.Text = _interval.End;
-            textBoxLength.Text = _interval.Length;
+            if (observed is Interval interval)
+            {
+                textBoxStart.Text = interval.Start.ToString();
+                textBoxEnd.Text = interval.End.ToString();
+                textBoxLength.Text = interval.Length.ToString();
+            }
         }
 
         private void textBoxStart_Leave(object sender, EventArgs e)
         {
             var text = ((TextBox)sender).Text;
-            Start = int.TryParse(text, out _) ? textBoxStart.Text : "0";
+            _interval.Start = int.TryParse(text, out var value) ? value : 0;
         }
 
         private void textBoxEnd_Leave(object sender, EventArgs e)
         {
             var text = ((TextBox)sender).Text;
-            End = int.TryParse(text, out _) ? textBoxEnd.Text : "0";
+            _interval.End = int.TryParse(text, out var value) ? value : 0;
         }
 
         private void textBoxLength_Leave(object sender, EventArgs e)
         {
             var text = ((TextBox)sender).Text;
-            Length = int.TryParse(text, out _) ? textBoxLength.Text : "0";
+            _interval.Length = int.TryParse(text, out var value) ? value : 0;
         }
     }
 }

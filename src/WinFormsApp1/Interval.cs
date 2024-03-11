@@ -1,91 +1,56 @@
 ﻿namespace WinFormsApp1;
 
-public class Interval : IObservable
+public class Interval : FormNotifyBase
 {
-    private List<IObserver> _observers = new();
-    private string _start = "0";
-    private string _end = "0";
-    private string _length = "0";
+    private int _start;
+    private int _end;
+    private int _length;
 
-    public string Start
+    public int Start
     {
         get => _start;
         set
         {
-            if (_start == value) return;
-            _start = value;
-            CalculateLength();
-            NotifyObservers();
+            if (Set(ref _start, value))
+            {
+                calculateLength();
+            }
         }
     }
 
-    public string End
+    public int End
     {
         get => _end;
         set
         {
-            if (_end == value) return;
-            _end = value;
-            CalculateLength();
-            NotifyObservers();
+            if (Set(ref _end, value))
+            {
+                calculateLength();
+            }
         }
     }
 
-    public string Length
+    public int Length
     {
         get => _length;
         set
         {
-            if (_length == value) return;
-            _length = value;
-            CalculateEnd();
-            NotifyObservers();
+            if (Set(ref _length, value))
+            {
+                calculateEnd();
+            }
         }
     }
 
-    public void AddObserver(IObserver observer)
+    private void calculateLength()
     {
-        _observers.Add(observer);
+        var length = End - Start;
+        Length = length;
     }
 
-    public void RemoveObserver(IObserver observer)
+    private void calculateEnd()
     {
-        _observers.Remove(observer);
-    }
-
-    public void NotifyObservers()
-    {
-        foreach (var observer in _observers)
-            observer.Update(this, null);
-    }
-
-    public void CalculateLength()
-    {
-        try
-        {
-            var start = int.Parse(Start);
-            var end = int.Parse(End);
-            var length = end - start;
-            Length = length.ToString();
-        }
-        catch
-        {
-            throw new ApplicationException("Некорректный формат числа");
-        }
-    }
-
-    public void CalculateEnd()
-    {
-        try
-        {
-            var start = int.Parse(Start);
-            var length = int.Parse(Length);
-            var end = start + length;
-            End = end.ToString();
-        }
-        catch 
-        {
-            throw new ApplicationException("Некорректный формат числа");
-        }
+        var end = Start + Length;
+        End = end;
     }
 }
