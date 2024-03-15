@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1;
 
-public class Interval : FormNotifyBase
+public class Interval : ModelBase
 {
     private int _start;
     private int _end;
