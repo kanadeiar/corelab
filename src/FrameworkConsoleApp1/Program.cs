@@ -19,20 +19,32 @@ namespace FrameworkConsoleApp1
             controller.AddPersonControl(contorol1);
             controller.AddPersonControl(contorol2);
 
-            foreach (var each in controller.GetPersons)
+            foreach (var each in controller.Controls)
             {
-                Console.WriteLine(each.Name);
+                Console.WriteLine(each.Person.Name);
             }
 
             controller.RemovePersonControl(contorol1);
 
             Console.WriteLine("After:");
 
-            foreach (var each in controller.GetPersons)
+            foreach (var each in controller.Controls)
             {
-                Console.WriteLine(each.Name);
+                Console.WriteLine(each.Person.Name);
             }
 
+            Console.WriteLine(contorol1.Description);
+
+            Console.WriteLine("Switch");
+
+            contorol1.Connect();
+
+            Console.WriteLine(contorol1.Description);
+
+            contorol1.Disconnect();
+
+            Console.WriteLine(contorol1.Description);
+            
             Console.WriteLine("Нажмите любую кнопку для завершения ...");
             Console.ReadKey();
         }

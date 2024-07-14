@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace FrameworkConsoleApp1.Models
 {
@@ -7,7 +6,7 @@ namespace FrameworkConsoleApp1.Models
     {
         private HashSet<PersonControl> _controls = new HashSet<PersonControl>();
 
-        public IEnumerable<Person> GetPersons => _controls.Select(x => x.Person);
+        public IEnumerable<PersonControl> Controls => _controls;
 
         /// <summary> Должен использоваться только в PersonControl </summary>
         internal HashSet<PersonControl> friendControls => _controls;
