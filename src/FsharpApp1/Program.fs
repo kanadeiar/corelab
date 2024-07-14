@@ -5,11 +5,11 @@ open Shapes
 
 printfn "Опытное приложение"
 
+let multiply a b = a * b
+
 let divide a b =
-    try
-        Some(a / b)
-    with
-    | ex -> printfn "Деление на ноль %s" ex.Message; None
+    if b = 0 then None
+    else Some(a / b)     
 
 let printResult result =
     match result with
