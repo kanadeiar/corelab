@@ -9,8 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Infrastructure\Attributes.fs" />
     <Compile Include="PersonModule\PersonTests.fs" />
-    <Compile Include="Tests.fs" />
+    <Compile Include="SampleTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
@@ -21,6 +22,8 @@
 	<PackageReference Include="AutoFixture.Xunit2" Version="4.18.1" />
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="Faqt" Version="4.2.1" />
+    <PackageReference Include="FsUnit" Version="6.0.1" />
+    <PackageReference Include="FsUnit.xUnit" Version="6.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="xunit" Version="2.9.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">

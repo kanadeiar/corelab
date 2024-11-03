@@ -81,7 +81,7 @@
   <ItemGroup>
     <Compile Include="Infrastructure\AutoMoqDataAttribute.cs" />
     <Compile Include="Infrastructure\InlineAutoMoqDataAttribute.cs" />
-    <Compile Include="DevTests.cs" />
+    <Compile Include="SampleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
