@@ -6,6 +6,9 @@ public static class Program
     {
         ConsoleHelper.PrintHeader("Лаборатория", "Опытное приложение");
 
+
+
+
         ConsoleHelper.PrintFooter();
     }
 }

@@ -63,18 +63,19 @@ namespace FrameworkConsoleApp1Tests
         {
             var zero = 0;
             Action act = () => { var x = 4 / zero; };
-            act.ShouldThrowExactly<DivideByZeroException>();
+
+            act.Should().Throw<DivideByZeroException>();
         }
 
         [Fact(DisplayName = "Пример проверки вызова классом обработчика события")]
         public void TestEventInvoke()
         {
             var repository = new SampleRepository();
-            repository.MonitorEvents();
+            var monitor = repository.Monitor();
 
             repository.Execute();
 
-            repository.ShouldRaise(nameof(ISamplesRepository.TestEvent))
+            monitor.Should().Raise(nameof(ISamplesRepository.TestEvent))
                 .WithSender(repository)
                 .WithArgs<EventArgs>(a => a == EventArgs.Empty);
         }
