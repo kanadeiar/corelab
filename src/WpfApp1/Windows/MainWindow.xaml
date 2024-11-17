@@ -1,0 +1,28 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="LightGreen" ResizeMode="CanResizeWithGrip"
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
+        Title="{Binding Title}">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Меню">
+                <Separator/>
+                <MenuItem Header="Выход" Cursor="Hand"
+                          Command="{Binding CloseAppCommand}"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="Статус проиложения: Норма"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid>
+
+        </Grid>
+    </DockPanel>
+</Window>
