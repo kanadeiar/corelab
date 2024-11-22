@@ -3,8 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WpfApp1"
              xmlns:vm="clr-namespace:WpfApp1.ViewModels"
-             StartupUri="Windows/MainWindow.xaml">
+             StartupUri="Windows/MainWindow.xaml"
+             ThemeMode="Dark">
     <Application.Resources>
-         <vm:ViewModelLocator x:Key="Locator"></vm:ViewModelLocator>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml" />
+                <ResourceDictionary>
+                    <vm:ViewModelLocator x:Key="Locator"></vm:ViewModelLocator>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

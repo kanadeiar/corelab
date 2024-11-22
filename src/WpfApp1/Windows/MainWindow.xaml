@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="LightGreen" ResizeMode="CanResizeWithGrip"
+        Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip"
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
-        Title="{Binding Title}">
+        Title="{Binding Title}"
+        ThemeMode="Dark">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Меню">
@@ -15,14 +16,32 @@
                 <MenuItem Header="Выход" Cursor="Hand"
                           Command="{Binding CloseAppCommand}"/>
             </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="О программе ..."></MenuItem>
+            </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <TextBlock Text="Статус проиложения: Норма"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Статус проиложения: "/>
+                    <TextBlock Text="Норма" FontWeight="Bold"/>
+                </StackPanel>
             </StatusBarItem>
         </StatusBar>
-        <Grid>
-
+        <Grid Margin="4">
+            <StackPanel>
+                <CheckBox>Чекбокс 1</CheckBox>
+                <CheckBox>Чекбокс 2</CheckBox>
+                <GroupBox Header="Радиокнопки">
+                    <StackPanel>
+                        <RadioButton>Первый</RadioButton>
+                        <RadioButton>Второй</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+                <TextBox TextWrapping="Wrap">
+                    Текстовое поле ввода
+                </TextBox>
+            </StackPanel>
         </Grid>
     </DockPanel>
 </Window>
