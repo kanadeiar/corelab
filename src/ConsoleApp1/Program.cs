@@ -1,23 +1,18 @@
-﻿using ConsoleApp1.DDD;
-
-namespace ConsoleApp1;
-
-public static class Program
+﻿namespace ConsoleApp1
 {
-    public static void Main(string[] args)
+    public static class Program
     {
-        ConsoleHelper.PrintHeader("Лаборатория", "Опытное приложение");
+        public static void Main()
+        {
+            ConsoleHelper.PrintHeader("Лаборатория", "Опытное приложение");
 
-        var person = new Person(
-            new PersonId(1),
-            new PersonName("Ivanov", "Ivan"),
-            new PhoneNumber("12323"),
-            new PhoneNumber("1233"),
-            new EmailAddress("one@ii.ru"),
-            Height.Metric(234),
-            CountryCode.Parse("RU"));
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(i);
+            }
 
-
-        ConsoleHelper.PrintFooter();
+            ConsoleHelper.PrintFooter();
+        }
     }
 }
+
