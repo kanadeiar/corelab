@@ -32,6 +32,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppApp1", "src\CppApp1\CppA
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppApp1Tests", "tests\CppApp1Tests\CppApp1Tests.vcxproj", "{A0A555CE-6408-4A6E-ACCC-F6F702CA33CF}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApp1", "src\PythonApp1\PythonApp1.pyproj", "{417B51E2-DF6A-4FB4-9D3B-BC5974EC7CA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -162,6 +164,12 @@ Global
 		{A0A555CE-6408-4A6E-ACCC-F6F702CA33CF}.Release|x64.Build.0 = Release|x64
 		{A0A555CE-6408-4A6E-ACCC-F6F702CA33CF}.Release|x86.ActiveCfg = Release|Win32
 		{A0A555CE-6408-4A6E-ACCC-F6F702CA33CF}.Release|x86.Build.0 = Release|Win32
+		{417B51E2-DF6A-4FB4-9D3B-BC5974EC7CA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{417B51E2-DF6A-4FB4-9D3B-BC5974EC7CA5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{417B51E2-DF6A-4FB4-9D3B-BC5974EC7CA5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{417B51E2-DF6A-4FB4-9D3B-BC5974EC7CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{417B51E2-DF6A-4FB4-9D3B-BC5974EC7CA5}.Release|x64.ActiveCfg = Release|Any CPU
+		{417B51E2-DF6A-4FB4-9D3B-BC5974EC7CA5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,6 +185,7 @@ Global
 		{28293AF3-20B3-42BD-94D7-8A77238AE3DA} = {F61A612F-4771-47F8-AED1-1416A4539DF6}
 		{7B93843B-A6A0-421C-8285-913DBF8CF53C} = {F61A612F-4771-47F8-AED1-1416A4539DF6}
 		{A0A555CE-6408-4A6E-ACCC-F6F702CA33CF} = {3D958931-DD9D-4539-9E2F-D921A748F653}
+		{417B51E2-DF6A-4FB4-9D3B-BC5974EC7CA5} = {F61A612F-4771-47F8-AED1-1416A4539DF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {61B875AE-1D63-43D5-9D49-69F4EC65F49F}
