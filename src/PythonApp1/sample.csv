@@ -1,0 +1,7 @@
+game_id,player_id,position,player,team,pass_cmp,pass_att,pass__yds
+1,1,QB,Tom Brady,NE,30,40,300
+2,2,QB,Patrick Mahomes,KC,25,35,280
+3,3,QB,Josh Allen,BUF,22,32,260
+4,4,QB,Lamar Jackson,BAL,20,28,240
+5,5,QB,Kyler Murray,ARI,18,25,220
+6,6,QB,Justin Herbert,LAC,15,22,200
