@@ -17,31 +17,12 @@ def larger(num1, num2):
 result = larger(2, 3)
 print(result)
 
+# Создай список чисел
+numbers = [1, 2, 3, 4, 5]
 
+# Найди сумму всех чисел в списке
+sum_of_numbers = sum(numbers)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Выведи сумму
+print(sum_of_numbers)
 
