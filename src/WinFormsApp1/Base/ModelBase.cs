@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1.Base;
 
-public abstract class FormNotifyBase : IFormObservable
+public abstract class ModelBase : IFormObservable
 {
     private List<IFormObserver> _observers = new();
 
