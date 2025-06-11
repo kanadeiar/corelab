@@ -53,7 +53,7 @@ def play(num_digits, num_guesses):
             messagebox.showwarning("Ошибка", "Неправильная догадка. Пожалуйста, попробуйте снова.")
 
     root = tk.Tk()
-    root.title("Игра в угадайку")
+    root.title("Добро пожаловать в игру в угадайку")
 
     label = tk.Label(root, text=f"Введите строку длиной {num_digits}:")
     label.pack()
