@@ -2,6 +2,8 @@
 print("Учебное приложение")
 
 import random
+import tkinter as tk
+from tkinter import messagebox
 
 def random_string(length):
     """
@@ -12,22 +14,6 @@ def random_string(length):
     digits = list(range(10))
     random.shuffle(digits)
     return ''.join(map(str, digits[:length]))
-
-def get_guess(length):
-    """
-    length - это длинна строки
-
-    Продолжай просить игрока ввести строку, в которой каждый символ является
-    цифрой от 0 до 9, пока он не введет правильную догадку.
-    Правильная догадка имеет заданную длинну
-    и не содержит повторяющихся цифр.
-    """
-    while True:
-        guess = input(f"Введите строку длиной {length}: ")
-        if len(guess) == length and all(c.isdigit() for c in guess) and len(set(guess)) == length:
-            return guess
-        else:
-            print("Неправильная догадка. Пожалуйста, попробуйте снова.")
 
 def guess_result(guess, secret_code):
     """
@@ -47,22 +33,38 @@ def guess_result(guess, secret_code):
     return [correct_digits, common_digits]
 
 def play(num_digits, num_guesses):
-    """
-    Создай случайную строку с цифрами num_digits.
-    у игрока есть догадки num_guesses, позволяющие угадать случайную строку.
-    После каждой догадки игроку сообщается, сколько цифр в догадке
-    находится на правильном месте и сколько цифр имеются,
-    но находятся на неправильном месте.
-    """
     secret_code = random_string(num_digits)
-    for _ in range(num_guesses):
-        guess = get_guess(num_digits)
-        result = guess_result(guess, secret_code)
-        print(f"Правильных: {result[0]} неправильных: {result[1]}")
-        if result[0] == num_digits:
-            print("Поздравляем! Вы угадали код!")
-            return
-    print(f"К сожалению, вы не угадали код. Правильный код был: {secret_code}")
+    attempts = 0
+
+    def check_guess():
+        nonlocal attempts
+        guess = entry.get()
+        if len(guess) == num_digits and guess.isdigit() and len(set(guess)) == num_digits:
+            attempts += 1
+            result = guess_result(guess, secret_code)
+            messagebox.showinfo("Результат", f"Правильных: {result[0]}, Неправильных: {result[1]}")
+            if result[0] == num_digits:
+                messagebox.showinfo("Поздравляем!", "Вы угадали код!")
+                root.quit()
+            elif attempts >= num_guesses:
+                messagebox.showinfo("Конец игры", f"К сожалению, вы не угадали код. Правильный код был: {secret_code}")
+                root.quit()
+        else:
+            messagebox.showwarning("Ошибка", "Неправильная догадка. Пожалуйста, попробуйте снова.")
+
+    root = tk.Tk()
+    root.title("Игра в угадайку")
+
+    label = tk.Label(root, text=f"Введите строку длиной {num_digits}:")
+    label.pack()
+
+    entry = tk.Entry(root)
+    entry.pack()
+
+    button = tk.Button(root, text="Проверить", command=check_guess)
+    button.pack()
+
+    root.mainloop()
 
 play(4, 10)
 
