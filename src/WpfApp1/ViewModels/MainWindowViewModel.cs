@@ -9,9 +9,9 @@ public class MainWindowViewModel : Base.ViewModelBase
     public string Title
     {
         get;
-        set => Set(ref field, value);
+        init => Set(ref field, value);
     } = "Опытно-экспериментальное настольное приложение";
-    
+
     ///// <summary>
     ///// Закрыть приложение
     ///// </summary>
