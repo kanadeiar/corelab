@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.QuestionPage"
+             Title="Опоросник"
+             BackgroundColor="LightCyan">
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+            <Label Text="Опросник"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Margin="0, 0,0, 20"/>
+
+            <Label 
+                Text="Ваше имя:" />
+            <Entry x:Name="NameEntry" 
+                   MaxLength="60"
+                   FontSize="18"
+                   Placeholder="Введите свое имя"/>
+
+            <Label 
+                Text="Идея:" />
+            <Editor x:Name="IdeaEditor" 
+                    HeightRequest="100"
+                    FontSize="18"
+                    Placeholder="Введите свою идею"/>
+
+            <Button Text="Отправить"
+                    Margin="0, 20, 0, 20"
+                    Clicked="Button_OnClicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.Views.AboutPage"
-             Title="О программе"
-             BackgroundColor="LightGray">
+             x:Class="MauiApp1.Views.SettingsPage"
+             Title="Настройки"
+             BackgroundColor="LightCyan">
     <ScrollView>
         <VerticalStackLayout Padding="20">
-            <Label Text="Опытное приложение"
+            <Label Text="Настройки приложения"
                    FontSize="22"
                    FontAttributes="Bold"
                    VerticalOptions="Center"
-                   HorizontalOptions="Center" 
+                   HorizontalOptions="Center"
                    Margin="0, 0,0, 20"/>
             <Label 
-                Text="Опытное приложение опроса пользователей и отправки сведений на адрес электронной почты."
+                Text="Сюда разместить настройки приложения."
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
         </VerticalStackLayout>

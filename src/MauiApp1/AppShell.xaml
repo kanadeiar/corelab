@@ -16,9 +16,9 @@
             <Grid BackgroundColor="Gray"
                   HeightRequest="200">
                 <Image Aspect="AspectFill"
-                       Source="amimal.png"
+                       Source="logo.png"
                        Opacity="0.6" />
-                <Label Text="Приложение о животных"
+                <Label Text="Опытное приложение"
                        TextColor="White"
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center"
@@ -32,21 +32,21 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />-->
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <Tab Title="Животные" Icon="cat.png">
-            <ShellContent Title="Кошки" 
+        <!--<Tab Title="Опросник" Icon="cat.png">
+            <ShellContent Title="Вопросы" 
                           Icon="cat.png"
                           ContentTemplate="{DataTemplate views:CatPage}"/>
-            <ShellContent Title="Собаки" 
+            <ShellContent Title="Настройки" 
                           Icon="cat.png"
                           ContentTemplate="{DataTemplate views:DogPage}"/>
-        </Tab>
+        </Tab>-->
 
-        <ShellContent Title="Обезьяны"
+        <ShellContent Title="Опросник"
                       Icon="cat.png"
-                      ContentTemplate="{DataTemplate views:MonkeyPage}"/>
-        <ShellContent Title="Слоны"
+                      ContentTemplate="{DataTemplate views:QuestionPage}"/>
+        <ShellContent Title="Настройки"
                       Icon="cat.png"
-                      ContentTemplate="{DataTemplate views:ElephantPage}"/>
+                      ContentTemplate="{DataTemplate views:SettingsPage}"/>
     </FlyoutItem>
 
     <ShellContent Title="О программе"
@@ -56,13 +56,10 @@
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
             <StackLayout>
-                <Label Text="Xamarin животные"
-                       TextColor="DimGray"
+                <Label Text="© Название комании, 2025"
                        FontAttributes="Bold"
-                       HorizontalOptions="Center" />
-                <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMMM dd, yyyy}'}"
-                       TextColor="DimGray"
-                       HorizontalOptions="Center" />
+                       HorizontalOptions="Center" 
+                       Margin="10"/>
             </StackLayout>
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>
