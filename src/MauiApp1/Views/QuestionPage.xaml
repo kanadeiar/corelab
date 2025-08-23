@@ -13,21 +13,20 @@
                    HorizontalOptions="Center"
                    Margin="0, 0,0, 20"/>
 
-            <Label 
-                Text="Ваше имя:" />
+            <Label Text="Ваше имя:" />
             <Entry x:Name="NameEntry" 
                    MaxLength="60"
                    FontSize="18"
                    Placeholder="Введите свое имя"/>
 
-            <Label 
-                Text="Идея:" />
+            <Label Text="Описание идеи:" />
             <Editor x:Name="IdeaEditor" 
                     HeightRequest="100"
                     FontSize="18"
                     Placeholder="Введите свою идею"/>
 
-            <Button Text="Отправить"
+            <Button x:Name="SendButton"
+                    Text="Отправить"
                     Margin="0, 20, 0, 20"
                     Clicked="Button_OnClicked"/>
         </VerticalStackLayout>

@@ -17,7 +17,8 @@
                           Command="{Binding CloseAppCommand}"/>
             </MenuItem>
             <MenuItem Header="Справка">
-                <MenuItem Header="О программе ..."></MenuItem>
+                <MenuItem Header="О программе ..."
+                          Command="{Binding AboutAppCommand}"></MenuItem>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
@@ -30,17 +31,14 @@
         </StatusBar>
         <Grid Margin="4">
             <StackPanel>
-                <CheckBox>Чекбокс 1</CheckBox>
-                <CheckBox>Чекбокс 2</CheckBox>
-                <GroupBox Header="Радиокнопки">
-                    <StackPanel>
-                        <RadioButton>Первый</RadioButton>
-                        <RadioButton>Второй</RadioButton>
-                    </StackPanel>
-                </GroupBox>
-                <TextBox TextWrapping="Wrap">
-                    Текстовое поле ввода
-                </TextBox>
+                <TextBlock Text="Имя:"></TextBlock>
+                <TextBox TextWrapping="Wrap"
+                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Идея:"></TextBlock>
+                <TextBox TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Height="100"
+                         Text="{Binding Idea, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Content="Отправить" Margin="0, 10, 0, 0"
+                        Command="{Binding SendAppCommand}"/>
             </StackPanel>
         </Grid>
     </DockPanel>
