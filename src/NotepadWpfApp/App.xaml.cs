@@ -1,22 +1,22 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NotepadWpfApp.ViewModels;
 using System.Windows;
-using WpfApp1.ViewModels;
 
-namespace WpfApp1;
+namespace NotepadWpfApp;
 
 public partial class App : Application
 {
-    public static IServiceProvider Provider => field ??= getServices()
+    public static IServiceProvider Provider => field ??= GetServices()
         .BuildServiceProvider();
 
-    private static IServiceCollection getServices()
+    private static IServiceCollection GetServices()
     {
         var services = new ServiceCollection();
-        initServices(services);
+        InitServices(services);
         return services;
     }
 
-    private static void initServices(IServiceCollection services)
+    private static void InitServices(IServiceCollection services)
     {
         services.AddScoped<MainWindowViewModel>();
 
