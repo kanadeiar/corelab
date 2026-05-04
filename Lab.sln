@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.8.34330.188
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11723.231 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F61A612F-4771-47F8-AED1-1416A4539DF6}"
 EndProject
@@ -35,6 +35,8 @@ EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApp1", "src\PythonApp1\PythonApp1.pyproj", "{417B51E2-DF6A-4FB4-9D3B-BC5974EC7CA5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiApp1", "src\MauiApp1\MauiApp1.csproj", "{8AFA759E-44A9-4FE4-BA42-D8194780237D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotepadWpfApp", "src\NotepadWpfApp\NotepadWpfApp.csproj", "{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -185,6 +187,18 @@ Global
 		{8AFA759E-44A9-4FE4-BA42-D8194780237D}.Release|x64.Build.0 = Release|Any CPU
 		{8AFA759E-44A9-4FE4-BA42-D8194780237D}.Release|x86.ActiveCfg = Release|Any CPU
 		{8AFA759E-44A9-4FE4-BA42-D8194780237D}.Release|x86.Build.0 = Release|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Debug|x64.Build.0 = Debug|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Debug|x86.Build.0 = Debug|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Release|x64.ActiveCfg = Release|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Release|x64.Build.0 = Release|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Release|x86.ActiveCfg = Release|Any CPU
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -202,6 +216,7 @@ Global
 		{A0A555CE-6408-4A6E-ACCC-F6F702CA33CF} = {3D958931-DD9D-4539-9E2F-D921A748F653}
 		{417B51E2-DF6A-4FB4-9D3B-BC5974EC7CA5} = {F61A612F-4771-47F8-AED1-1416A4539DF6}
 		{8AFA759E-44A9-4FE4-BA42-D8194780237D} = {F61A612F-4771-47F8-AED1-1416A4539DF6}
+		{BA6C0DA6-E309-4C0B-B61A-ABB5C3E94BFD} = {F61A612F-4771-47F8-AED1-1416A4539DF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {61B875AE-1D63-43D5-9D49-69F4EC65F49F}
