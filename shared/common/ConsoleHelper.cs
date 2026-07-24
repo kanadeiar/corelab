@@ -51,6 +51,11 @@ public class ConsoleHelper
         WriteLine(message);
     }
 
+    public static void Print(string message)
+    {
+        WriteLine(message);
+    }
+
     public static string? ReadLineFromConsole(string message)
     {
         Write($"{message}:>");

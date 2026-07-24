@@ -1,18 +1,16 @@
-﻿namespace ConsoleApp1
+﻿namespace ConsoleApp1;
+
+public static class Program
 {
-    public static class Program
+    public static void Main()
     {
-        public static void Main()
-        {
-            ConsoleHelper.PrintHeader("Лаборатория", "Опытное приложение");
+        ConsoleHelper.PrintHeader("Лаборатория", "Опытное приложение");
 
-            for (int i = 0; i < 10; i++)
-            {
-                Console.WriteLine(i);
-            }
+        var name = ConsoleHelper.ReadLineFromConsole("Введите свое имя");
 
-            ConsoleHelper.PrintFooter();
-        }
+        ConsoleHelper.Print($"Привет, {name}!");
+
+        ConsoleHelper.PrintFooter();
     }
 }
 
