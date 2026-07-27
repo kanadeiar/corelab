@@ -7,8 +7,9 @@ public static class Program
         ConsoleHelper.PrintHeader("Лаборатория", "Опытное приложение");
 
         var name = ConsoleHelper.ReadLineFromConsole("Введите свое имя");
+        var surName = ConsoleHelper.ReadLineFromConsole("Введите свою фамилию");
 
-        ConsoleHelper.Print($"Привет, {name}!");
+        ConsoleHelper.Print($"Привет, {surName} {name}!");
 
         ConsoleHelper.PrintFooter();
     }
